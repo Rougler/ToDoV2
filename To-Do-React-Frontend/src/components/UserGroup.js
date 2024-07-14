@@ -7,14 +7,14 @@ const initialUsers = [
         name: 'Swatishee Sahoo',
         role: 'UI/UX Designer',
         techStack: ['React', 'HTML', 'CSS', 'JS', 'Figma'],
-        assigned: 'Admin',
+        assigned: 'user',
     },
     {
         initials: 'SU',
         name: 'Sk Sahil Ullah',
         role: 'Cloud Developer',
         techStack: ['AWS', 'OCI', 'HTML', 'CSS'],
-        assigned: 'Admin',
+        assigned: 'user',
     },
     {
         initials: 'NS',
@@ -28,7 +28,7 @@ const initialUsers = [
         name: 'Soumya Kanungo',
         role: 'Cloud Developer',
         techStack: ['JS', 'HTML', 'CSS'],
-        assigned: 'Admin',
+        assigned: 'user',
     },
     {
         initials: 'SR',
@@ -56,7 +56,11 @@ const UserGroup = () => {
     };
 
     const handleSaveUser = () => {
-        setUsers([...users, { ...newUser, techStack: newUser.techStack.split(',').map(tech => tech.trim()) }]);
+        const initials = newUser.name
+            .split(' ')
+            .map(word => word[0].toUpperCase())
+            .join('');
+        setUsers([...users, { ...newUser, initials, techStack: newUser.techStack.split(',').map(tech => tech.trim()) }]);
         setIsModalOpen(false);
         setNewUser({
             initials: '',
@@ -67,6 +71,7 @@ const UserGroup = () => {
             password: '',
         });
     };
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -129,16 +134,29 @@ const UserGroup = () => {
                         </label>
                         <label>
                             Role:
-                            <input type="text" name="role" value={newUser.role} onChange={handleChange} />
+                            <select name="role" value={newUser.role} onChange={handleChange}>
+                                <option value="">Select a Role</option>
+                                <option value="UI/UX">UI/UX</option>
+                                <option value="Backend developer">Backend Developer</option>
+                                <option value="Full Stack developer">Full Stack Developer</option>
+                                <option value="Cloud Engineer">Cloud Engineer</option>
+                            </select>
                         </label>
+
                         <label>
                             Tech Stack (comma-separated):
                             <input type="text" name="techStack" value={newUser.techStack} onChange={handleChange} />
                         </label>
                         <label>
                             Designation:
-                            <input type="text" name="assigned" value={newUser.assigned} onChange={handleChange} />
+                            <select name="assigned" value={newUser.assigned} onChange={handleChange}>
+                                <option value="">Select a designation</option>
+                                <option value="User">User</option>
+                                <option value="Project Manager">Project Manager</option>
+                            </select>
                         </label>
+
+
                         <label>
                             Password:
                             <input type="password" name="password" value={newUser.password} onChange={handleChange} />
