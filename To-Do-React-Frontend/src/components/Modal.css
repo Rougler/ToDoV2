@@ -59,17 +59,11 @@
     transition: background-color 0.3s;
   }
   
-  button:hover {
-    background-color: #0056b3;
-  }
+
   
-  button[type="button"] {
-    background-color: #6c757d;
-  }
+
   
-  button[type="button"]:hover {
-    background-color: #5a6268;
-  }
+
 
 
 
