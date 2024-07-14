@@ -7,45 +7,39 @@ const initialUsers = [
         name: 'Swatishee Sahoo',
         role: 'UI/UX Designer',
         techStack: ['React', 'HTML', 'CSS', 'JS', 'Figma'],
-        assigned: 'To-Do Application',
-        status: 'Engaged',
-        assignedOn: 'April 12, 2024'
+        assigned: 'Admin',
+        
     },
     {
         initials: 'SU',
         name: 'Sk Sahil Ullah',
         role: 'Cloud Developer',
         techStack: ['AWS', 'OCI', 'HTML', 'CSS'],
-        assigned: 'CloudOptGen',
-        status: 'Engaged',
-        assignedOn: 'April 30, 2024'
+        assigned: 'Admin',
+        
     },
     {
         initials: 'NS',
         name: 'Nitesh Saw',
         role: 'Cloud Developer',
         techStack: ['React', 'HTML', 'CSS', 'Figma'],
-        assigned: '---------',
-        status: 'Available',
-        assignedOn: '---------'
+        assigned: 'User',
+        
     },
     {
         initials: 'SK',
         name: 'Soumya Kanungo',
         role: 'Cloud Developer',
         techStack: ['JS', 'HTML', 'CSS'],
-        assigned: 'Intact',
-        status: 'Engaged',
-        assignedOn: 'May 20, 2024'
+        assigned: 'Admin',
+        
     },
     {
         initials: 'SR',
         name: 'Subrat Rath',
         role: 'Developer',
         techStack: ['Django', 'HTML', 'CSS'],
-        assigned: '---------',
-        status: 'Available',
-        assignedOn: '---------'
+        assigned: 'User',
     }
 ];
 
@@ -58,8 +52,6 @@ const UserGroup = () => {
         role: '',
         techStack: '',
         assigned: '',
-        status: 'Available',
-        assignedOn: ''
     });
 
     const handleAddUser = () => {
@@ -67,11 +59,7 @@ const UserGroup = () => {
     };
 
     const handleSaveUser = () => {
-        const initials = newUser.name
-            .split(' ')
-            .map(word => word[0].toUpperCase())
-            .join('');
-        setUsers([...users, { ...newUser, initials, techStack: newUser.techStack.split(',').map(tech => tech.trim()) }]);
+        setUsers([...users, { ...newUser, techStack: newUser.techStack.split(',').map(tech => tech.trim()) }]);
         setIsModalOpen(false);
         setNewUser({
             initials: '',
@@ -79,8 +67,6 @@ const UserGroup = () => {
             role: '',
             techStack: '',
             assigned: '',
-            status: 'Available',
-            assignedOn: ''
         });
     };
 
@@ -97,16 +83,14 @@ const UserGroup = () => {
         <div className="user-group">
             <div className="header">
                 <h2>USERS</h2>
-                <button onClick={handleAddUser}>+ Add users</button>
+                <button classname='usergrp' onClick={handleAddUser}>+ Add users</button>
             </div>
             <table>
                 <thead>
                     <tr>
                         <th>Persons</th>
                         <th>Tech Stack</th>
-                        <th>Assigned</th>
-                        <th>Status</th>
-                        <th>Assigned On</th>
+                        <th>Designation</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -131,13 +115,7 @@ const UserGroup = () => {
                             </td>
                             <td>{user.assigned}</td>
                             <td>
-                                <span className={`status ${user.status.toLowerCase()}`}>
-                                    {user.status}
-                                </span>
-                            </td>
-                            <td>{user.assignedOn}</td>
-                            <td>
-                                <button onClick={() => handleRemoveUser(index)}>Remove</button>
+                                <button classname='usergrp' onClick={() => handleRemoveUser(index)}>Remove</button>
                             </td>
                         </tr>
                     ))}
@@ -156,27 +134,20 @@ const UserGroup = () => {
                             <input type="text" name="role" value={newUser.role} onChange={handleChange} />
                         </label>
                         <label>
+                            Initials:
+                            <input type="text" name="initials" value={newUser.initials} onChange={handleChange} />
+                        </label>
+                        <label>
                             Tech Stack (comma-separated):
                             <input type="text" name="techStack" value={newUser.techStack} onChange={handleChange} />
                         </label>
                         <label>
-                            Assigned:
+                            Designation:
                             <input type="text" name="assigned" value={newUser.assigned} onChange={handleChange} />
                         </label>
-                        <label>
-                            Status:
-                            <select name="status" value={newUser.status} onChange={handleChange}>
-                                <option value="Available">Available</option>
-                                <option value="Engaged">Engaged</option>
-                            </select>
-                        </label>
-                        <label>
-                            Assigned On:
-                            <input type="date" name="assignedOn" value={newUser.assignedOn} onChange={handleChange} />
-                        </label>
                         <div className="modal-actions">
-                            <button onClick={() => setIsModalOpen(false)}>Cancel</button>
-                            <button onClick={handleSaveUser}>Save</button>
+                            <button classname='usergrp' onClick={() => setIsModalOpen(false)}>Cancel</button>
+                            <button classname='usergrp' onClick={handleSaveUser}>Save</button>
                         </div>
                     </div>
                 </div>
