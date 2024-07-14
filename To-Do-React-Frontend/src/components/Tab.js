@@ -150,20 +150,25 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Tabs
-          value={value}
-          onChange={onChange}
-          textColor="secondary"
-          variant="scrollable"
-          scrollButtons="auto"
-          indicatorColor="secondary"
-          
-          sx={{ flexGrow: 1 }}
-        >
-          {tabs.map((tab, index) => (
-            <Tab key={index} value={tab.value} label={tab.label} />
-          ))}
-        </Tabs>
+      <Tabs
+  value={value}
+  onChange={onChange}
+  textColor="secondary"
+  variant="scrollable"
+  scrollButtons="auto"
+  indicatorColor="secondary"
+  sx={{
+    flexGrow: 1,
+    '& .MuiTabs-scrollButtons': {
+      color: 'black', // change the color to your desired value
+    },
+  }}
+>
+  {tabs.map((tab, index) => (
+    <Tab key={index} value={tab.value} label={tab.label} />
+  ))}
+</Tabs>
+
 
         <Button className='AddProject'onClick={handleAddClick} variant="contained" color="primary" sx={{ ml: 2 }}>
           + Add Project
