@@ -1,0 +1,147 @@
+import React, { useState } from "react";
+import Select from "react-select";
+import "./Modal.css";
+import axios from "axios";
+
+const Modal = ({ showModal, handleClose, addTask }) => {
+  const [taskName, setTaskName] = useState("");
+  const [taskStatus, setTaskStatus] = useState("Not-Start");
+  const [assignedTo, setAssignedTo] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const options = [
+    { value: "John", label: "John" },
+    { value: "Alice", label: "Alice" },
+    { value: "Bob", label: "Bob" },
+    { value: "admin", label: "admin" },
+    { value: "niyaz.noor", label: "niyaz.noor" },
+  ];
+
+  const getAllProjects = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/todo/projects/");
+      const projects = response.data;
+      setProjects(projects);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    }
+  };
+
+  React.useEffect(() => {
+    getAllProjects();
+  }, []);
+
+  const handleProjectChange = (selectedOption) => {
+    setSelectedProject(selectedOption);
+  };
+
+  const projectOptions = projects.map((project) => ({
+    value: project.projname,
+    label: project.projname,
+  }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (
+      !taskName ||
+      !taskStatus ||
+      assignedTo.length === 0 ||
+      !selectedProject
+    ) {
+      console.error(
+        "Task Name, Task Status, Assigned To, and Project are required."
+      );
+      return;
+    }
+
+    const assignedToNames = assignedTo.map((person) => person.label);
+    const projectName = selectedProject.label;
+
+    const task = {
+      taskName,
+      taskStatus,
+      assignedTo: assignedToNames,
+      project: projectName,
+    };
+
+    try {
+      let res = await fetch("http://127.0.0.1:8000/todo/api/create-task/", {
+        method: "POST",
+        body: JSON.stringify(task),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const result = await res.json();
+      console.log("Task added:", result);
+      addTask(result);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+
+    handleClose();
+  };
+
+  if (!showModal) {
+    return null;
+  }
+
+  return (
+    <div className="modal-overlay-card">
+      <div className="modal-card">
+        <h2>Add New Task</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Task Name:</label>
+            <input
+              type="text"
+              value={taskName}
+              onChange={(e) => setTaskName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Task Status:</label>
+            <select
+              value={taskStatus}
+              onChange={(e) => setTaskStatus(e.target.value)}
+            >
+              <option value="Not-Start">Not Start</option>
+              <option value="On-going">On-going</option>
+              <option value="Done">Done</option>
+              <option value="Staging">Staging</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Assigned To:</label>
+            <Select
+              isMulti
+              options={options}
+              value={assignedTo}
+              onChange={setAssignedTo}
+            />
+          </div>
+          <div className="form-group">
+            <label>Projects:</label>
+            <Select
+              options={projectOptions}
+              value={selectedProject}
+              onChange={handleProjectChange}
+            />
+          </div>
+          <button type="submit">Add Task</button>
+          <button className="cancel" type="button" onClick={handleClose}>
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Modal;
