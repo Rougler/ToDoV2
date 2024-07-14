@@ -8,7 +8,6 @@ const initialUsers = [
         role: 'UI/UX Designer',
         techStack: ['React', 'HTML', 'CSS', 'JS', 'Figma'],
         assigned: 'Admin',
-        
     },
     {
         initials: 'SU',
@@ -16,7 +15,6 @@ const initialUsers = [
         role: 'Cloud Developer',
         techStack: ['AWS', 'OCI', 'HTML', 'CSS'],
         assigned: 'Admin',
-        
     },
     {
         initials: 'NS',
@@ -24,7 +22,6 @@ const initialUsers = [
         role: 'Cloud Developer',
         techStack: ['React', 'HTML', 'CSS', 'Figma'],
         assigned: 'User',
-        
     },
     {
         initials: 'SK',
@@ -32,7 +29,6 @@ const initialUsers = [
         role: 'Cloud Developer',
         techStack: ['JS', 'HTML', 'CSS'],
         assigned: 'Admin',
-        
     },
     {
         initials: 'SR',
@@ -52,6 +48,7 @@ const UserGroup = () => {
         role: '',
         techStack: '',
         assigned: '',
+        password: '',
     });
 
     const handleAddUser = () => {
@@ -67,6 +64,7 @@ const UserGroup = () => {
             role: '',
             techStack: '',
             assigned: '',
+            password: '',
         });
     };
 
@@ -83,7 +81,7 @@ const UserGroup = () => {
         <div className="user-group">
             <div className="header">
                 <h2>USERS</h2>
-                <button classname='usergrp' onClick={handleAddUser}>+ Add users</button>
+                <button className='usergrp' onClick={handleAddUser}>+ Add users</button>
             </div>
             <table>
                 <thead>
@@ -115,7 +113,7 @@ const UserGroup = () => {
                             </td>
                             <td>{user.assigned}</td>
                             <td>
-                                <button classname='usergrp' onClick={() => handleRemoveUser(index)}>Remove</button>
+                                <button className='usergrp' onClick={() => handleRemoveUser(index)}>Remove</button>
                             </td>
                         </tr>
                     ))}
@@ -134,10 +132,6 @@ const UserGroup = () => {
                             <input type="text" name="role" value={newUser.role} onChange={handleChange} />
                         </label>
                         <label>
-                            Initials:
-                            <input type="text" name="initials" value={newUser.initials} onChange={handleChange} />
-                        </label>
-                        <label>
                             Tech Stack (comma-separated):
                             <input type="text" name="techStack" value={newUser.techStack} onChange={handleChange} />
                         </label>
@@ -145,9 +139,13 @@ const UserGroup = () => {
                             Designation:
                             <input type="text" name="assigned" value={newUser.assigned} onChange={handleChange} />
                         </label>
+                        <label>
+                            Password:
+                            <input type="password" name="password" value={newUser.password} onChange={handleChange} />
+                        </label>
                         <div className="modal-actions">
-                            <button classname='usergrp' onClick={() => setIsModalOpen(false)}>Cancel</button>
-                            <button classname='usergrp' onClick={handleSaveUser}>Save</button>
+                            <button className='usergrp' onClick={() => setIsModalOpen(false)}>Cancel</button>
+                            <button className='usergrp' onClick={handleSaveUser}>Save</button>
                         </div>
                     </div>
                 </div>
