@@ -295,14 +295,14 @@ const Board = () => {
   };
 
   const addTab = (label, managerName) => {
-    const newTabValue = label.toLowerCase().replace(/\s/g, "_");
+    const newTabValue = label.toLowerCase().replace(/\s/g, '_');
     const newTab = { value: newTabValue, label: label };
     setTabs([...tabs, newTab]);
     setManagerNames({ ...managerNames, [newTabValue]: managerName });
-
     setSelectedTab(newTab.value);
-    console.log("Tab and manager name added", newTab, managerNames);
+    console.log("Tab and manager name added", newTab, managerName);
   };
+  
 
   const getCardsForCurrentTab = (listTitle) => {
     return cards.filter(

@@ -33,25 +33,21 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
   const getAllProject = async () => {
     const response = await axios.get("http://127.0.0.1:8000/todo/projects/");
     const projects = response.data;
-
+  
     const transformedTabs = projects.map((project, index) => ({
       value: `tab${index}`,
       label: project.projname
     }));
-
-    const transformedmanagers = projects.map((project, index) => ({
-    [`tab${index}`]:project.assignedTo[0]
-    }));
-
+  
+    const transformedManagers = {};
+    projects.forEach((project, index) => {
+      transformedManagers[`tab${index}`] = project.assignedTo[0];
+    });
+  
     setTabs(transformedTabs);
-    setManagerNames(transformedmanagers);
-    console.log(`I am response`);
-    console.log(response.data);
-    console.log(`I am Transformed tabs`);
-    console.log(transformedTabs);
-    console.log(`I am Transformed managers`);
-    console.log(transformedmanagers);
+    setManagerNames(transformedManagers);
   }
+  
 
   const postProject = async () => {
     try {
@@ -156,8 +152,9 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
           value={value}
           onChange={onChange}
           textColor="secondary"
+          variant="scrollable"
+          scrollButtons="auto"
           indicatorColor="secondary"
-          aria-label="secondary tabs example"
           sx={{ flexGrow: 1 }}
         >
           {tabs.map((tab, index) => (
