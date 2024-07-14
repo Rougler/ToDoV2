@@ -26,17 +26,17 @@ logs/
 __pycache__/
 
 # Ignore Django migrations
-backend/*/migrations/*.pyc
-backend/*/migrations/*.pyo
-backend/*/migrations/*.pyd
-backend/*/migrations/__pycache__/
+To-Do-Django-Backend/*/migrations/*.pyc
+To-Do-Django-Backend/*/migrations/*.pyo
+To-Do-Django-Backend/*/migrations/*.pyd
+To-Do-Django-Backend/*/migrations/__pycache__/
 
 # Ignore media and static files
-backend/media/
-backend/static/
+To-Do-Django-Backend/media/
+To-Do-Django-Backend/static/
 
 # Ignore SQLite database
-backend/*.sqlite3
+To-Do-Django-Backend/*.sqlite3
 
 # Ignore virtual environment
 venv/
@@ -59,15 +59,15 @@ env/
 *.backup
 
 # Ignore coverage reports
-backend/htmlcov/
-backend/.tox/
-backend/.nox/
-backend/.coverage
-backend/.coverage.*
-backend/.cache
-backend/nosetests.xml
-backend/coverage.xml
-backend/*.cover
-backend/*.py,cover
-backend/.hypothesis/
-backend/.pytest_cache/
+To-Do-Django-Backend/htmlcov/
+To-Do-Django-Backend/.tox/
+To-Do-Django-Backend/.nox/
+To-Do-Django-Backend/.coverage
+To-Do-Django-Backend/.coverage.*
+To-Do-Django-Backend/.cache
+To-Do-Django-Backend/nosetests.xml
+To-Do-Django-Backend/coverage.xml
+To-Do-Django-Backend/*.cover
+To-Do-Django-Backend/*.py,cover
+To-Do-Django-Backend/.hypothesis/
+To-Do-Django-Backend/.pytest_cache/

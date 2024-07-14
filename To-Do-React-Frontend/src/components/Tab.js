@@ -86,6 +86,7 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
       textAlign: 'center',
       marginTop: '50px'
     },
+
     openButton: {
       padding: '10px 20px',
       fontSize: '16px',
@@ -155,6 +156,7 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
           variant="scrollable"
           scrollButtons="auto"
           indicatorColor="secondary"
+          
           sx={{ flexGrow: 1 }}
         >
           {tabs.map((tab, index) => (
