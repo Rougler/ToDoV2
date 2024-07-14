@@ -287,8 +287,112 @@
 }
 
 .managerName {
-  color: black;
+  color: #ffffff;
+  padding: 10px 17px;
+  background: #1976d2;
+  margin-top: -44px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 25px;
 }
+
+
+
+
+.add-list-section{
+  height: 100%;
+}
+
+.add-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.add-list input {
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.add-list button {
+  padding: 5px;
+}
+
+.add-new-list {
+  border-radius: 4px;
+    padding: 10px;
+    width: 200px;
+}
+
+.add-new-list input {
+  margin-bottom: 5px;
+  padding: 5px;
+  width: 88%;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 11px;
+  color: rgb(0, 0, 0);
+  box-shadow: rgba(0, 0, 0, 0.133) 0px 3.2px 7.2px 0px, rgba(0, 0, 0, 0.11) 0px 0.6px 1.8px 0px;
+}
+
+.add-new-list button {
+  background-color: #0079bf;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    padding: 6px;
+    width: 100%;
+}
+
+.add-list-button {
+  background-color: #0079bf;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.add-list-button:hover {
+  background-color: #026aa7;
+}
+
+
+.add-list-section {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.add-list-input {
+  padding: 5px;
+  margin-right: 10px;
+  flex: 1;
+}
+
+.add-list-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.add-another-list-button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
 
 @-moz-keyframes splash-12 {
   40% {
