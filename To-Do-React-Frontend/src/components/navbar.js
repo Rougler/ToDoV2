@@ -261,7 +261,7 @@ function ResponsiveAppBar({ onSidebarToggle }) {
 
         .line {
           fill: none;
-          stroke: black;
+          stroke: #1976d2;
           stroke-linecap: round;
           stroke-linejoin: round;
           stroke-width: 3;
