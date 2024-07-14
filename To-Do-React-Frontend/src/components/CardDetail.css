@@ -37,9 +37,7 @@
     color: #8c8c8c;
 }
 
-button[type="button"] {
-  background-color: #ffffff;
-}
+
 .modal-content h2{
   word-wrap: break-word;
   white-space: normal;

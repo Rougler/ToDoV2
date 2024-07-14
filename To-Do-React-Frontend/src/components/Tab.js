@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from "axios";
+import './Tabs.css'
 
 export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setManagerNames, children }) {
   const [isAdding, setIsAdding] = React.useState(false);
@@ -164,8 +165,8 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
           ))}
         </Tabs>
 
-        <Button onClick={handleAddClick} variant="contained" color="primary" sx={{ ml: 2 }}>
-          Add Project
+        <Button className='AddProject'onClick={handleAddClick} variant="contained" color="primary" sx={{ ml: 2 }}>
+          + Add Project
         </Button>
       </Box>
 
