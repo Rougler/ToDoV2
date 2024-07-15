@@ -160,7 +160,8 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
           sx={{
             flexGrow: 1,
             '& .MuiTabs-scrollButtons': {
-              color: 'black', // change the color to your desired value
+              color: 'black',
+              width: 'auto' // change the color to your desired value
             },
           }}
         >
