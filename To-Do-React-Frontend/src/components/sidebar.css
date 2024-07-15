@@ -3,6 +3,7 @@
   transition: l;
   height: 100vh;
   top: 0;
+  margin-top: 65px;
   position: sticky;
   float: left;
   transition: 0.1s ease-in-out;
@@ -16,6 +17,11 @@
     width: 10%;
   }
   
+  .navbar-container {
+    position: fixed;
+    width: 100%;
+    z-index: 111;
+}
   .toggle-button {
     background-color: #0079bf;
     color: white;
