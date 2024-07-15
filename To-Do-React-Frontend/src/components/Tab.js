@@ -34,21 +34,21 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
   const getAllProject = async () => {
     const response = await axios.get("http://127.0.0.1:8000/todo/projects/");
     const projects = response.data;
-  
+
     const transformedTabs = projects.map((project, index) => ({
       value: `tab${index}`,
       label: project.projname
     }));
-  
+
     const transformedManagers = {};
     projects.forEach((project, index) => {
       transformedManagers[`tab${index}`] = project.assignedTo[0];
     });
-  
+
     setTabs(transformedTabs);
     setManagerNames(transformedManagers);
   }
-  
+
 
   const postProject = async () => {
     try {
@@ -150,24 +150,24 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Tabs
-  value={value}
-  onChange={onChange}
-  textColor="secondary"
-  variant="scrollable"
-  scrollButtons="auto"
-  indicatorColor="secondary"
-  sx={{
-    flexGrow: 1,
-    '& .MuiTabs-scrollButtons': {
-      color: 'black', // change the color to your desired value
-    },
-  }}
->
-  {tabs.map((tab, index) => (
-    <Tab key={index} value={tab.value} label={tab.label} />
-  ))}
-</Tabs>
+        <Tabs
+          value={value}
+          onChange={onChange}
+          textColor="secondary"
+          variant="scrollable"
+          scrollButtons="auto"
+          indicatorColor="secondary"
+          sx={{
+            flexGrow: 1,
+            '& .MuiTabs-scrollButtons': {
+              color: 'black', // change the color to your desired value
+            },
+          }}
+        >
+          {tabs.map((tab, index) => (
+            <Tab key={index} value={tab.value} label={tab.label} />
+          ))}
+        </Tabs>
 
 
         <Button className='AddProject'onClick={handleAddClick} variant="contained" color="primary" sx={{ ml: 2 }}>
@@ -216,7 +216,7 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
         )}
       </div>
 
-      {children} 
+      {children}
     </Box>
   );
 }

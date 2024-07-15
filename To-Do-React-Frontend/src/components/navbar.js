@@ -261,7 +261,7 @@ function ResponsiveAppBar({ onSidebarToggle }) {
 
         .line {
           fill: none;
-          stroke: white;
+          stroke: #1976d2;
           stroke-linecap: round;
           stroke-linejoin: round;
           stroke-width: 3;
@@ -285,7 +285,7 @@ function ResponsiveAppBar({ onSidebarToggle }) {
           stroke-dashoffset: -32.42;
         }
         .hamburger:hover .line {
-          stroke: #d8d8d8;
+          stroke: grey;
         }
       `}</style>
     </AppBar>
