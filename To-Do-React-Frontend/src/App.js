@@ -6,6 +6,7 @@ import Home from "./components/Home.js";
 import UserGroup from "./components/UserGroup.js";
 import SignUp from "./components/SignUp.js";
 import Login from "./components/login.js";
+import Projects from "./components/Projects.js";
 // import ResponsiveAppBar from ",/navbar.js";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/user-group" element={<UserGroup />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/Projects" element={<Projects/>}/>
       </Routes>
     </Sidebar>
   );

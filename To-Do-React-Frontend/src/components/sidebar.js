@@ -44,6 +44,12 @@ const Sidebar = ({ children }) => {
               {isOpen && <span className='icon-tag'>User/Group</span>}
             </li>
           </Link>
+          <Link to="/Projects" style={{ cursor: 'pointer', textDecoration: 'none' }}>
+            <li className="sidebar-item">
+              <div className="icon"><FontAwesomeIcon icon={faUsers} /></div>
+              {isOpen && <span className='icon-tag'>Projects</span>}
+            </li>
+          </Link>
         </ul>
       </div>
       <main>{children}</main>

@@ -7,6 +7,7 @@ import IntactBoard from './IntactBoard';
 import CloudOptGenBoard from './CloudOptGenBoard';
 import CardDetailTitle from './CardDetailTitle';
 import './App.css';
+import Projects from './Projects';
 
 // Simulated API call function
 const updateCard = async (cardId, updatedData) => {
@@ -56,6 +57,7 @@ const App = () => {
               <CSPMBoard />
               <CardDetailTitle card={card} updateCard={handleUpdateCard} />
             </Route>
+            <Route path="/Projects" component={Projects} />
           </Switch>
         </div>
       </div>

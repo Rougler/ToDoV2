@@ -1,0 +1,75 @@
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    float: right;
+  }
+  
+  form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form input, form select {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  form button {
+    align-self: flex-start;
+  }
+  .project-card {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .project-info {
+    flex-grow: 1;
+  }
+  
+  .project-info h2 {
+    margin-top: 0;
+  }
+  
+  .status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    white-space: nowrap;
+  }
+  
+  .status.in-progress {
+    background-color: #e6e6fa;
+    color: #8a2be2;
+  }
+  
+  .status.pending {
+    background-color: #ffe4e1;
+    color: #ff4500;
+  }
+  
+  .status.completed {
+    background-color: #e0ffff;
+    color: #20b2aa;
+  }
+
+  .project-list h1{
+    padding-top: 70px;
+    font-size: 20px;
+  }
