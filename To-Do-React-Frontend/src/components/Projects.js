@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 import './Projects.css';
 
@@ -37,6 +38,8 @@ const ProjectList = () => {
     team: '',
     status: 'Pending'
   });
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -45,16 +48,38 @@ const ProjectList = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setProjects(prev => [...prev, newProject]);
+    if (isEditing) {
+      const updatedProjects = projects.map((project, index) =>
+        index === currentIndex ? newProject : project
+      );
+      setProjects(updatedProjects);
+      setIsEditing(false);
+      setCurrentIndex(null);
+    } else {
+      setProjects(prev => [...prev, newProject]);
+    }
     setNewProject({ name: '', deadline: '', team: '', status: 'Pending' });
     setShowForm(false);
   };
 
+  const handleEdit = (index) => {
+    setCurrentIndex(index);
+    setNewProject(projects[index]);
+    setIsEditing(true);
+    setShowForm(true);
+  };
+
+  const handleDelete = (index) => {
+    const updatedProjects = projects.filter((_, i) => i !== index);
+    setProjects(updatedProjects);
+  };
+
   return (
     <div className="project-list">
+      <div className='pos-fix'>
       <h1>Project List</h1>
       <button onClick={() => setShowForm(true)}>Add Project</button>
-
+      </div>
       {showForm && (
         <form onSubmit={handleSubmit}>
           <input
@@ -87,22 +112,28 @@ const ProjectList = () => {
             <option value="In Progress">In Progress</option>
             <option value="Completed">Completed</option>
           </select>
-          <button type="submit">Add</button>
+          <button type="submit">{isEditing ? 'Update' : 'Add'}</button>
         </form>
       )}
 
-{projects.map((project, index) => (
-  <div key={index} className="project-card">
-    <div className="project-info">
-      <h2>{project.name}</h2>
-      <p>Deadline: {project.deadline}</p>
-      <p>Team: {project.team}</p>
-    </div>
-    <span className={`status ${project.status.toLowerCase().replace(' ', '-')}`}>
-      {project.status}
-    </span>
-  </div>
-))}
+      <div className="project-wrap">
+        {projects.map((project, index) => (
+          <div key={index} className="project-card">
+            <div className="project-info">
+              <h2>{project.name}</h2>
+              <p>Deadline: {project.deadline}</p>
+              <p>Team: {project.team}</p>
+            </div>
+            <div className="project-actions">
+              <span className={`status ${project.status.toLowerCase().replace(' ', '-')}`}>
+                {project.status}
+              </span>
+              <button className='project-icon' onClick={() => handleEdit(index)}><FaEdit /></button>
+              <button className='project-icon' onClick={() => handleDelete(index)}><FaTrash /></button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
