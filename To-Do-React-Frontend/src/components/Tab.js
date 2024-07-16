@@ -5,22 +5,35 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import Select from 'react-select';
 import axios from "axios";
-import './Tabs.css'
+import './Tabs.css';
 
 export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setManagerNames, children }) {
   const [isAdding, setIsAdding] = React.useState(false);
   const [newTabLabel, setNewTabLabel] = React.useState('');
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
   const [taskName, setTaskName] = useState('');
   const [managerName, setManagerName] = useState('');
+  const [assignedTo, setAssignedTo] = useState([]);
+  const [currentTab, setCurrentTab] = useState(null);
+  const [editedTabLabel, setEditedTabLabel] = useState('');
+
+  const userOptions = [
+    { value: "John", label: "John" },
+    { value: "Alice", label: "Alice" },
+    { value: "Bob", label: "Bob" },
+    { value: "admin", label: "admin" },
+    { value: "niyaz.noor", label: "niyaz.noor" },
+  ];
 
   React.useEffect(() => {
     getAllProject();
-    return () => {
-
-    };
+    return () => { };
   }, []);
 
   const handleAddClick = () => {
@@ -30,6 +43,14 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
 
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
+
+  const openEditModal = (tab) => {
+    setCurrentTab(tab);
+    setEditedTabLabel(tab.label);
+    setEditModalVisible(true);
+  };
+
+  const closeEditModal = () => setEditModalVisible(false);
 
   const getAllProject = async () => {
     const response = await axios.get("http://127.0.0.1:8000/todo/projects/");
@@ -49,16 +70,26 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
     setManagerNames(transformedManagers);
   }
 
-
   const postProject = async () => {
     try {
+      const assignedToNames = assignedTo.map(person => person.label);
       const data = {
         "projname": newTabLabel,
-        "assignedTo": [managerName]
-      }
-      const response = await axios.post("http://127.0.0.1:8000/todo/api/create_project/", data);
+        "assignedTo": assignedToNames
+      };
+      await axios.post("http://127.0.0.1:8000/todo/api/create_project/", data);
     } catch (error) {
-      console.error("Error fetching tasks:", error);
+      console.error("Error creating project:", error);
+    }
+  };
+
+  const deleteProject = async (tab) => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/todo/api/delete_project/${tab.label}`);
+      setTabs(tabs.filter(t => t.value !== tab.value));
+      closeEditModal();
+    } catch (error) {
+      console.error("Error deleting project:", error);
     }
   };
 
@@ -66,19 +97,21 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
     if (newTabLabel.trim() !== "") {
       addTab(newTabLabel, managerName);
       setNewTabLabel('');
-      setManagerName("");
+      setAssignedTo([]);
       setIsAdding(false);
       postProject();
       closeModal();
     }
   };
 
-
-  const saveData = () => {
-    console.log('Task Name:', taskName);
-    console.log('Manager Name:', managerName);
-    postProject();
-    closeModal();
+  const handleEditTag = () => {
+    if (editedTabLabel.trim() !== "") {
+      const updatedTabs = tabs.map((tab) => 
+        tab.value === currentTab.value ? { ...tab, label: editedTabLabel } : tab
+      );
+      setTabs(updatedTabs);
+      closeEditModal();
+    }
   };
 
   const styles = {
@@ -87,7 +120,6 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
       textAlign: 'center',
       marginTop: '50px'
     },
-
     openButton: {
       padding: '10px 20px',
       fontSize: '16px',
@@ -129,6 +161,7 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
     label: {
       display: 'block',
       marginBottom: '5px',
+      color:'black',
     },
     input: {
       width: '100%',
@@ -142,10 +175,19 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
       color: 'white',
       border: 'none',
       cursor: 'pointer',
-    }
+      marginTop:'8px',
+      marginBottom: '8px',
+      display:'flex',
+    },
+    deleteButton: {
+      width: '100%',
+      padding: '10px',
+      backgroundColor: '#f44336',
+      color: 'white',
+      border: 'none',
+      cursor: 'pointer',
+    },
   };
-
-
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -160,17 +202,26 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
           sx={{
             flexGrow: 1,
             '& .MuiTabs-scrollButtons': {
-              color: 'black', // change the color to your desired value
+              color: 'black',
             },
           }}
         >
           {tabs.map((tab, index) => (
-            <Tab key={index} value={tab.value} label={tab.label} />
+            <Tab
+              key={index}
+              value={tab.value}
+              label={
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  {tab.label}
+                  <IconButton size="small" onClick={() => openEditModal(tab)} sx={{ ml: 1 }}>
+                    <EditIcon fontSize="small" />
+                  </IconButton>
+                </div>
+              }
+            />
           ))}
         </Tabs>
-
-
-        <Button className='AddProject'onClick={handleAddClick} variant="contained" color="primary" sx={{ ml: 2 }}>
+        <Button className='AddProject' onClick={handleAddClick} variant="contained" color="primary" sx={{ ml: 2 }}>
           + Add Project
         </Button>
       </Box>
@@ -182,7 +233,7 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
               <span style={styles.close} onClick={closeModal}>&times;</span>
               <form style={styles.form}>
                 <div style={styles.formGroup}>
-                  <label style={styles.label} htmlFor="taskName">Task Name</label>
+                  <label style={styles.label} htmlFor="taskName">Project Name</label>
                   <TextField
                     label="Project Name"
                     value={newTabLabel}
@@ -193,22 +244,43 @@ export default function ColorTabs({ value, onChange, tabs, addTab, setTabs, setM
                   />
                 </div>
                 <div style={styles.formGroup}>
-                  <label style={styles.label} htmlFor="managerName">Select Manager</label>
-                  <select
-                    style={styles.input}
-                    id="managerName"
-                    value={managerName}
-                    onChange={(e) => setManagerName(e.target.value)}
-                  >
-                    <option value="">Select Manager</option>
-
-                    <option value="nitesh.saw">nitesh.saw</option>
-                    <option value="s.r">s.r</option>
-                    <option value="sahil.ullah">sahil.ullah</option>
-                  </select>
+                  <label style={styles.label} htmlFor="managerName">Assigned To:</label>
+                  <Select
+                    isMulti
+                    options={userOptions}
+                    value={assignedTo}
+                    onChange={setAssignedTo}
+                  />
                 </div>
                 <Button onClick={handleAddTag} variant="contained" color="primary">
                   Add
+                </Button>
+              </form>
+            </div>
+          </div>
+        )}
+
+        {editModalVisible && (
+          <div style={styles.modal}>
+            <div style={styles.modalContent}>
+              <span style={styles.close} onClick={closeEditModal}>&times;</span>
+              <form style={styles.form}>
+                <div style={styles.formGroup}>
+                  <label style={styles.label} htmlFor="editedTabLabel">Edit Project Name</label>
+                  <TextField
+                    label="Project Name"
+                    value={editedTabLabel}
+                    onChange={(e) => setEditedTabLabel(e.target.value)}
+                    variant="outlined"
+                    size="small"
+                    sx={{ mr: 2 }}
+                  />
+                </div>
+                <Button onClick={handleEditTag} variant="contained" color="primary" style={styles.saveButton}>
+                  Save
+                </Button>
+                <Button onClick={() => deleteProject(currentTab)} variant="contained" color="secondary" style={styles.deleteButton}>
+                  Delete
                 </Button>
               </form>
             </div>

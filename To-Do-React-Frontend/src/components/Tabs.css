@@ -5,9 +5,7 @@
  .css-1jcfcth{
     margin-bottom: 6px;
  }
- .MuiButtonBase-root button{
-    background: green;
- }
+
  .css-70qvj9{
     background: #f3f3f3;
      padding: 8px;
@@ -16,9 +14,7 @@
   .css-1jcfcth{
      margin-bottom: 6px;
   }
-  .MuiButtonBase-root button{
-     background: green;
-  }
+
  
  
   .AddProject {
@@ -84,4 +80,18 @@
  .css-jpln7h-MuiTabs-scroller button:hover {
     background-color: #f3f3f3 !important;
     padding: 3px !important;
+}
+
+
+.css-ptiqhd-MuiSvgIcon-root{
+font-size: 15px !important;
+color: #f3f3f300 !important;
+}
+
+.css-ptiqhd-MuiSvgIcon-root:hover{
+    color: #bcbcbc !important;
+}
+
+.MuiIconButton-sizeSmall{
+    background: none !important;
 }
