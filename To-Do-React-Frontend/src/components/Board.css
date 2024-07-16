@@ -371,7 +371,10 @@
 .add-list-input {
   padding: 5px;
   margin-right: 10px;
-  flex: 1;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+
 }
 
 .add-list-button {

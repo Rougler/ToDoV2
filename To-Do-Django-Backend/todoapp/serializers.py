@@ -90,12 +90,12 @@ class Update_Description(serializers.ModelSerializer):
 class Update_Status(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['id', 'status']
+        fields = ['id', 'taskStatus']
 
 class Update_Name(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['id', 'name']
+        fields = ['id', 'taskName']
 
 
 class UploadedFileSerializer(serializers.ModelSerializer):
