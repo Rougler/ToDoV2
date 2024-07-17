@@ -1,27 +1,28 @@
 .sidebar-left {
-  background-color: #e0f0ff;
-  transition: l;
-  height: 100vh;
-  top: 0;
-  margin-top: 64px;
-  position: sticky;
-  float: left;
-  transition: 0.1s ease-in-out;
+  background-color: #ffffff;
+    transition: l;
+    height: -29px;
+    top: 66px;
+    position: sticky;
+    float: left;
+    margin-top: 2px;
+    transition: 0.1s ease-in-out;
   }
   
   .sidebar-left.closed {
-    width: 2%;
+    width: 42px;
   }
 
   .sidebar-left.open{
     width: 10%;
   }
-  
-  .navbar-container {
+
+  .navbar-container{
     position: fixed;
     width: 100%;
     z-index: 111;
-}
+  }
+  
   .toggle-button {
     background-color: #0079bf;
     color: white;
@@ -41,10 +42,11 @@
   .sidebar-item {
     display: flex;
     align-items: center;
-    padding: 10px 3px;
+    gap: 12px;
+    padding: 10px 12px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
+}
   
   .sidebar-item:hover {
     background-color: #e9ecef;
@@ -66,3 +68,5 @@
   .icon-tag{
     color: #0079bf;
   }
+
+  
