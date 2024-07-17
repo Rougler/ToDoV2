@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import Modal from 'react-modal';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
 import './Projects.css';
+
+Modal.setAppElement('#root');
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([
@@ -77,11 +80,19 @@ const ProjectList = () => {
   return (
     <div className="project-list">
       <div className='pos-fix'>
-      <h1>Project List</h1>
-      <button onClick={() => setShowForm(true)}>Add Project</button>
+        <h1>Project List</h1>
+        <button onClick={() => setShowForm(true)}>Add Project</button>
       </div>
-      {showForm && (
+
+      <Modal
+        isOpen={showForm}
+        onRequestClose={() => setShowForm(false)}
+        contentLabel="Add/Edit Project"
+        className="modal"
+        overlayClassName="overlay"
+      >
         <form onSubmit={handleSubmit}>
+          <h2>{isEditing ? 'Edit Project' : 'Add Project'}</h2>
           <input
             name="name"
             value={newProject.name}
@@ -113,8 +124,9 @@ const ProjectList = () => {
             <option value="Completed">Completed</option>
           </select>
           <button type="submit">{isEditing ? 'Update' : 'Add'}</button>
+          <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
         </form>
-      )}
+      </Modal>
 
       <div className="project-wrap">
         {projects.map((project, index) => (
