@@ -100,40 +100,6 @@ button {
     margin-right: 4px;
   }
 
-
-
-
-
-  /* Modal styles */
-.modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 21%;
-    /* max-width: 200px; */
-    height: 50%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75);
-  }
-  
-  /* Example existing styles */
-  
-
   .team-members {
     display: flex;
     gap: 2px;
@@ -175,4 +141,3 @@ button {
   .team-member-circle:nth-child(6) {
     background-color: #ffb2f0;
   }
-

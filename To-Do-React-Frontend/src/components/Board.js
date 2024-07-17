@@ -3,7 +3,7 @@ import "./Board.css"; // Ensure the correct path to your CSS file
 import DeleteColumn from "./DeleteColumn";
 import CardDetail from "./CardDetail";
 import axios from "axios";
-import ColorTabs from "./Tab.js";
+import ProjectDropdown from "./ProjectDropdown"; // Update the import statement d
 
 const initialLists = ["Not-Start", "On-going", "Done", "Staging"];
 const initialTabs = [];
@@ -112,12 +112,12 @@ const Board = () => {
     setCards(updatedCards);
   };
 
-  const handleTabChange = (event, newValue) => {
-    setSelectedTab(newValue);
+  const handleProjectChange = (event) => {
+    setSelectedTab(event.target.value);
   };
 
   const addTab = (label, managerName) => {
-    const newTabValue = label.toLowerCase().replace(/\s/g, "_");
+    const newTabValue = `tab${tabs.length}`;
     const newTab = { value: newTabValue, label: label };
     setTabs([...tabs, newTab]);
     setManagerNames({ ...managerNames, [newTabValue]: managerName });
@@ -129,8 +129,7 @@ const Board = () => {
     return cards.filter(
       (card) =>
         card.listTitle === listTitle &&
-        card.projectName ===
-          tabs.find((tab) => tab.value === selectedTab)?.label
+        card.projectName === tabs.find((tab) => tab.value === selectedTab)?.label
     );
   };
 
@@ -143,72 +142,73 @@ const Board = () => {
   return (
     <div>
       <div className="board">
-        <ColorTabs
+        <ProjectDropdown
           value={selectedTab}
-          onChange={handleTabChange}
+          onChange={handleProjectChange}
           tabs={tabs}
           addTab={addTab}
           setTabs={setTabs}
-          managerNames={managerNames}
           setManagerNames={setManagerNames}
-        >
-          {tabs.map(
-            (tab) =>
-              selectedTab === tab.value && (
-                <div key={tab.value}>
-                  <div className="managerName">
-                    Project Manager: {managerNames[tab.value] || "N/A"}
-                  </div>
-                  <div key={tab.value} className="lists-container">
-                    {lists.map((listTitle, index) => (
-                      <div key={index} className="list">
-                        <div className="list-header">
-                          <h3>{listTitle}</h3>
-                          <DeleteColumn
-                            listTitle={listTitle}
-                            onDelete={deleteList}
-                          />
-                        </div>
-                        <div className="cards">
-                          {getCardsForCurrentTab(listTitle).map((card) => (
-                            <div
-                              key={card.id}
-                              className="card"
-                              onClick={() => setSelectedCard(card)}
-                              style={{ backgroundColor: card.cover }}
-                            >
-                              {card.title}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                    {showAddListForm ? (
-                      <form onSubmit={handleAddList} className="add-list-section">
-                        <input
-                          type="text"
-                          placeholder="Add another list"
-                          value={newListTitle}
-                          onChange={(e) => setNewListTitle(e.target.value)}
-                          className="add-list-input" // Ensure this class is defined in your CSS
-                        />
-                        <button type="submit" className="add-list-button"> {/* Ensure this class is defined in your CSS */}
-                          Add List
-                        </button>
-                      </form>
-                    ) : (
-                      <button
-                        className="add-another-list-button"
-                        onClick={() => setShowAddListForm(true)}
-                      >
-                        Add another list
-                      </button>
-                    )}
-                  </div>
+        />
+        {tabs.map(
+          (tab) =>
+            selectedTab === tab.value && (
+              <div key={tab.value}>
+                <div className="managerName">
+                  Project Manager: {managerNames[tab.value] || "N/A"}
                 </div>
-              )
-          )}
-        </ColorTabs>
+                <div key={tab.value} className="lists-container">
+                  {lists.map((listTitle, index) => (
+                    <div key={index} className="list">
+                      <div className="list-header">
+                        <h3>{listTitle}</h3>
+                        <DeleteColumn
+                          listTitle={listTitle}
+                          onDelete={deleteList}
+                        />
+                      </div>
+                      <div className="cards">
+                        {getCardsForCurrentTab(listTitle).map((card) => (
+                          <div
+                            key={card.id}
+                            className="card"
+                            onClick={() => setSelectedCard(card)}
+                            style={{ backgroundColor: card.cover }}
+                          >
+                            {card.title}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                  {showAddListForm ? (
+                    <form
+                      onSubmit={handleAddList}
+                      className="add-list-section"
+                    >
+                      <input
+                        type="text"
+                        placeholder="Add another list"
+                        value={newListTitle}
+                        onChange={(e) => setNewListTitle(e.target.value)}
+                        className="add-list-input"
+                      />
+                      <button type="submit" className="add-list-button">
+                        Add List
+                      </button>
+                    </form>
+                  ) : (
+                    <button
+                      className="add-another-list-button"
+                      onClick={() => setShowAddListForm(true)}
+                    >
+                      Add another list
+                    </button>
+                  )}
+                </div>
+              </div>
+            )
+        )}
 
         {selectedCard && (
           <CardDetail
@@ -228,3 +228,4 @@ const Board = () => {
 };
 
 export default Board;
+

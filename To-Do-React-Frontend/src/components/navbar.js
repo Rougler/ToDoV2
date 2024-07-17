@@ -19,6 +19,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 
+import ProjectDropdown from "./ProjectDropdown";
+
 const pages = [];
 const settings = ['Profile', 'Logout'];
 
@@ -43,15 +45,19 @@ function ResponsiveAppBar({ onSidebarToggle }) {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
   const handleOpenProfile = () => {
     setOpenProfile(true);
   };
+
   const handleCloseProfile = () => {
     setOpenProfile(false);
   };
@@ -63,6 +69,30 @@ function ResponsiveAppBar({ onSidebarToggle }) {
     } catch (error) {
       console.error('Error fetching user profile:', error);
     }
+  };
+
+  const [selectedTab, setSelectedTab] = useState("tab0");
+  const [tabs, setTabs] = useState([]);
+  const [managerNames, setManagerNames] = useState({});
+
+  useEffect(() => {
+    console.log("Initial selectedTab:", selectedTab);
+    console.log("Initial tabs:", tabs);
+    console.log("Initial managerNames:", managerNames);
+  }, []);
+
+  const handleProjectChange = (event) => {
+    setSelectedTab(event.target.value);
+    console.log("Selected Tab Changed:", event.target.value);
+  };
+
+  const addTab = (label, managerName) => {
+    const newTabValue = `tab${tabs.length}`;
+    const newTab = { value: newTabValue, label: label };
+    setTabs([...tabs, newTab]);
+    setManagerNames({ ...managerNames, [newTabValue]: managerName });
+    setSelectedTab(newTab.value);
+    console.log("Tab and manager name added", newTab, managerName);
   };
 
   return (
@@ -98,6 +128,15 @@ function ResponsiveAppBar({ onSidebarToggle }) {
           >
             To-Do-Application
           </Typography>
+
+          <ProjectDropdown
+            value={selectedTab}
+            onChange={handleProjectChange}
+            tabs={tabs}
+            addTab={addTab}
+            setTabs={setTabs}
+            setManagerNames={setManagerNames}
+          />
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <Menu
@@ -177,8 +216,8 @@ function ResponsiveAppBar({ onSidebarToggle }) {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem 
-                  key={setting} 
+                <MenuItem
+                  key={setting}
                   onClick={() => {
                     handleCloseUserMenu();
                     if (setting === 'Profile') {
@@ -209,7 +248,9 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             fullWidth
             variant="standard"
             value={userData.username}
-            disabled
+            onChange={(e) =>
+              setUserData({ ...userData, username: e.target.value })
+            }
           />
           <TextField
             margin="dense"
@@ -219,7 +260,9 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             fullWidth
             variant="standard"
             value={userData.email}
-            disabled
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
           />
           <TextField
             margin="dense"
@@ -229,65 +272,16 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             fullWidth
             variant="standard"
             value={userData.role}
-            disabled
+            onChange={(e) =>
+              setUserData({ ...userData, role: e.target.value })
+            }
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseProfile} color="primary">
-            Close
-          </Button>
+          <Button onClick={handleCloseProfile}>Cancel</Button>
+          <Button onClick={handleCloseProfile}>Save</Button>
         </DialogActions>
       </Dialog>
-
-      <style jsx>{`
-        .hamburger {
-          cursor: pointer;
-          font-size:12px;
-          margin: 5px 39px 0px -22px;
-        }
-
-        .hamburger input {
-          display: none;
-        }
-
-        .hamburger svg {
-          font-size: 10px;
-          height: 3em;
-          transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .hamburger-item:hover {
-          background-color: #22adff;
-        }
-
-        .line {
-          fill: none;
-          stroke: #1976d2;
-          stroke-linecap: round;
-          stroke-linejoin: round;
-          stroke-width: 3;
-          transition: stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1),
-          stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .line-top-bottom {
-          stroke-dasharray: 12 63;
-        }
-
-        .hamburger input:checked + svg {
-          transform: rotate(-45deg);
-        }
-        .hamburger input:checked + svg .line {
-          stroke: #103c6e;
-        }
-
-        .hamburger input:checked + svg .line-top-bottom {
-          stroke-dasharray: 20 300;
-          stroke-dashoffset: -32.42;
-        }
-        .hamburger:hover .line {
-          stroke: grey;
-        }
-      `}</style>
     </AppBar>
   );
 }
