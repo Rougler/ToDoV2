@@ -3,7 +3,7 @@ import "./Board.css"; // Ensure the correct path to your CSS file
 import DeleteColumn from "./DeleteColumn";
 import CardDetail from "./CardDetail";
 import axios from "axios";
-import ProjectDropdown from "./ProjectDropdown"; // Update the import statement
+import ProjectDropdown from "./ProjectDropdown"; // Update the import statement d
 
 const initialLists = ["Not-Start", "On-going", "Done", "Staging"];
 const initialTabs = [];
