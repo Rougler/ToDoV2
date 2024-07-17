@@ -5,6 +5,7 @@
   min-width: 100vh;
   overflow: hidden;
   background: #ececec;
+  padding: 78px 11px 0px 11px;
   }
   
   h1 {
@@ -69,13 +70,19 @@
     cursor: pointer;
   }
   .add-task-button {
-    position: relative;
-    width: 1em;
-    height: 1em;
-    border: none;
-    background: #0079bf54;
+    width: 24px;
+    height: 24px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
     border-radius: 5px;
-    transition: background 0.5s;
+    font-size: 14px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    background: black;
   }
   
   .A {

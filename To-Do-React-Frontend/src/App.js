@@ -18,7 +18,7 @@ function App() {
         <Route path="/user-group" element={<UserGroup />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/Projects" element={<Projects />} />
+        <Route path="/Projects" element={<Projects/>}/>
       </Routes>
     </Sidebar>
   );
