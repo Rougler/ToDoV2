@@ -3,6 +3,7 @@
 .board {
   display: flex;
   gap: 10px;
+  background: #f1f1f1;
   padding: 10px;
   padding-top: 64px;
   /* Enable horizontal scrolling */
@@ -22,22 +23,19 @@
 
 .list {
   padding: 50px;
-  border-radius: 5px;
-  padding: 10px;
-  border-radius: 2px;
-  flex: 0 0 250px;
-  width: 272px;
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  white-space: normal;
-  position: relative;
-  background: none;
-  box-shadow: 0px 0px 2px 3px #ffffffa1;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
+    border-radius: 5px;
+    padding: 10px;
+    border-radius: 2px;
+    flex: 0 0 250px;
+    width: 272px;
+    display: flex;
+    /* height: 100%; */
+    flex-direction: column;
+    white-space: normal;
+    position: relative;
+    background: none;
+    /* box-shadow: 0px 0px 2px 3px #ffffffa1; */
+    -webkit-border-radius: 2px;
 }
 
 .list h3 { 

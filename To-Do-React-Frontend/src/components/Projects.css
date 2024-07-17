@@ -53,6 +53,7 @@ button {
   .project-card {
     background-color: #f8f8f8;
     border-radius: 8px;
+    gap: 12px;
     padding: 10px 14px;
     margin-bottom: 15px;
     display: flex;
@@ -99,3 +100,44 @@ button {
     margin-right: 4px;
   }
 
+  .team-members {
+    display: flex;
+    gap: 2px;
+  }
+  
+  .team-member-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #eee;
+    color: black;
+    /* font-weight: bold; */
+    font-size: 13px;
+  }
+  
+  .team-member-circle:nth-child(1) {
+    background-color: #ffe4b2;
+  }
+  
+  .team-member-circle:nth-child(2) {
+    background-color: #c2f0c2;
+  }
+  
+  .team-member-circle:nth-child(3) {
+    background-color: #ffc2c2;
+  }
+  
+  .team-member-circle:nth-child(4) {
+    background-color: #d1c2ff;
+  }
+  
+  .team-member-circle:nth-child(5) {
+    background-color: #b2d1ff;
+  }
+  
+  .team-member-circle:nth-child(6) {
+    background-color: #ffb2f0;
+  }

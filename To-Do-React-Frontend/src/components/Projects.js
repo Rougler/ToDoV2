@@ -3,30 +3,35 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 
 import './Projects.css';
 
+// Utility function to generate initials
+const getInitials = (name) => {
+  return name.split(' ').map(word => word[0]).join('').toUpperCase();
+};
+
 const ProjectList = () => {
   const [projects, setProjects] = useState([
     {
       name: "Website Redesign",
       deadline: "2023-12-01",
-      team: "Alice, Bob, Charlie",
+      team: "Alice Bob Charlie",
       status: "In Progress"
     },
     {
       name: "Mobile App Launch",
       deadline: "2024-01-15",
-      team: "Dave, Eva, Frank",
+      team: "Dave Eva Frank",
       status: "In Progress"
     },
     {
       name: "SEO Optimization",
       deadline: "2023-10-30",
-      team: "Gina, Hank, Irene",
+      team: "Gina Hank Irene",
       status: "Pending"
     },
     {
       name: "Backend Upgrade",
       deadline: "2023-11-20",
-      team: "Jack, Kim, Leo",
+      team: "Jack Kim Leo",
       status: "Completed"
     }
   ]);
@@ -77,8 +82,8 @@ const ProjectList = () => {
   return (
     <div className="project-list">
       <div className='pos-fix'>
-      <h1>Project List</h1>
-      <button onClick={() => setShowForm(true)}>Add Project</button>
+        <h1>Project List</h1>
+        <button onClick={() => setShowForm(true)}>Add Project</button>
       </div>
       {showForm && (
         <form onSubmit={handleSubmit}>
@@ -122,8 +127,14 @@ const ProjectList = () => {
             <div className="project-info">
               <h2>{project.name}</h2>
               <p>Deadline: {project.deadline}</p>
-              <p>Team: {project.team}</p>
             </div>
+              <div className="team-members">
+                {project.team.split(' ').map((member, i) => (
+                  <div key={i} className="team-member-circle">
+                    {getInitials(member)}
+                  </div>
+                ))}
+              </div>
             <div className="project-actions">
               <span className={`status ${project.status.toLowerCase().replace(' ', '-')}`}>
                 {project.status}
