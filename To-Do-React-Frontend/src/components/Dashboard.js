@@ -4,7 +4,7 @@ import "./dashboard.css";
 import SimpleBarChart from "./BarChart.js";
 import StraightAnglePieChart from "./PieChart.js";
 import Modal from "./Modal.js";
-import ColorTabs from "./Tab.js";
+import ProjectDropdown from "./ProjectDropdown.js"; // Updated import statement
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
@@ -51,18 +51,8 @@ const Dashboard = () => {
     return counts;
   };
 
-  const handleTabChange = (event, newValue) => {
-    setSelectedTab(newValue);
-  };
-
-  const addTab = (label, managerName) => {
-    const newTabValue = label.toLowerCase().replace(/\s/g, "_");
-    const newTab = { value: newTabValue, label: label };
-    setTabs([...tabs, newTab]);
-    setManagerNames({ ...managerNames, [newTabValue]: managerName });
-
-    setSelectedTab(newTab.value);
-    console.log("Tab and manager name added", newTab, managerNames);
+  const handleTabChange = (event) => {
+    setSelectedTab(event.target.value);
   };
 
   const getFilteredTasks = () => {
@@ -76,11 +66,10 @@ const Dashboard = () => {
     <>
       <div className="dashboard">
         <h1>Detailed Dashboard</h1>
-        <ColorTabs
+        <ProjectDropdown
           value={selectedTab}
           onChange={handleTabChange}
           tabs={tabs}
-          addTab={addTab}
           setTabs={setTabs}
           managerNames={managerNames}
           setManagerNames={setManagerNames}
