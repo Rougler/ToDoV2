@@ -4,14 +4,10 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 
 import './Projects.css';
 
-<<<<<<< HEAD
-Modal.setAppElement('#root');
-=======
 // Utility function to generate initials
 const getInitials = (name) => {
   return name.split(' ').map(word => word[0]).join('').toUpperCase();
 };
->>>>>>> 4c4029492afc360c310d67b95a606e6e7a690d7c
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([
