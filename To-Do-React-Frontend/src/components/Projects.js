@@ -1,0 +1,108 @@
+import React, { useState } from 'react';
+import './Projects.css';
+const ProjectList = () => {
+  const [projects, setProjects] = useState([
+    {
+      name: "Website Redesign",
+      deadline: "2023-12-01",
+      team: "Alice, Bob, Charlie",
+      status: "In Progress"
+    },
+    {
+      name: "Mobile App Launch",
+      deadline: "2024-01-15",
+      team: "Dave, Eva, Frank",
+      status: "In Progress"
+    },
+    {
+      name: "SEO Optimization",
+      deadline: "2023-10-30",
+      team: "Gina, Hank, Irene",
+      status: "Pending"
+    },
+    {
+      name: "Backend Upgrade",
+      deadline: "2023-11-20",
+      team: "Jack, Kim, Leo",
+      status: "Completed"
+    }
+  ]);
+
+  const [showForm, setShowForm] = useState(false);
+  const [newProject, setNewProject] = useState({
+    name: '',
+    deadline: '',
+    team: '',
+    status: 'Pending'
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewProject(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setProjects(prev => [...prev, newProject]);
+    setNewProject({ name: '', deadline: '', team: '', status: 'Pending' });
+    setShowForm(false);
+  };
+
+  return (
+    <div className="project-list">
+      <h1>Project List</h1>
+      <button onClick={() => setShowForm(true)}>Add Project</button>
+
+      {showForm && (
+        <form onSubmit={handleSubmit}>
+          <input
+            name="name"
+            value={newProject.name}
+            onChange={handleInputChange}
+            placeholder="Project Name"
+            required
+          />
+          <input
+            type="date"
+            name="deadline"
+            value={newProject.deadline}
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            name="team"
+            value={newProject.team}
+            onChange={handleInputChange}
+            placeholder="Team Members"
+            required
+          />
+          <select
+            name="status"
+            value={newProject.status}
+            onChange={handleInputChange}
+          >
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+          <button type="submit">Add</button>
+        </form>
+      )}
+
+{projects.map((project, index) => (
+  <div key={index} className="project-card">
+    <div className="project-info">
+      <h2>{project.name}</h2>
+      <p>Deadline: {project.deadline}</p>
+      <p>Team: {project.team}</p>
+    </div>
+    <span className={`status ${project.status.toLowerCase().replace(' ', '-')}`}>
+      {project.status}
+    </span>
+  </div>
+))}
+    </div>
+  );
+};
+
+export default ProjectList;

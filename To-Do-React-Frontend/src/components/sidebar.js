@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './sidebar.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faChartBar, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faChartBar, faUsers, faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
 import ResponsiveAppBar from './navbar'; // Adjust the path
 
 const Sidebar = ({ children }) => {
@@ -42,6 +42,12 @@ const Sidebar = ({ children }) => {
             <li className="sidebar-item">
               <div className="icon"><FontAwesomeIcon icon={faUsers} /></div>
               {isOpen && <span className='icon-tag'>User/Group</span>}
+            </li>
+          </Link>
+          <Link to="/Projects" style={{ cursor: 'pointer', textDecoration: 'none' }}>
+            <li className="sidebar-item">
+              <div className="icon"><FontAwesomeIcon icon={faProjectDiagram} /></div>
+              {isOpen && <span className='icon-tag'>Projects</span>}
             </li>
           </Link>
         </ul>
