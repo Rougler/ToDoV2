@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+import Modal from 'react-modal';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
 import './Projects.css';
 
+<<<<<<< HEAD
+Modal.setAppElement('#root');
+=======
 // Utility function to generate initials
 const getInitials = (name) => {
   return name.split(' ').map(word => word[0]).join('').toUpperCase();
 };
+>>>>>>> 4c4029492afc360c310d67b95a606e6e7a690d7c
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([
@@ -85,8 +90,16 @@ const ProjectList = () => {
         <h1>Project List</h1>
         <button onClick={() => setShowForm(true)}>Add Project</button>
       </div>
-      {showForm && (
+
+      <Modal
+        isOpen={showForm}
+        onRequestClose={() => setShowForm(false)}
+        contentLabel="Add/Edit Project"
+        className="modal"
+        overlayClassName="overlay"
+      >
         <form onSubmit={handleSubmit}>
+          <h2>{isEditing ? 'Edit Project' : 'Add Project'}</h2>
           <input
             name="name"
             value={newProject.name}
@@ -118,8 +131,9 @@ const ProjectList = () => {
             <option value="Completed">Completed</option>
           </select>
           <button type="submit">{isEditing ? 'Update' : 'Add'}</button>
+          <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
         </form>
-      )}
+      </Modal>
 
       <div className="project-wrap">
         {projects.map((project, index) => (
