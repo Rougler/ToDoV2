@@ -100,7 +100,7 @@ button {
     margin-right: 4px;
   }
 
-<<<<<<< HEAD
+
 
 
 
@@ -133,7 +133,7 @@ button {
   
   /* Example existing styles */
   
-=======
+
   .team-members {
     display: flex;
     gap: 2px;
@@ -175,4 +175,4 @@ button {
   .team-member-circle:nth-child(6) {
     background-color: #ffb2f0;
   }
->>>>>>> 4c4029492afc360c310d67b95a606e6e7a690d7c
+
