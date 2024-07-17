@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// Modal.js
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "./Modal.css";
 import axios from "axios";
@@ -9,6 +10,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
   const [assignedTo, setAssignedTo] = useState([]);
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [techStack, setTechStack] = useState("");
 
   const options = [
     { value: "John", label: "John" },
@@ -16,6 +18,14 @@ const Modal = ({ showModal, handleClose, addTask }) => {
     { value: "Bob", label: "Bob" },
     { value: "admin", label: "admin" },
     { value: "niyaz.noor", label: "niyaz.noor" },
+  ];
+
+  const techStackOptions = [
+    { value: "React", label: "React" },
+    { value: "Angular", label: "Angular" },
+    { value: "Vue", label: "Vue" },
+    { value: "Node.js", label: "Node.js" },
+    { value: "Python", label: "Python" },
   ];
 
   const getAllProjects = async () => {
@@ -28,7 +38,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getAllProjects();
   }, []);
 
@@ -48,10 +58,11 @@ const Modal = ({ showModal, handleClose, addTask }) => {
       !taskName ||
       !taskStatus ||
       assignedTo.length === 0 ||
-      !selectedProject
+      !selectedProject ||
+      !techStack
     ) {
       console.error(
-        "Task Name, Task Status, Assigned To, and Project are required."
+        "Task Name, Task Status, Assigned To, Project, and Tech Stack are required."
       );
       return;
     }
@@ -64,6 +75,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
       taskStatus,
       assignedTo: assignedToNames,
       project: projectName,
+      techStack: techStack.label,
     };
 
     try {
@@ -132,6 +144,14 @@ const Modal = ({ showModal, handleClose, addTask }) => {
               options={projectOptions}
               value={selectedProject}
               onChange={handleProjectChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Tech Stack:</label>
+            <Select
+              options={techStackOptions}
+              value={techStack}
+              onChange={setTechStack}
             />
           </div>
           <button type="submit">Add Task</button>

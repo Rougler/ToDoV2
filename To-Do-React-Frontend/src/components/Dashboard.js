@@ -4,7 +4,7 @@ import "./dashboard.css";
 import SimpleBarChart from "./BarChart.js";
 import StraightAnglePieChart from "./PieChart.js";
 import Modal from "./Modal.js";
-import ProjectDropdown from "./ProjectDropdown.js"; // Updated import statement
+import ProjectDropdown from "./ProjectDropdown.js";
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
@@ -96,6 +96,7 @@ const Dashboard = () => {
                 <th>Task Status</th>
                 <th>Assigned to</th>
                 <th>Project Name</th>
+                <th>Tech Stack</th>
               </tr>
             </thead>
             <tbody>
@@ -109,6 +110,7 @@ const Dashboard = () => {
                   </td>
                   <td>{task.assignedTo.join(", ")}</td>
                   <td>{task.project}</td>
+                  <td>{task.techStack}</td>
                 </tr>
               ))}
             </tbody>
