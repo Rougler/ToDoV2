@@ -82,7 +82,7 @@ function ResponsiveAppBar({ onSidebarToggle }) {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-            <Tooltip>
+          <Tooltip>
             <label className="hamburger">
               <input type="checkbox" onClick={onSidebarToggle} />
               <svg viewBox="0 0 32 32">
@@ -113,7 +113,7 @@ function ResponsiveAppBar({ onSidebarToggle }) {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -136,10 +136,10 @@ function ResponsiveAppBar({ onSidebarToggle }) {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
-                
+
               ))}
             </Menu>
-            
+
           </Box>
           <Typography
             variant="h5"
@@ -169,10 +169,10 @@ function ResponsiveAppBar({ onSidebarToggle }) {
               </Button>
             ))}
           </Box>
-          
+
 
           <Box sx={{ flexGrow: 0 }}>
-            
+
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt={userData.username} src={userData.profilePicture} />
@@ -195,8 +195,8 @@ function ResponsiveAppBar({ onSidebarToggle }) {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem 
-                  key={setting} 
+                <MenuItem
+                  key={setting}
                   onClick={() => {
                     handleCloseUserMenu();
                     if (setting === 'Profile') {
@@ -211,7 +211,6 @@ function ResponsiveAppBar({ onSidebarToggle }) {
           </Box>
         </Toolbar>
       </Container>
-
       <Dialog open={openProfile} onClose={handleCloseProfile}>
         <DialogTitle>Profile</DialogTitle>
         <DialogContent>
