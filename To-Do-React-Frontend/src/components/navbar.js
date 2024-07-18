@@ -18,7 +18,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-// import "./navbar.css";
+import "./navbar.css";
 import ProjectDropdown from "./ProjectDropdown";
 import ProjectContext from "../components/ProjectContext";
 
@@ -82,9 +82,18 @@ function ResponsiveAppBar({ onSidebarToggle }) {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+      <Container maxWidth="xl" sx={{
+        background: "white", color: "#007BFF",
+        paddingLeft: {
+          xs: '8px', // Default for extra-small screens (below 600px)
+          sm: '8px', // For small screens and above (600px and up)
+        },
+
+      }} >
+        <Toolbar disableGutters >
+          
           <Tooltip>
+
             <label className="hamburger">
               <input type="checkbox" onClick={onSidebarToggle} />
               <svg viewBox="0 0 32 32">
@@ -106,14 +115,12 @@ function ResponsiveAppBar({ onSidebarToggle }) {
               display: { xs: "none", md: "flex" },
               fontFamily: "sans-serif",
               fontWeight: 700,
-              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
             }}
           >
             To-Do-Application
           </Typography>
-          
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <Menu
@@ -170,6 +177,7 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             ))}
           </Box>
 
+            <ProjectDropdown />
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -206,16 +214,21 @@ function ResponsiveAppBar({ onSidebarToggle }) {
                 </MenuItem>
               ))}
             </Menu>
-            <ProjectDropdown />
           </Box>
         </Toolbar>
       </Container>
-      <Dialog open={openProfile} onClose={handleCloseProfile}>
+      <Dialog
+      open={openProfile}
+      onClose={handleCloseProfile}
+      PaperProps={{
+        sx: {
+          width: '500px', // Change the width as needed
+          maxWidth: '100%', // Ensure it doesn’t exceed the screen width
+        },
+      }}
+    >
         <DialogTitle>Profile</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            View and edit your profile information here.
-          </DialogContentText>
           <TextField
             autoFocus
             margin="dense"

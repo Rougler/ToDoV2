@@ -6,6 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import axios from "axios";
 import ProjectContext from "../components/ProjectContext"; 
+import './ProjectDropdown.css';
 
 const ProjectDropdown = () => {
   const {
@@ -47,9 +48,11 @@ const ProjectDropdown = () => {
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="project-select-label">Project</InputLabel>
+    <Box sx={{ minWidth: 120, 
+      
+     }}>
+      <FormControl fullWidth >
+        <InputLabel id="project-select-label" >Project</InputLabel>
         <Select
           labelId="project-select-label"
           id="project-select"

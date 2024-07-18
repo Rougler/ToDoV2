@@ -51,6 +51,17 @@ const UserGroup = () => {
         password: '',
     });
 
+
+    const generateRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
+
+    
     const handleAddUser = () => {
         setIsModalOpen(true);
     };
@@ -102,7 +113,7 @@ const UserGroup = () => {
                         <tr key={index}>
                             <td>
                                 <div className="person">
-                                    <span className="initials">{user.initials}</span>
+                                <span className="initials" style={{ backgroundColor: generateRandomColor() }}>{user.initials}</span>
                                     <div className="info">
                                         <span className="name">{user.name}</span>
                                         <span className="role">{user.role}</span>

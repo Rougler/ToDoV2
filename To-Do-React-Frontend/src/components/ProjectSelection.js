@@ -1,6 +1,6 @@
 // components/ProjectSelection.js
 import React from "react";
-import ProjectDropdown from "../components/ProjectDropdown.js";
+import ProjectDropdown from "../components/ProjectDropdown";
 
 const ProjectSelection = ({
   selectedTab,
