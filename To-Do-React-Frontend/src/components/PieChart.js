@@ -3,23 +3,25 @@ import { PieChart } from "@mui/x-charts/PieChart";
 
 const StraightAnglePieChart = ({ data }) => {
   const chartData = [
-    // { label: "Not-Start", value: data["Not-Start"] },
-    { label: "On-going", value: data["On-going"] }, //, color: 'green'
-    { label: "Done", value: data["Done"] }, //, color: 'green'
+    { label: "On-going", value: data["On-going"] },
+    { label: "Done", value: data["Done"] },
   ];
 
   return (
-    <PieChart
-      series={[
-        {
-          data: chartData,
-          paddingAngle: 5,
-          innerRadius: 80,
-          outerRadius: 150,
-        },
-      ]}
-      height={300}
-    />
+    <div style={{ textAlign: 'center' }}>
+      <h2>Project Task Status</h2>
+      <PieChart
+        series={[
+          {
+            data: chartData,
+            paddingAngle: 5,
+            innerRadius: 80,
+            outerRadius: 140,
+          },
+        ]}
+        height={300}
+      />
+    </div>
   );
 };
 

@@ -22,6 +22,8 @@ import "./navbar.css";
 import ProjectDropdown from "./ProjectDropdown";
 import ProjectContext from "../components/ProjectContext";
 
+
+
 const pages = [];
 const settings = ["Profile", "Logout"];
 
@@ -84,11 +86,17 @@ function ResponsiveAppBar({ onSidebarToggle }) {
     <AppBar position="static">
       <Container maxWidth="xl" sx={{
         background: "white", color: "#007BFF",
+        paddingLeft: {
+          xs: '8px', // Default for extra-small screens (below 600px)
+          sm: '8px', // For small screens and above (600px and up)
+        },
 
       }} >
         <Toolbar disableGutters >
           
+          
           <Tooltip>
+
 
             <label className="hamburger">
               <input type="checkbox" onClick={onSidebarToggle} />
@@ -213,12 +221,18 @@ function ResponsiveAppBar({ onSidebarToggle }) {
           </Box>
         </Toolbar>
       </Container>
-      <Dialog open={openProfile} onClose={handleCloseProfile}>
+      <Dialog
+      open={openProfile}
+      onClose={handleCloseProfile}
+      PaperProps={{
+        sx: {
+          width: '500px', // Change the width as needed
+          maxWidth: '100%', // Ensure it doesn’t exceed the screen width
+        },
+      }}
+    >
         <DialogTitle>Profile</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            View and edit your profile information here.
-          </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -228,7 +242,9 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             fullWidth
             variant="standard"
             value={userData.username}
-            disabled
+            onChange={(e) =>
+              setUserData({ ...userData, username: e.target.value })
+            }
           />
           <TextField
             margin="dense"
@@ -238,7 +254,9 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             fullWidth
             variant="standard"
             value={userData.email}
-            disabled
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
           />
           <TextField
             margin="dense"
@@ -248,13 +266,14 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             fullWidth
             variant="standard"
             value={userData.role}
-            disabled
+            onChange={(e) =>
+              setUserData({ ...userData, role: e.target.value })
+            }
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseProfile} color="primary">
-            Close
-          </Button>
+          <Button onClick={handleCloseProfile}>Cancel</Button>
+          <Button onClick={handleCloseProfile}>Save</Button>
         </DialogActions>
       </Dialog>
     </AppBar>
