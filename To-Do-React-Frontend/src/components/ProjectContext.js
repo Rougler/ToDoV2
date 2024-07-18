@@ -1,15 +1,26 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 
-export const ProjectContext = createContext();
+const ProjectContext = createContext();
 
 export const ProjectProvider = ({ children }) => {
+  const [selectedProject, setSelectedProject] = useState("tab0");
   const [tabs, setTabs] = useState([]);
-  const [selectedTab, setSelectedTab] = useState('');
   const [managerNames, setManagerNames] = useState({});
 
   return (
-    <ProjectContext.Provider value={{ tabs, setTabs, selectedTab, setSelectedTab, managerNames, setManagerNames }}>
+    <ProjectContext.Provider
+      value={{
+        selectedProject,
+        setSelectedProject,
+        tabs,
+        setTabs,
+        managerNames,
+        setManagerNames,
+      }}
+    >
       {children}
     </ProjectContext.Provider>
   );
 };
+
+export default ProjectContext;

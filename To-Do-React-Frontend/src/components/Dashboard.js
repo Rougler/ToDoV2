@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./dashboard.css";
-import SimpleBarChart from "./BarChart.js";
-import StraightAnglePieChart from "./PieChart.js";
-import Modal from "./Modal.js";
-import ProjectDropdown from "./ProjectDropdown.js"; // Updated import statement
+import SimpleBarChart from "../components/BarChart.js";
+import StraightAnglePieChart from "../components/PieChart.js";
+import Modal from "../components/Modal.js";
+import ProjectSelection from "../components/ProjectSelection";
+import ProjectContext from "../components/ProjectContext"; // Adjust the import path as needed
 
 const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const [tasks, setTasks] = useState([]);
-  const [selectedTab, setSelectedTab] = useState("tab0");
-  const [tabs, setTabs] = useState([]);
-  const [managerNames, setManagerNames] = useState({});
+
+  const { selectedProject, setSelectedProject, tabs, setTabs, managerNames, setManagerNames } = useContext(ProjectContext);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -41,7 +41,7 @@ const Dashboard = () => {
 
     const filteredTasks = tasks.filter(
       (task) =>
-        task.project === tabs.find((tab) => tab.value === selectedTab)?.label
+        task.project === tabs.find((tab) => tab.value === selectedProject)?.label
     );
 
     filteredTasks.forEach((task) => {
@@ -51,14 +51,18 @@ const Dashboard = () => {
     return counts;
   };
 
-  const handleTabChange = (event) => {
-    setSelectedTab(event.target.value);
+  const addTab = (label, managerName) => {
+    const newTabValue = label.toLowerCase().replace(/\s/g, "_");
+    const newTab = { value: newTabValue, label: label };
+    setTabs([...tabs, newTab]);
+    setManagerNames({ ...managerNames, [newTabValue]: managerName });
+    setSelectedProject(newTab.value);
   };
 
   const getFilteredTasks = () => {
     return tasks.filter(
       (task) =>
-        task.project === tabs.find((tab) => tab.value === selectedTab)?.label
+        task.project === tabs.find((tab) => tab.value === selectedProject)?.label
     );
   };
 
@@ -66,14 +70,6 @@ const Dashboard = () => {
     <>
       <div className="dashboard">
         <h1>Detailed Dashboard</h1>
-        <ProjectDropdown
-          value={selectedTab}
-          onChange={handleTabChange}
-          tabs={tabs}
-          setTabs={setTabs}
-          managerNames={managerNames}
-          setManagerNames={setManagerNames}
-        />
         <div className="charts">
           <div className="chart pie-chart">
             <StraightAnglePieChart data={taskStatusCounts()} />
@@ -102,9 +98,7 @@ const Dashboard = () => {
               {getFilteredTasks().map((task, index) => (
                 <tr key={index}>
                   <td>{task.taskName}</td>
-                  <td
-                    className={task.taskStatus.toLowerCase().replace(" ", "-")}
-                  >
+                  <td className={task.taskStatus.toLowerCase().replace(" ", "-")}>
                     {task.taskStatus}
                   </td>
                   <td>{task.assignedTo.join(", ")}</td>
@@ -115,11 +109,7 @@ const Dashboard = () => {
           </table>
         </div>
       </div>
-      <Modal
-        showModal={showModal}
-        handleClose={handleCloseModal}
-        addTask={addTask}
-      />
+      <Modal showModal={showModal} handleClose={handleCloseModal} addTask={addTask} />
     </>
   );
 };

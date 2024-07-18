@@ -1,38 +1,41 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import TextField from '@mui/material/TextField';
-import axios from 'axios';
-
+import * as React from "react";
+import { useEffect, useState } from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import TextField from "@mui/material/TextField";
+import axios from "axios";
+import "./navbar.css";
 import ProjectDropdown from "./ProjectDropdown";
+import ProjectContext from "../components/ProjectContext";
+
+
 
 const pages = [];
-const settings = ['Profile', 'Logout'];
+const settings = ["Profile", "Logout"];
 
 function ResponsiveAppBar({ onSidebarToggle }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [openProfile, setOpenProfile] = useState(false);
   const [userData, setUserData] = useState({
-    username: '',
-    email: '',
-    role: '',
-    profilePicture: '',
+    username: "",
+    email: "",
+    role: "",
+    profilePicture: "",
   });
 
   useEffect(() => {
@@ -64,10 +67,10 @@ function ResponsiveAppBar({ onSidebarToggle }) {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await axios.get('/api/user/profile'); // Adjust the endpoint as needed
+      const response = await axios.get("/api/user/profile"); 
       setUserData(response.data);
     } catch (error) {
-      console.error('Error fetching user profile:', error);
+      console.error("Error fetching user profile:", error);
     }
   };
 
@@ -75,30 +78,16 @@ function ResponsiveAppBar({ onSidebarToggle }) {
   const [tabs, setTabs] = useState([]);
   const [managerNames, setManagerNames] = useState({});
 
-  useEffect(() => {
-    console.log("Initial selectedTab:", selectedTab);
-    console.log("Initial tabs:", tabs);
-    console.log("Initial managerNames:", managerNames);
-  }, []);
-
   const handleProjectChange = (event) => {
     setSelectedTab(event.target.value);
-    console.log("Selected Tab Changed:", event.target.value);
-  };
-
-  const addTab = (label, managerName) => {
-    const newTabValue = `tab${tabs.length}`;
-    const newTab = { value: newTabValue, label: label };
-    setTabs([...tabs, newTab]);
-    setManagerNames({ ...managerNames, [newTabValue]: managerName });
-    setSelectedTab(newTab.value);
-    console.log("Tab and manager name added", newTab, managerName);
   };
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+      <Container maxWidth="xl" sx={{
+        background: "white", color: "#007BFF"
+      }} >
+        <Toolbar disableGutters >
           <Tooltip>
             <label className="hamburger">
               <input type="checkbox" onClick={onSidebarToggle} />
@@ -118,43 +107,33 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             href="#home"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'sans-serif',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "sans-serif",
               fontWeight: 700,
-              letterSpacing: '.2rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             To-Do-Application
           </Typography>
 
-          <ProjectDropdown
-            value={selectedTab}
-            onChange={handleProjectChange}
-            tabs={tabs}
-            addTab={addTab}
-            setTabs={setTabs}
-            setManagerNames={setManagerNames}
-          />
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
@@ -171,28 +150,29 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             href="#Profile"
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             To-Do-Application
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
+                sx={{ my: 2, color: "black", display: "block" }}
               >
                 {page}
               </Button>
             ))}
           </Box>
 
+            <ProjectDropdown />
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -200,17 +180,17 @@ function ResponsiveAppBar({ onSidebarToggle }) {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
@@ -220,7 +200,7 @@ function ResponsiveAppBar({ onSidebarToggle }) {
                   key={setting}
                   onClick={() => {
                     handleCloseUserMenu();
-                    if (setting === 'Profile') {
+                    if (setting === "Profile") {
                       handleOpenProfile();
                     }
                   }}
@@ -232,7 +212,6 @@ function ResponsiveAppBar({ onSidebarToggle }) {
           </Box>
         </Toolbar>
       </Container>
-
       <Dialog open={openProfile} onClose={handleCloseProfile}>
         <DialogTitle>Profile</DialogTitle>
         <DialogContent>
