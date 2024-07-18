@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
-import "./Board.css"; // Ensure the correct path to your CSS file
-import DeleteColumn from "./DeleteColumn";
-import CardDetail from "./CardDetail";
+import React, { useState, useEffect, useContext } from "react";
+import "./Board.css";
+import DeleteColumn from "../components/DeleteColumn";
+import CardDetail from "../components/CardDetail";
 import axios from "axios";
-import ProjectDropdown from "./ProjectDropdown"; // Update the import statement d
+import ProjectDropdown from "../components/ProjectDropdown";
+import ProjectContext from "../components/ProjectContext"; 
 
 const initialLists = ["Not-Start", "On-going", "Done", "Staging"];
-const initialTabs = [];
 
 const Board = () => {
   const [cards, setCards] = useState([]);
   const [lists, setLists] = useState(initialLists);
   const [selectedCard, setSelectedCard] = useState(null);
   const [tasks, setTasks] = useState([]);
-  const [selectedTab, setSelectedTab] = useState("tab0");
-  const [tabs, setTabs] = useState(initialTabs);
-  const [managerNames, setManagerNames] = useState({});
   const [newListTitle, setNewListTitle] = useState("");
-  const [showAddListForm, setShowAddListForm] = useState(false); // State to toggle add list form
+  const [showAddListForm, setShowAddListForm] = useState(false);
+
+  const { selectedProject, setSelectedProject, tabs, setTabs, managerNames, setManagerNames } = useContext(ProjectContext);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -73,7 +72,7 @@ const Board = () => {
   const addList = (listTitle) => {
     if (listTitle.trim() === "") return;
     setLists([...lists, listTitle]);
-    setShowAddListForm(false); // Close the form after adding a list
+    setShowAddListForm(false);
   };
 
   const deleteList = (listTitle) => {
@@ -112,47 +111,27 @@ const Board = () => {
     setCards(updatedCards);
   };
 
-  const handleProjectChange = (event) => {
-    setSelectedTab(event.target.value);
-  };
-
-  const addTab = (label, managerName) => {
-    const newTabValue = `tab${tabs.length}`;
-    const newTab = { value: newTabValue, label: label };
-    setTabs([...tabs, newTab]);
-    setManagerNames({ ...managerNames, [newTabValue]: managerName });
-    setSelectedTab(newTab.value);
-    console.log("Tab and manager name added", newTab, managerName);
-  };
-
-  const getCardsForCurrentTab = (listTitle) => {
-    return cards.filter(
-      (card) =>
-        card.listTitle === listTitle &&
-        card.projectName === tabs.find((tab) => tab.value === selectedTab)?.label
-    );
-  };
-
   const handleAddList = (e) => {
     e.preventDefault();
     addList(newListTitle);
     setNewListTitle("");
   };
 
+  const getCardsForCurrentTab = (listTitle) => {
+    return cards.filter(
+      (card) =>
+        card.listTitle === listTitle &&
+        card.projectName ===
+          tabs.find((tab) => tab.value === selectedProject)?.label
+    );
+  };
+
   return (
     <div>
       <div className="board">
-        <ProjectDropdown
-          value={selectedTab}
-          onChange={handleProjectChange}
-          tabs={tabs}
-          addTab={addTab}
-          setTabs={setTabs}
-          setManagerNames={setManagerNames}
-        />
         {tabs.map(
           (tab) =>
-            selectedTab === tab.value && (
+            selectedProject === tab.value && (
               <div key={tab.value}>
                 <div className="managerName">
                   Project Manager: {managerNames[tab.value] || "N/A"}
@@ -181,30 +160,6 @@ const Board = () => {
                       </div>
                     </div>
                   ))}
-                  {showAddListForm ? (
-                    <form
-                      onSubmit={handleAddList}
-                      className="add-list-section"
-                    >
-                      <input
-                        type="text"
-                        placeholder="Add another list"
-                        value={newListTitle}
-                        onChange={(e) => setNewListTitle(e.target.value)}
-                        className="add-list-input"
-                      />
-                      <button type="submit" className="add-list-button">
-                        Add List
-                      </button>
-                    </form>
-                  ) : (
-                    <button
-                      className="add-another-list-button"
-                      onClick={() => setShowAddListForm(true)}
-                    >
-                      Add another list
-                    </button>
-                  )}
                 </div>
               </div>
             )
@@ -228,4 +183,3 @@ const Board = () => {
 };
 
 export default Board;
-

@@ -1,12 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import axios from "axios";
+import ProjectContext from "../components/ProjectContext"; 
+import './ProjectDropdown.css';
 
-export default function ProjectDropdown({ value, onChange, tabs, setTabs, setManagerNames }) {
+const ProjectDropdown = () => {
+  const {
+    selectedProject,
+    setSelectedProject,
+    tabs,
+    setTabs,
+    setManagerNames,
+  } = useContext(ProjectContext);
+
   useEffect(() => {
     getAllProject();
   }, []);
@@ -33,16 +43,22 @@ export default function ProjectDropdown({ value, onChange, tabs, setTabs, setMan
     }
   };
 
+  const handleProjectChange = (event) => {
+    setSelectedProject(event.target.value);
+  };
+
   return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="project-select-label">Project</InputLabel>
+    <Box sx={{ minWidth: 120, 
+      
+     }}>
+      <FormControl fullWidth >
+        <InputLabel id="project-select-label" >Project</InputLabel>
         <Select
           labelId="project-select-label"
           id="project-select"
-          value={value}
+          value={selectedProject}
           label="Project"
-          onChange={onChange}
+          onChange={handleProjectChange}
         >
           {tabs.map((tab) => (
             <MenuItem key={tab.value} value={tab.value}>
@@ -53,4 +69,6 @@ export default function ProjectDropdown({ value, onChange, tabs, setTabs, setMan
       </FormControl>
     </Box>
   );
-}
+};
+
+export default ProjectDropdown;

@@ -1,4 +1,3 @@
-// Modal.js
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "./Modal.css";
@@ -10,7 +9,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
   const [assignedTo, setAssignedTo] = useState([]);
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [techStack, setTechStack] = useState("");
+  const [techStack, setTechStack] = useState([]);
 
   const options = [
     { value: "John", label: "John" },
@@ -59,7 +58,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
       !taskStatus ||
       assignedTo.length === 0 ||
       !selectedProject ||
-      !techStack
+      techStack.length === 0
     ) {
       console.error(
         "Task Name, Task Status, Assigned To, Project, and Tech Stack are required."
@@ -69,13 +68,14 @@ const Modal = ({ showModal, handleClose, addTask }) => {
 
     const assignedToNames = assignedTo.map((person) => person.label);
     const projectName = selectedProject.label;
+    const techStackNames = techStack.map((tech) => tech.label);
 
     const task = {
       taskName,
       taskStatus,
       assignedTo: assignedToNames,
       project: projectName,
-      techStack: techStack.label,
+      techStack: techStackNames,
     };
 
     try {
@@ -149,6 +149,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
           <div className="form-group">
             <label>Tech Stack:</label>
             <Select
+              isMulti
               options={techStackOptions}
               value={techStack}
               onChange={setTechStack}
