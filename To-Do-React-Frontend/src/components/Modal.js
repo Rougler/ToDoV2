@@ -10,6 +10,7 @@ const Modal = ({ showModal, handleClose, addTask }) => {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [techStack, setTechStack] = useState([]);
+  const [autoAssign, setAutoAssign] = useState(false);
 
   const options = [
     { value: "John", label: "John" },
@@ -40,6 +41,12 @@ const Modal = ({ showModal, handleClose, addTask }) => {
   useEffect(() => {
     getAllProjects();
   }, []);
+
+  useEffect(() => {
+    if (assignedTo.length === 0) {
+      setAutoAssign(false);
+    }
+  }, [assignedTo]);
 
   const handleProjectChange = (selectedOption) => {
     setSelectedProject(selectedOption);
@@ -99,6 +106,17 @@ const Modal = ({ showModal, handleClose, addTask }) => {
     handleClose();
   };
 
+  const handleAutoAssign = () => {
+    const randomUser = options[Math.floor(Math.random() * options.length)];
+    setAssignedTo([randomUser]);
+    setAutoAssign(true);
+  };
+
+  const handleClearAssignedTo = () => {
+    setAssignedTo([]);
+    setAutoAssign(false);
+  };
+
   if (!showModal) {
     return null;
   }
@@ -136,7 +154,24 @@ const Modal = ({ showModal, handleClose, addTask }) => {
               options={options}
               value={assignedTo}
               onChange={setAssignedTo}
+              isDisabled={autoAssign}
             />
+            <button
+              type="button"
+              className="auto-assign-button"
+              onClick={handleAutoAssign}
+            >
+              Auto-Assign
+            </button>
+            {autoAssign && (
+              <button
+                type="button"
+                className="clear-assigned-button"
+                onClick={handleClearAssignedTo}
+              >
+                Clear Assigned User
+              </button>
+            )}
           </div>
           <div className="form-group">
             <label>Projects:</label>
