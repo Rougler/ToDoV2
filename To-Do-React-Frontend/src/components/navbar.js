@@ -22,6 +22,8 @@ import "./navbar.css";
 import ProjectDropdown from "./ProjectDropdown";
 import ProjectContext from "../components/ProjectContext";
 
+
+
 const pages = [];
 const settings = ["Profile", "Logout"];
 
@@ -92,7 +94,9 @@ function ResponsiveAppBar({ onSidebarToggle }) {
       }} >
         <Toolbar disableGutters >
           
+          
           <Tooltip>
+
 
             <label className="hamburger">
               <input type="checkbox" onClick={onSidebarToggle} />
@@ -238,7 +242,9 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             fullWidth
             variant="standard"
             value={userData.username}
-            disabled
+            onChange={(e) =>
+              setUserData({ ...userData, username: e.target.value })
+            }
           />
           <TextField
             margin="dense"
@@ -248,7 +254,9 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             fullWidth
             variant="standard"
             value={userData.email}
-            disabled
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
           />
           <TextField
             margin="dense"
@@ -258,13 +266,14 @@ function ResponsiveAppBar({ onSidebarToggle }) {
             fullWidth
             variant="standard"
             value={userData.role}
-            disabled
+            onChange={(e) =>
+              setUserData({ ...userData, role: e.target.value })
+            }
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseProfile} color="primary">
-            Close
-          </Button>
+          <Button onClick={handleCloseProfile}>Cancel</Button>
+          <Button onClick={handleCloseProfile}>Save</Button>
         </DialogActions>
       </Dialog>
     </AppBar>

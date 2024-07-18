@@ -125,6 +125,9 @@
     color: #fff;
   }
 
+
+
+
   .team-box{
     display: flex;
     align-items: center;
@@ -184,6 +187,7 @@
   }
   
   .modal form {
+
     display: flex;
     flex-direction: column;
     width: 100%;

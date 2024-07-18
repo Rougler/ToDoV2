@@ -1,5 +1,6 @@
 # Ignore node_modules
 To-Do-React-Frontend/node_modules/
+To-Do-Application/node_modules
 
 # Ignore build output
 To-Do-React-Frontend/build/
