@@ -547,9 +547,7 @@ const CardDetail = ({
               <a onClick={toggleChecklist}>
                 <FontAwesomeIcon icon={faCheckSquare} /> Checklist
               </a>
-              <a onClick={toggleDatePicker}>
-                <FontAwesomeIcon icon={faClock} /> Dates
-              </a>
+          
               {showDatePicker && (
                 <div className="date-picker-popup">
                   <OutsideClickHandler onClose={() => setShowDatePicker(false)}>
@@ -667,9 +665,7 @@ const CardDetail = ({
               {/* <a onClick={handleCopyCard}>
                 <FontAwesomeIcon icon={faCopy} /> Copy
               </a> */}
-              <a>
-                <FontAwesomeIcon icon={faPaperclip} /> Share
-              </a>
+            
             </div>
           </div>
         </div>

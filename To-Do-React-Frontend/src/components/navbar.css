@@ -36,3 +36,15 @@
     stroke-dasharray: 20 300;
     stroke-dashoffset: -32.42;
   }
+  
+  .css-dt1zdq-MuiContainer-root{
+    width: 100%;
+    margin-left: auto;
+    box-sizing: border-box;
+    margin-right: auto;
+    display: block;
+    padding-left: 5px;
+    padding-right: 16px;
+    background: white;
+    color: #007BFF;
+  }

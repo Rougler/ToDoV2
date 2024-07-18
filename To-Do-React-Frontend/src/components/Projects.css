@@ -1,8 +1,10 @@
 /* Main container */
 .project-list {
-    overflow: auto;
-    box-sizing: border-box;
-    padding: 78px 11px 0px 11px;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 78px 11px 0px 11px;
+  background: #f1f1f1;
+  height: 100vh;
   }
   
   .pos-fix {
@@ -19,7 +21,6 @@
   h1 {
     text-align: left;
     padding: 1px;
-    background: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     font-size: 28px;
     font-weight: 500;
@@ -52,7 +53,7 @@
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 13px 20px;
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: calc(33% - 20px);

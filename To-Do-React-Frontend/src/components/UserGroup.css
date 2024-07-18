@@ -2,6 +2,8 @@
     padding: 78px 11px 0px 11px;
     box-sizing: border-box;
     overflow: auto;
+    background-color: #f1f1f1;
+    height: 100vh;
   }
   
   .header {
@@ -25,18 +27,19 @@
   }
   
   table {
-      width: 100%;
-      border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
   }
   
   th, td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
   }
   
   th {
-      background-color: #f4f4f4;
+    background-color: #e9f5ff;
   }
   
   .person {
@@ -76,10 +79,12 @@
   }
   
   .tech {
-      background-color: #eee;
-      padding: 5px 10px;
-      margin: 2px;
-      border-radius: 3px;
+    background-color: #e9f5ff;
+    padding: 3px 12px;
+    margin: 2px;
+    color: #041958;
+    border-radius: 8px;
+    font-size: 14px;
   }
   
   .status {

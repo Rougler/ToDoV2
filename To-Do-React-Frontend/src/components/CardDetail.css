@@ -130,12 +130,13 @@
  
 .sidebar button {
   background-color: #0079bf;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 3px;
-  margin-bottom: 10px;
-  cursor: pointer;
+    color: white;
+    border: none;
+    padding: 4px 6px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    margin-left: 8px;
 }
  
 .sidebar button:hover {
