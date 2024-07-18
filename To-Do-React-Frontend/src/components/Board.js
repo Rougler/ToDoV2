@@ -160,6 +160,26 @@ const Board = () => {
                       </div>
                     </div>
                   ))}
+                  <div className="add-list">
+                    {showAddListForm ? (
+                      <form onSubmit={handleAddList} className="add-list-form">
+                        <input
+                          type="text"
+                          value={newListTitle}
+                          onChange={(e) => setNewListTitle(e.target.value)}
+                          placeholder="List Title"
+                        />
+                        <button type="submit">Add</button>
+                      </form>
+                    ) : (
+                      <button
+                        className="add-list-button"
+                        onClick={() => setShowAddListForm(true)}
+                      >
+                        Add another list
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             )
@@ -183,4 +203,3 @@ const Board = () => {
 };
 
 export default Board;
-
