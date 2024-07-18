@@ -110,7 +110,7 @@ const ProjectList = () => {
         <div className="project-list">
             <div className='pos-fix'>
                 <h1>Project List</h1>
-                <button onClick={() => setShowForm(true)}>Add Project</button>
+                <button onClick={() => setShowForm(true)}>+ Add Project</button>
             </div>
 
             <Modal

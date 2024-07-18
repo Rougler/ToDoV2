@@ -85,10 +85,13 @@ function ResponsiveAppBar({ onSidebarToggle }) {
   return (
     <AppBar position="static">
       <Container maxWidth="xl" sx={{
-        background: "white", color: "#007BFF"
+        background: "white", color: "#007BFF",
+
       }} >
         <Toolbar disableGutters >
+          
           <Tooltip>
+
             <label className="hamburger">
               <input type="checkbox" onClick={onSidebarToggle} />
               <svg viewBox="0 0 32 32">

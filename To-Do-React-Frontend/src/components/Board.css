@@ -1,11 +1,10 @@
 /* src/components/Board.css */
 
 .board {
-  display: flex;
   gap: 10px;
   background: #f1f1f1;
   padding: 10px;
-  padding-top: 64px;
+  padding-top: 118px;
   /* Enable horizontal scrolling */
   white-space: nowrap;
 
