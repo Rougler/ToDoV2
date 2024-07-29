@@ -655,11 +655,7 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
             <img
               src={Bourntec}
               alt="Bourntec Logo"
-              style={{
-                height: "60px",
-                marginRight: "5px",
-                marginLeft: "10px",
-              }}
+              style={{ width: '120px', marginLeft:'7px', paddingRight:'7px'}}
             />
           </Tooltip>
           <Typography
@@ -676,8 +672,8 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
               textDecoration: "none",
             }}
           >
-            <p style={{ color: "orangered", marginRight: "5px" }}>||</p>{" "}
-            To-Do-Application
+            <p style={{ color: "orangered", marginRight: "5px" }}>|</p>{" "}
+            ToDo
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <Menu
