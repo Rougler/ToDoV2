@@ -109,7 +109,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="dashboard">
-        <h1>Detailed Dashboard</h1>
+        <h3>Task Pool</h3>
         <div className="charts">
           <div className="chart pie-chart">
             <StraightAnglePieChart

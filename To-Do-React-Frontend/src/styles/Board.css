@@ -1,28 +1,10 @@
 /* src/components/Board.css */
 
-.your-board-title {
-  display: flex;
-  margin-top: 30px;
-  color: black;
-  background-color: silver;
-  padding: 7px;
-  position: relative;
-  align-items: center;
-  margin-bottom: 10px;
-  border-radius: 4px;
-}
-
-.your-board-title h1 {
-  font-size: 28px;
-  padding-left: 20px;
-  font-weight: 500;
-}
-
 .board {
   gap: 10px;
   background: #f1f1f1;
   padding: 10px;
-  padding-top: 50px;
+  padding-top: 118px;
   /* Enable horizontal scrolling */
   white-space: nowrap;
 }
@@ -37,7 +19,7 @@
   justify-content: space-between;
   align-items: center;
   padding-left: 5%;
-  background: black;
+ color: #0079bf;
 }
 
 .list {
@@ -58,7 +40,7 @@
 }
 
 .list h3 {
-  color: white;
+  color:#0079bf;
   word-wrap: break-word;
   /* font-weight: normal; */
   font-size: 15px;
@@ -173,7 +155,6 @@
 
 .add-list button {
   padding: 5px;
-  background-color: black;
 }
 
 .add-new-list {
@@ -310,17 +291,19 @@
 .lists-container {
   display: flex;
   overflow-x: scroll;
-  height: 100vh;
+  height: 76vh;
   overflow-y: hidden;
 }
 
 .managerName {
-  color: black;
+  color: #ffffff;
   padding: 10px 17px;
-  margin-top: -12px;
-  text-align: right;
+  background: #1976d2;
+  margin-top: -44px;
+  text-align: left;
   font-weight: 700;
   font-size: 16px;
+  margin-bottom: 25px;
 }
 
 .add-list-section {
@@ -340,8 +323,6 @@
 
 .add-list button {
   padding: 5px;
-  height: 40px;
-  margin-top: 0;
 }
 
 .add-new-list {
@@ -413,6 +394,12 @@
   cursor: pointer;
   margin-top: 10px;
   height: 36px;
+}
+
+.proj-manager{
+  color: gray;
+  font-weight: 500;
+  margin-left: 10px;
 }
 
 @-moz-keyframes splash-12 {

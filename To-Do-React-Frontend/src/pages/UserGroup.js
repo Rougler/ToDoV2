@@ -665,8 +665,8 @@ const UserGroup = (userInfo) => {
   return (
     <div className="user-group">
       <div className="header">
-        <h1>USERS</h1>
-        <button onClick={handleAddUser}>+ Add Users</button>
+        <h3>USERS</h3>
+        <button className="usergrp" onClick={handleAddUser}>+ Add Users</button>
         {showMessageModal && (
           <div className="modal-add-project">
             <div className="modal-content-add-project">

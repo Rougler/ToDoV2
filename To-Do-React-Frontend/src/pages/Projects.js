@@ -490,7 +490,7 @@ const ProjectList = (userInfo) => {
   return (
     <div className="project-list">
       <div className="pos-fix">
-        <h1>Project List</h1>
+        <h3>Project List</h3>
         <button onClick={handleClick}>+ Add Project</button>
       </div>
       {showMessageModal && (
@@ -549,15 +549,13 @@ const ProjectList = (userInfo) => {
           />
           <select
             name="status"
-            className="manager-project"
             value={newProject.status}
             onChange={handleInputChange}
           >
-            <option value="">-select-</option>
-            <option value="In Pipeline">In Pipeline</option>
-            <option value="On Going">On Going</option>
-            <option value="Completed">Completed</option>
-            <option value="On Hold">On Hold</option>
+            <option value="Not-Start">Not-Start</option>
+            <option value="On-going">On-going</option>
+            <option value="Done">Done</option>
+            <option value="Staging">Staging</option>
           </select>
           <div class="update-add-button-project">
             <button
