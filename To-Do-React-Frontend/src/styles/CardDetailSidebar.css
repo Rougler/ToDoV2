@@ -1,0 +1,28 @@
+.card-detail-sidebar {
+  flex: 1;
+  padding: 20px;
+  background-color: #3c3c3c;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-section {
+  margin-bottom: 20px;
+}
+
+.sidebar-section button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #444;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sidebar-section button:hover {
+  background-color: #555;
+}

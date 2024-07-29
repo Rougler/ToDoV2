@@ -1,0 +1,25 @@
+.card-detail-header {
+  background-color: #3c3c3c;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-detail-header h2 {
+  color: white;
+  margin: 0;
+}
+
+.card-detail-header a {
+  color: #0079bf;
+  text-decoration: none;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}

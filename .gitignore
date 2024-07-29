@@ -1,0 +1,73 @@
+# Ignore node_modules
+To-Do-React-Frontend/node_modules
+
+# Ignore build output
+To-Do-React-Frontend/build/
+To-Do-React-Frontend/dist/
+
+# Ignore coverage reports
+To-Do-React-Frontend/coverage/
+
+# Ignore .env files (you might want to keep this if you store secrets in .env files)
+To-Do-React-Frontend/.env
+To-Do-React-Frontend/.env.local
+To-Do-React-Frontend/.env.development.local
+To-Do-React-Frontend/.env.test.local
+To-Do-React-Frontend/.env.production.local
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore Python compiled files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore Django migrations
+To-Do-Django-Backend/*/migrations/*.pyc
+To-Do-Django-Backend/*/migrations/*.pyo
+To-Do-Django-Backend/*/migrations/*.pyd
+To-Do-Django-Backend/*/migrations/__pycache__/
+
+# Ignore media and static files
+To-Do-Django-Backend/media/
+To-Do-Django-Backend/static/
+
+# Ignore SQLite database
+To-Do-Django-Backend/*.sqlite3
+
+# Ignore virtual environment
+venv/
+env/
+.venv/
+.env/
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore various other files
+*.swp
+*.swo
+*.swn
+*.bak
+*.backup
+
+# Ignore coverage reports
+To-Do-Django-Backend/htmlcov/
+To-Do-Django-Backend/.tox/
+To-Do-Django-Backend/.nox/
+To-Do-Django-Backend/.coverage
+To-Do-Django-Backend/.coverage.*
+To-Do-Django-Backend/.cache
+To-Do-Django-Backend/nosetests.xml
+To-Do-Django-Backend/coverage.xml
+To-Do-Django-Backend/*.cover
+To-Do-Django-Backend/*.py,cover
+To-Do-Django-Backend/.hypothesis/
+To-Do-Django-Backend/.pytest_cache/
