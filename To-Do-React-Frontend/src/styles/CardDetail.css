@@ -3,6 +3,16 @@
   margin-top: 20px;
 }
 
+.comment-section {
+  margin-top: 20px;
+}
+
+/* Ensure the comment section doesn't overflow */
+.comment-section .react-comments-section {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .priority-radio-buttons {
   display: ruby-text;
   margin-top: 15px;
