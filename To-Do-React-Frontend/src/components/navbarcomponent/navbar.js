@@ -687,7 +687,7 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
               sx={{ display: { xs: "block", md: "none" } }}
             >
               {settings.map((setting) => (
-                <MenuItem
+                <MenuItem sx={{position:'static !important'}}
                   key={setting}
                   onClick={() => {
                     handleCloseUserMenu();
@@ -743,7 +743,7 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem
+                <MenuItem sx={{position:'static !important'}}
                   key={setting}
                   onClick={() => {
                     handleCloseUserMenu();
@@ -761,7 +761,7 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
           </Box>
         </Toolbar>
       </Container>
-      <Dialog
+      <Dialog 
         className="profile-manage"
         open={openProfile}
         onClose={handleCloseProfile}
@@ -770,6 +770,7 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
             width: "500px",
             maxWidth: "100%",
             display: "flex",
+            position: "static",
             left: "50%",
           },
         }}
