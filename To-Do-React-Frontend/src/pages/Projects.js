@@ -578,7 +578,7 @@ const ProjectList = (userInfo) => {
         onRequestClose={() => setShowDeleteModal(false)}
         contentLabel="Confirm Delete"
         className="add-modal"
-        overlayClassName="overlay"
+        overlayClassName="overlay-one"
       >
         <div className="delete_popup">
           <h2>Are you sure you want to delete this project?</h2>

@@ -411,10 +411,12 @@
 .modal-content-carddetails {
   background-color: white;
   padding: 20px;
-  border-radius: 10px;
-  width: 500px;
+  border-radius: 2px;
+  width: 600px;
   max-height: 90%;
-  overflow-y: auto;
+  overflow-y: scroll;
+  height: 70vh;
+  scrollbar-color: #fff6 #00000026;
 }
 
 .close {
