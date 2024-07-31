@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../styles/CardDetail.css";
 import OutsideClickHandler from "../OutsideClickHandler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ClassComponent from "./comment";
+import CommentBox from "./comment";
 import axios from "axios";
 import {
   faEye,
@@ -642,7 +642,7 @@ const CardDetail = ({
             </div>
             <h3>Actions</h3>
             <div className="sidebar-button">
-            <ClassComponent />
+            <CommentBox />
             </div>
           </div>
         </div>
