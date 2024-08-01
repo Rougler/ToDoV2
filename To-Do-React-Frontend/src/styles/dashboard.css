@@ -194,3 +194,11 @@
 .completed {
   color: green;
 }
+
+.charts h2{
+  text-align: left;
+    font-size: 16px;
+    margin-top: -5px;
+    margin-bottom: 9px;
+    color: gray;
+}
