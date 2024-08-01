@@ -201,13 +201,21 @@ h1 {
 }
 
 .modal input,
-.modal select,
-.modal button {
+.modal select
+ {
   margin-bottom: 10px;
   padding: 10px;
   font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 5px;
+}
+
+.modal h4{
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #565656;
 }
 
 .button-project{
@@ -215,12 +223,26 @@ h1 {
   justify-content: space-between;
 }
 
-.modal button {
+
+
+.add-modal{
   background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 7px 28px;
-    cursor: pointer;
+  color: #fff;
+  border: none;
+  padding: 7px 28px;
+  border-radius: 5px;
+  float:right;
+  cursor: pointer;
+}
+
+.cancel{
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 7px 28px;
+  float: left;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .modal button:hover {

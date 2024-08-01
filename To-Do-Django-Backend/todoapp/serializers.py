@@ -6,7 +6,9 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_decode
 from rest_framework import serializers
-from .models import Task, User, Card, Projects
+from .models import Task, User, Card, Projects, Message
+from django.utils import timezone
+
 
 class TaskSerializer(serializers.ModelSerializer):
     assignedTo = serializers.SlugRelatedField(
@@ -320,11 +322,21 @@ class ManagerRelatedField(serializers.SlugRelatedField):
 
 
 class ProjectsSerializer(serializers.ModelSerializer):
-    team = serializers.ListField(child=serializers.CharField())
+    # team = serializers.ListField(child=serializers.CharField())
+    status = serializers.SlugRelatedField(
+        queryset = Card.objects.all(),
+        slug_field='card_name',
+        many = False,
+    )
+    team = serializers.SlugRelatedField(
+        queryset=User.objects.all(),
+        slug_field='username',
+        many=True
+    )
 
     class Meta:
         model = Projects
-        fields = ['id', 'name', 'deadline', 'team', 'status', 'manager']
+        fields = '__all__'
         read_only_fields = ['id']
 
 
@@ -357,3 +369,22 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         password = self.validated_data['new_password']
         self.user.set_password(password)
         self.user.save()
+
+
+class MessageSerializer(serializers.ModelSerializer):
+
+    task = serializers.SlugRelatedField(
+        queryset=Task.objects.all(),
+        slug_field='taskName',
+        many=False
+    )
+    user = serializers.SlugRelatedField(
+        queryset=User.objects.all(),
+        slug_field='username',
+        many=False
+    )
+
+    class Meta:
+        model = Message
+        fields = "__all__"
+ 

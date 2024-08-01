@@ -31,12 +31,18 @@ urlpatterns = [
     path('api/projects/<int:pk>/update/', ProjectUpdateAPIView.as_view(), name='project-update'),
     path('api/projects/<int:pk>/delete/', ProjectDeleteAPIView.as_view(), name='project-delete'),
     path('update-priority/<int:card_id>/', views.update_priority, name='update_priority'),
-    path('update-deadline/<int:card_id>/', views.update_deadline, name='update_deadline'),
+    path('update-enddate/<int:card_id>/', views.update_enddate, name='update_enddate'),
     path('api/get-users/', UserProfileListView.as_view(), name='user-list'),
     path('reset-password/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('projectper/', ProjectListAPIView.as_view(), name='project_list_api'),
     path('user/tasks/<int:user_id>/', UserProjectTasksView.as_view(), name='user-project-tasks'),
     path('api/deletecard/<int:card_id>/', delete_card, name='delete_card'),
+    path('project/tasks/<str:projname>/', ProjectTasksView.as_view(), name='project-tasks'),
+    path('comment/tasks/<str:task_name>/', TaskMessagesView.as_view(), name='tasks_Comment'),#Comment App
+    # path('comment/tasks/<int:task_id>/', TaskMessagesView.as_view(), name='tasks_Comment'),
+    path('user/tasks/<str:user_name>/', UserTaskView.as_view(), name='tasks_user'),#User Specific Tasks
+    path('update-date/<int:pk>/', UpdateDateView.as_view(), name='update-date'),# Task Update Date
+ 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -211,7 +211,7 @@ const Board = () => {
                           onChange={(e) => setNewListTitle(e.target.value)}
                           placeholder="List Title"
                         />
-                        <button type="submit">Add</button>
+                        <button type="submit">+Add</button>
                       </form>
                     ) : (
                       <button

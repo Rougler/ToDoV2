@@ -176,7 +176,7 @@ const CommentBox = ({ user, time, comment, likes, onLike, onEdit, onDelete, onFl
       </div>
       <div className="comment-body">
         {isEditing ? (
-          <textarea
+          <textarea className='comment'
             value={editedComment}
             onChange={(e) => setEditedComment(e.target.value)}
           />
@@ -260,7 +260,7 @@ const CommentsSection = ({ initialComments }) => {
   return (
     <div className="comments-section">
       <div className="add-comment">
-        <input
+        <input 
           type="text"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}

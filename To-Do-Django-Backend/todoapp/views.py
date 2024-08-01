@@ -29,7 +29,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .serializers import UserSerializer
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from .models import Projects, User, Task, Card
+from .models import Projects, User, Task, Card, Message
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.core.mail import send_mail
 
@@ -112,16 +112,16 @@ def update_priority(request, card_id):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['PUT'])
-def update_deadline(request, card_id):
+def update_enddate(request, card_id):
     try:
         task = Task.objects.get(id=card_id)
     except Task.DoesNotExist:
         return Response({'error': 'Task not found'}, status=status.HTTP_404_NOT_FOUND)
     
-    deadline = request.data.get('deadline')
+    enddate = request.data.get('enddate')
     
     try:
-        task.deadline = deadline  
+        task.enddate = enddate  
         task.save()
     except ValueError:
         return Response({'error': 'Invalid date format'}, status=status.HTTP_400_BAD_REQUEST)
@@ -519,6 +519,21 @@ def get_users(request):
     users_list = list(users)
     return JsonResponse(users_list, safe=False)
 
+class ProjectTasksView(APIView):
+    def get(self, request, projname):
+        project = get_object_or_404(Projects, name=projname)
+        tasks = Task.objects.filter(project=project)
+
+        task_data = []
+
+        for task in tasks:
+            task_serializer = TaskSerializer(task)
+            task_info = task_serializer.data
+            task_info['project_name'] = task.project.name
+            task_data.append(task_info)
+
+        return Response(task_data, status=status.HTTP_200_OK)
+
 class UserProjectTasksView(APIView):
     def get(self, request, user_id):
         user = get_object_or_404(User, pk=user_id)
@@ -533,3 +548,44 @@ class UserProjectTasksView(APIView):
             task_data.append(task_info)
 
         return Response(task_data, status=status.HTTP_200_OK)
+    
+# class TaskMessagesView(APIView):
+#     permission_classes = [IsAuthenticated]
+
+#     def get(self, request, task_id, format=None):
+#         task = get_object_or_404(Task, id=task_id)
+#         messages = Message.objects.filter(task=task)
+#         serializer = MessageSerializer(messages, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+
+#     def post(self, request, task_id, format=None):
+#         if not request.user.is_authenticated:
+#             return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
+
+#         task = get_object_or_404(Task, id=task_id)
+#         serializer = MessageSerializer(data=request.data, context={'request': request})
+#         if serializer.is_valid():
+#             serializer.save(task=task, user=request.user)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TaskMessagesView(APIView):
+    def get(self, request, task_id, format=None):
+        task = get_object_or_404(Task, id=task_id)
+        messages = Message.objects.filter(task=task)
+        serializer = MessageSerializer(messages, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+ 
+ 
+class UserTaskView(APIView):
+    def get(self, request, user_name, format=None):
+        user = get_object_or_404(User, username=user_name)
+        task = Task.objects.filter(assignedTo=user)
+        serializer = TaskSerializer(task, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class UpdateDateView(generics.UpdateAPIView):
+    permission_classes = [AllowAny]
+    queryset = Task.objects.all()
+    serializer_class = MyModelSerializer

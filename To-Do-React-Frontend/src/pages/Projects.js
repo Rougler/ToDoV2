@@ -558,7 +558,7 @@ const ProjectList = (userInfo) => {
             <option value="Staging">Staging</option>
           </select>
           <div class="update-add-button-project">
-            <button
+            <button className="cancel"
               type="button"
               onClick={() => {
                 setShowForm(false);
@@ -568,7 +568,7 @@ const ProjectList = (userInfo) => {
             >
               Cancel
             </button>
-            <button type="submit">{showEditModal ? "Update" : "Add"}</button>
+            <button className="add-modal" type="submit">{showEditModal ? "Update" : "Add"}</button>
           </div>
         </form>
       </Modal>

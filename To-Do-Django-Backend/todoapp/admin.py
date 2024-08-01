@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'taskName', 'taskStatus', 'description', 'file', 'cover')
+    list_display = ('id', 'taskName','startdate', 'taskStatus', 'description', 'file', 'cover')
     list_filter = ('taskStatus',)
     search_fields = ('taskName',)
     filter_horizontal = ('assignedTo', 'assigned_groups')
@@ -32,6 +32,7 @@ class ProjectsAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'deadline', 'status', 'manager']
     search_fields = ['name', 'status', 'manager']
     list_filter = ['status']
+    filter_horizontal = ('team',)
 
 admin.site.register(Projects, ProjectsAdmin)
 
