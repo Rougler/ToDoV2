@@ -497,7 +497,7 @@ const ProjectList = (userInfo) => {
         <div className="modal-add-project">
           <div className="modal-content-add-project">
             <p>You do not have permission to add a project.</p>
-            <button onClick={() => setShowMessageModal(false)}>Close</button>
+            <button className="add-btn-modal" onClick={() => setShowMessageModal(false)}>Close</button>
           </div>
         </div>
       )}
