@@ -148,9 +148,9 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import  '../../styles/comment.css';
+import '../../styles/comment.css';
 
-const CommentBox = ({ user, time, comment, likes, onLike, onEdit, onDelete }) => {
+const CommentBox = ({ user, time, comment, likes, onLike, onEdit, onDelete, onFlag }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedComment, setEditedComment] = useState(comment);
 
@@ -185,19 +185,18 @@ const CommentBox = ({ user, time, comment, likes, onLike, onEdit, onDelete }) =>
         )}
       </div>
       <div className="comment-footer">
-        <div className="like-section" onClick={onLike}>
-          <span className="like-icon">❤️</span>
-          <span className="like-count">{likes}</span>
-        </div>
         <div className="edit-section" onClick={handleEdit}>
-          <span className="edit-icon">✏️</span>
+          <span className="edit-icon-comment"style={{cursor: "pointer"}}>✏️</span>
         </div>
         <div className="delete-section" onClick={onDelete}>
-          <span className="delete-icon">🗑️</span>
+          <span className="delete-icon-comment"style={{cursor: "pointer"}}>🗑️</span>
+        </div>
+        <div className="flag-section" onClick={onFlag}>
+          <span className="delete-icon-comment"style={{cursor: "pointer"}}>🗑️</span>
         </div>
         {isEditing && (
           <div className="save-section" onClick={handleSave}>
-            <span className="save-icon">💾</span>
+            <span className="save-icon-comment"style={{cursor: "pointer"}}>💾</span>
           </div>
         )}
       </div>
@@ -215,7 +214,8 @@ CommentBox.propTypes = {
   likes: PropTypes.number.isRequired,
   onLike: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
+  onFlag:PropTypes.func.isRequired,
 };
 
 CommentBox.defaultProps = {
@@ -225,18 +225,8 @@ CommentBox.defaultProps = {
   }
 };
 
-const CommentsSection = () => {
-  const [comments, setComments] = useState([
-    {
-      user: {
-        name: 'Jenny Wen',
-        avatar: 'https://via.placeholder.com/40'
-      },
-      time: '6 hours ago',
-      comment: 'I love where this is headed, but I’m not quite sure about the spacing here. I think things could be nudged over a bit to get to a tighter rhythm.',
-      likes: 3
-    }
-  ]);
+const CommentsSection = ({ initialComments }) => {
+  const [comments, setComments] = useState(initialComments);
   const [newComment, setNewComment] = useState('');
 
   const handleAddComment = () => {
@@ -281,7 +271,6 @@ const CommentsSection = () => {
           Add Comment
         </button>
       </div>
-      <p>{`Comments Added: ${comments.length}`}</p>
       {comments.map((comment, index) => (
         <CommentBox
           key={index}
@@ -302,13 +291,61 @@ const CommentsSection = () => {
   );
 };
 
-const App = () => {
+CommentsSection.propTypes = {
+  initialComments: PropTypes.arrayOf(
+    PropTypes.shape({
+      user: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        avatar: PropTypes.string
+      }),
+      time: PropTypes.string.isRequired,
+      comment: PropTypes.string.isRequired,
+      likes: PropTypes.number.isRequired
+    })
+  ).isRequired
+};
+
+const App = ({ initialComments }) => {
   return (
     <div className="App">
-      <h1>Comments</h1>
-      <CommentsSection />
+      <p>{`Comments ${initialComments.length}`}</p>
+      <CommentsSection initialComments={initialComments} />
     </div>
   );
 };
 
-export default App;
+App.propTypes = {
+  initialComments: PropTypes.arrayOf(
+    PropTypes.shape({
+      user: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        avatar: PropTypes.string
+      }),
+      time: PropTypes.string.isRequired,
+      comment: PropTypes.string.isRequired,
+      likes: PropTypes.number.isRequired
+    })
+  ).isRequired
+};
+
+// Sample initial comments
+const initialComments = [
+  {
+    user: {
+      name: 'Jenny Wen',
+      avatar: 'https://via.placeholder.com/40'
+    },
+    time: '6 hours ago',
+    comment: 'I love where this is headed, but I’m not quite sure about the spacing here. I think things could be nudged over a bit to get to a tighter rhythm.',
+    likes: 3
+  }
+  
+];
+
+// Rendering the App with initial comments
+const renderApp = () => (
+  <App initialComments={initialComments} />
+);
+
+export default renderApp;
+
