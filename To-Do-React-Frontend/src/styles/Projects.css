@@ -35,7 +35,6 @@ h1 {
   color: rgb(0, 0, 0);
   font-size: 28px;
   font-weight: 500;
-  padding-left: 26px;
 }
 
 .pos-fix button {
@@ -185,7 +184,7 @@ h1 {
   height: auto !important;
 }
 
-.overlay {
+.overlay-one {
   position: fixed;
   top: 0;
   left: 0;

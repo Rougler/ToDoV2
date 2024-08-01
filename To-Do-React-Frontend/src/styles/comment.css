@@ -1,0 +1,135 @@
+.comment-box {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 0px;
+  background-color: #fff;
+}
+p{
+  color: black;
+  text-align: left;
+  margin-bottom: 5px;
+  white-space: break-spaces;
+  word-wrap: break-word;
+}
+.comment-header {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: bold;
+  color: black;
+}
+
+.comment-time {
+  color: #888;
+}
+
+.comment-body {
+  margin: 10px 0;
+  text-align: left;
+  white-space: break-spaces;
+  /* word-wrap: unset; */
+  color: black;
+}
+input:target-within{
+  border: 1px solid pink;
+}
+
+.edit-icon-comment .delete-icon-comment{
+  margin-left: 0;
+  cursor: pointer;
+}
+
+textarea{
+  font-family: "LFT Etica", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  color: black;
+    font-weight: 400;
+    display: block;
+    border: none;
+    /* letter-spacing: .4px; */
+    width: 88%;
+    border: 1px solid #e7e7e7;
+    line-height: 1.25;
+    background-color: var(--aard-color-bkgd-default);
+    /* border: 2px solid var(--aard-color-ink-line-ui-default); */
+    /* border-radius: 8px; */
+    height: 70px;
+    padding: 0 12px;
+    resize: none;
+}
+
+input{
+  font-family: "LFT Etica", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  color: black;
+    font-weight: 400;
+    display: block;
+    border: none;
+    /* letter-spacing: .4px; */
+    width: 88%;
+    border: 1px solid #e7e7e7;
+    line-height: 1.25;
+    background-color: var(--aard-color-bkgd-default);
+    /* border: 2px solid var(--aard-color-ink-line-ui-default); */
+    /* border-radius: 8px; */
+    height: 45px;
+    padding: 0 12px;
+}
+
+.comment-footer {
+  display: flex;
+  align-items: center;
+}
+
+.like-section,
+.reply-section {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.like-icon,
+.reply-icon {
+  margin-right: 5px;
+}
+
+.reply-box {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.reply-input {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.reply-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}

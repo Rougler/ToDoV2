@@ -317,20 +317,29 @@ const Modal = ({ showModal, handleClose, addTask }) => {
         "http://127.0.0.1:8000/todo/api/get-users/"
       );
 
+      console.log("tech",response.data);
+
       const techStackSet = new Set();
       response.data.forEach((techStack) => {
         const techStackNames = techStack.tech_stack
           .split(",")
           .map((tech) => tech.trim());
         techStackNames.forEach((name) => techStackSet.add(name));
+        const uniqueTechStacks = Array.from(techStackSet).map((name) => ({
+          value: name,
+          label: name,
+        }));
+  
+        setTechStackOptions(uniqueTechStacks);
       });
 
-      const uniqueTechStacks = Array.from(techStackSet).map((name) => ({
-        value: name,
-        label: name,
-      }));
 
-      setTechStackOptions(uniqueTechStacks);
+      // const uniqueTechStacks = Array.from(techStackSet).map((name) => ({
+      //   value: name,
+      //   label: name,
+      // }));
+
+      // setTechStackOptions(uniqueTechStacks);
     } catch (error) {
       console.error("Error fetching tech stacks:", error);
     }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../styles/CardDetail.css";
 import OutsideClickHandler from "../OutsideClickHandler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CommentBox from "./comment";
 import axios from "axios";
 import {
   faEye,
@@ -638,6 +639,10 @@ const CardDetail = ({
               <a onClick={handleDeleteCard}>
                 <FontAwesomeIcon icon={faTrashAlt} /> Delete
               </a>
+            </div>
+            <h3>Actions</h3>
+            <div className="sidebar-button">
+            <CommentBox />
             </div>
           </div>
         </div>
