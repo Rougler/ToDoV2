@@ -136,7 +136,7 @@ export default function PieActiveArc() {
         </div>
       </div>
       <div className="chart apex-chart">
-        <ApexChart />
+        <ApexChart  />
       </div>
     </div>
   );

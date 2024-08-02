@@ -42,7 +42,7 @@ const AddListForm = ({ onAddList }) => {
             value={newListTitle}
             onChange={(e) => setNewListTitle(e.target.value)}
           />
-          <button onClick={addList}>+Add</button>
+          <button onClick={addList}>Add List</button>
         </div>
       ) : (
         <button

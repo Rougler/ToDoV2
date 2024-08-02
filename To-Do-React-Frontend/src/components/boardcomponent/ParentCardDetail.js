@@ -4,14 +4,13 @@ import CardDetail from './CardDetail';
 const ParentComponent = () => {
   const [cards, setCards] = useState([
     { id: 1, title: 'Project planning' },
-    // Add more cards as needed
   ]);
 
   const [selectedCard, setSelectedCard] = useState(null);
 
   const handleDeleteCard = (id) => {
     setCards(cards.filter(card => card.id !== id));
-    setSelectedCard(null); // Close the modal after deletion
+    setSelectedCard(null); 
   };
 
   return (
@@ -26,7 +25,7 @@ const ParentComponent = () => {
         <CardDetail
           card={selectedCard}
           onClose={() => setSelectedCard(null)}
-          onDelete={handleDeleteCard} // Ensure this is passed
+          onDelete={handleDeleteCard} 
         />
       )}
     </div>

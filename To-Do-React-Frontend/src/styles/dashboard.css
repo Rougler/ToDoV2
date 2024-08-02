@@ -20,16 +20,21 @@
   padding: 78px 11px 0px 11px;
 }
 
-.dashboard h3 {
+.dashboard h1 {
   text-align: left;
-    padding: 9px;
-    color: rgb(255, 255, 255);
-    /* font-size: 20px; */
-    font-weight: 500;
-    padding-left: 26px;
-    background-color: #1976d2;
-    margin-top: -7px;
+  background-color: #0079bf;
+  /* background-color: silver; */
+  position: relative;
+  align-items: center;
+  padding: 7px;
+  /* color: black; */
+  color: white;
+  font-size: 28px;
+  font-weight: 500;
+  padding-left: 26px;
+  border-radius: 4px;
 }
+
 .charts {
   display: flex;
   /* gap: 17px; */
@@ -66,6 +71,7 @@
   border-radius: 5px;
   margin: 0px 27px;
   background: white;
+  margin-bottom: 18px;
 }
 
 .add-task {
@@ -193,12 +199,4 @@
 
 .completed {
   color: green;
-}
-
-.charts h2{
-  text-align: left;
-    font-size: 16px;
-    margin-top: -5px;
-    margin-bottom: 9px;
-    color: gray;
 }

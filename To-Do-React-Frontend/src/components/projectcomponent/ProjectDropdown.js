@@ -23,7 +23,9 @@ const ProjectDropdown = () => {
 
   const getAllProject = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/todo/api/projects/");
+      const response = await axios.get(
+        "http://127.0.0.1:8000/todo/api/projects/"
+      );
       const projects = response.data;
       console.log(projects);
 
