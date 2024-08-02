@@ -63,3 +63,7 @@
   color: #007BFF;
   padding: 0px 8px !important;
 }
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root{
+  box-shadow: none !important;
+}

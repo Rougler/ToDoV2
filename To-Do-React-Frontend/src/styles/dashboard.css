@@ -24,11 +24,11 @@
   text-align: left;
     padding: 9px;
     color: rgb(255, 255, 255);
-    /* font-size: 20px; */
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 19px;
     padding-left: 26px;
     background-color: #1976d2;
-    margin-top: -7px;
+    margin-top: -3px;
 }
 .charts {
   display: flex;
@@ -65,14 +65,14 @@
   box-shadow: 0px 0px 4px 0px #d4d1d1;
   border-radius: 5px;
   margin: 0px 27px;
-  background: white;
+  background: #ffffffb0;
 }
 
 .add-task {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  padding: 12px;
+  padding: 7px;
   background: #ebebeb;
   border-radius: 3px;
 }
@@ -89,8 +89,8 @@
   cursor: pointer;
 }
 .add-task-button {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   padding: 0px;
   display: flex;
   align-items: center;
@@ -168,7 +168,7 @@
 
 .text {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .task-table {
@@ -178,14 +178,25 @@
 
 .task-table th,
 .task-table td {
-  border: 1px solid #216ba552;
+  
   padding: 8px;
   text-align: left;
 }
 
-.task-table th {
-  background-color: #0079bf54;
+.task-table th{
+  background-color: #ffffff54 !important;
+  box-shadow: 1px 0px 8px 0px #ebebeb !important;
 }
+tr.priority-medium:hover {
+  background-color: #eeeff0;
+}
+tr.priority-low:hover {
+  background-color: #eeeff0;
+}
+tr.priority-high:hover {
+  background-color: #eeeff0;
+}
+
 
 .ongoing {
   color: red;

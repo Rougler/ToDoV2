@@ -640,7 +640,7 @@ const CardDetail = ({
                 <FontAwesomeIcon icon={faTrashAlt} /> Delete
               </a>
             </div>
-            <h3>Actions</h3>
+            <h3>Comments</h3>
             <div className="sidebar-button">
             <CommentBox />
             </div>

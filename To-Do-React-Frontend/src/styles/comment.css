@@ -5,13 +5,7 @@
   margin: 5px 0px;
   background-color: #fff;
 }
-p{
-  color: black;
-  text-align: left;
-  margin-bottom: 5px;
-  white-space: break-spaces;
-  word-wrap: break-word;
-}
+
 .comment-header {
   display: flex;
   align-items: center;
@@ -132,4 +126,8 @@ input{
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.comments-section{
+  margin-top: -22px;
 }
