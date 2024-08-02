@@ -22,3 +22,14 @@
   width: 92%;
   margin-bottom: 20px;
 }
+
+.detailed-dashboard-h3{
+  text-align: left;
+  padding: 9px;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-size: 19px;
+  padding-left: 26px;
+  background-color: #1976d2;
+  margin-top: -3px;
+}

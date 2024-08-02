@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/sidebar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -17,6 +17,8 @@ const Sidebar = ({ children, userInfo, handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isUserGroupOpen, setIsUserGroupOpen] = useState(false);
+
+  const location = useLocation();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -40,12 +42,7 @@ const Sidebar = ({ children, userInfo, handleLogout }) => {
     e.stopPropagation();
   };
 
-  // const navigate = useNavigate();
-
-  // const handleLogout = () => {
-  //   localStorage.removeItem("token");
-  //   navigate("/login");
-  // };
+  const isActive = (path) => location.pathname === path;
 
   return (
     <>
@@ -81,50 +78,53 @@ const Sidebar = ({ children, userInfo, handleLogout }) => {
               <Link
                 to="/projects"
                 onClick={handleLinkClick}
+                className={`sidebar-sub-item ${
+                  isActive("/projects") ? "active" : ""
+                }`}
                 style={{
                   cursor: "pointer",
                   textDecoration: "none",
                   paddingLeft: "20px",
                 }}
               >
-                <li className="sidebar-sub-item">
-                  <div className="icon">
-                    <FontAwesomeIcon icon={faProjectDiagram} />
-                  </div>
-                  {isOpen && <span className="icon-tag">Project Lists</span>}
-                </li>
+                <div className="icon">
+                  <FontAwesomeIcon icon={faProjectDiagram} />
+                </div>
+                {isOpen && <span className="icon-tag">Project Lists</span>}
               </Link>
               <Link
                 to="/"
                 onClick={handleLinkClick}
+                className={`sidebar-sub-item ${
+                  isActive("/") ? "active" : ""
+                }`}
                 style={{
                   cursor: "pointer",
                   textDecoration: "none",
                   paddingLeft: "20px",
                 }}
               >
-                <li className="sidebar-sub-item">
-                  <div className="icon">
-                    <FontAwesomeIcon icon={faHome} />
-                  </div>
-                  {isOpen && <span className="icon-tag">Your Boards</span>}
-                </li>
+                <div className="icon">
+                  <FontAwesomeIcon icon={faHome} />
+                </div>
+                {isOpen && <span className="icon-tag">Your Boards</span>}
               </Link>
               <Link
                 to="/dashboard"
                 onClick={handleLinkClick}
+                className={`sidebar-sub-item ${
+                  isActive("/dashboard") ? "active" : ""
+                }`}
                 style={{
                   cursor: "pointer",
                   textDecoration: "none",
                   paddingLeft: "20px",
                 }}
               >
-                <li className="sidebar-sub-item">
-                  <div className="icon">
-                    <FontAwesomeIcon icon={faChartBar} />
-                  </div>
-                  {isOpen && <span className="icon-tag">Task Pool</span>}
-                </li>
+                <div className="icon">
+                  <FontAwesomeIcon icon={faChartBar} />
+                </div>
+                {isOpen && <span className="icon-tag">Task Pool</span>}
               </Link>
             </>
           )}
@@ -148,34 +148,36 @@ const Sidebar = ({ children, userInfo, handleLogout }) => {
               <Link
                 to="/detailed-dashboard"
                 onClick={handleLinkClick}
+                className={`sidebar-sub-item ${
+                  isActive("/detailed-dashboard") ? "active" : ""
+                }`}
                 style={{
                   cursor: "pointer",
                   textDecoration: "none",
                   paddingLeft: "20px",
                 }}
               >
-                <li className="sidebar-sub-item">
-                  <div className="icon">
-                    <FontAwesomeIcon icon={faUser} />
-                  </div>
-                  {isOpen && <span className="icon-tag">User Dashboard</span>}
-                </li>
+                <div className="icon">
+                  <FontAwesomeIcon icon={faUser} />
+                </div>
+                {isOpen && <span className="icon-tag">User Dashboard</span>}
               </Link>
               <Link
                 to="/user-group"
                 onClick={handleLinkClick}
+                className={`sidebar-sub-item ${
+                  isActive("/user-group") ? "active" : ""
+                }`}
                 style={{
                   cursor: "pointer",
                   textDecoration: "none",
                   paddingLeft: "20px",
                 }}
               >
-                <li className="sidebar-sub-item">
-                  <div className="icon">
-                    <FontAwesomeIcon icon={faUsers} />
-                  </div>
-                  {isOpen && <span className="icon-tag">User/Group</span>}
-                </li>
+                <div className="icon">
+                  <FontAwesomeIcon icon={faUsers} />
+                </div>
+                {isOpen && <span className="icon-tag">User/Group</span>}
               </Link>
             </>
           )}

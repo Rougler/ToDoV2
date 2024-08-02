@@ -146,10 +146,10 @@
 .sidebar-left .sidebar-sub-item {
   padding-left: 20px;
   display: flex;
-  font-size: 13px;
-  margin-top: -13px;
+  font-size: 12px;
+  /* margin-top: -13px; */
   border-bottom: 1px solid #dedede;
-  padding-bottom: 4px; 
+  /* padding-bottom: 4px; */
 }
 
 .sidebar-left .sidebar-item .toggle-icon {
@@ -167,4 +167,29 @@
 
 .sidebar-sub-item:hover {
   color: #0079bf;
+}
+
+
+
+
+
+
+/* sidebar.css */
+.sidebar-item,
+.sidebar-sub-item {
+  position: relative;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-item:hover,
+.sidebar-sub-item:hover {
+  background-color: #f0f0f0;
+}
+
+.sidebar-item.active,
+.sidebar-sub-item.active {
+  background-color: #e0e0e0;
+  font-weight: bold;
 }
