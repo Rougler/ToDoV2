@@ -3,6 +3,7 @@ import "../../styles/CardDetail.css";
 import OutsideClickHandler from "../OutsideClickHandler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ClassComponent from "./comment";
+import CommentCard from "./comment";
 import axios from "axios";
 import {
   faEye,
@@ -65,6 +66,8 @@ const CardDetail = ({
   const [priority, setPriority] = useState(card.priority || 0);
   const [showDeadline, setShowDeadline] = useState(false);
   const [deadline, setDeadline] = useState(card.deadline || "");
+  const [isVisible, setIsVisible] = useState(false);
+  const selectedTaskName = title;
 
   useEffect(() => {
     fetchTaskDetails();
@@ -426,6 +429,10 @@ const CardDetail = ({
     }
   };
 
+  const toggleCard = () => {
+    setIsVisible(!isVisible);
+  };
+
   const handleFileInputChange = (event) => {
     const files = Array.from(event.target.files);
     setUploadedFiles([...uploadedFiles, ...files]);
@@ -640,9 +647,17 @@ const CardDetail = ({
                 <FontAwesomeIcon icon={faTrashAlt} /> Delete
               </a>
             </div>
-            <h3>Actions</h3>
+            {/* <h3>Actions</h3>
             <div className="sidebar-button">
-            <ClassComponent />
+              <ClassComponent />
+            </div> */}
+            <h3>Comments</h3>
+            <div className="toggle-container">
+              <button className="sidebar-button" onClick={toggleCard}>
+                {isVisible ? "Hide Comment Card" : "Show Comment Card"}
+              </button>
+              {console.log("Task Name being passed:", selectedTaskName)}
+              {isVisible && <CommentCard taskName={selectedTaskName} />}
             </div>
           </div>
         </div>
