@@ -686,12 +686,8 @@ const CardDetail = ({
               </a>
             </div>
             <h3>Comments</h3>
-            <div className="toggle-container">
-              <button className="sidebar-button" onClick={toggleCard}>
-                {isVisible ? "Hide Comment Card" : "Show Comment Card"}
-              </button>
-              {console.log("Task Name being passed:", selectedTaskName)}
-              {isVisible && <CommentCard taskName={selectedTaskName} />}
+            <div className="sidebar-button">
+            <CommentBox />
             </div>
           </div>
         </div>

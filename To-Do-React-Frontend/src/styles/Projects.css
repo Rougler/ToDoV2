@@ -55,15 +55,16 @@
 
 .pos-fix {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  /* background-color: silver; */
-  background-color: #0079bf;
-  position: relative;
-  align-items: center;
-  padding: 7px;
-  border-radius: 4px;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    padding: 8px 17px;
+    background: #1976d2;
+    margin-top: -2px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 25px;
 }
 
 .pos-fix h1 {

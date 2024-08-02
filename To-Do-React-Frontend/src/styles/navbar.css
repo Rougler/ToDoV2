@@ -52,3 +52,7 @@
   display: flex;
   position: relative;
 }
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root{
+  box-shadow: none !important;
+}

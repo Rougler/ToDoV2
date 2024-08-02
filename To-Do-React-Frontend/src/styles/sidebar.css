@@ -93,6 +93,7 @@
   position: fixed;
   width: 100%;
   z-index: 111;
+  box-shadow: 1px 1px 4px 1px #d6d6d6;
 }
 
 .toggle-button {
