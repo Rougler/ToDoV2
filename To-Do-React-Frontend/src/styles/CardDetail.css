@@ -78,6 +78,7 @@
   text-align: left;
   position: relative;
   color: #8c8c8c;
+  scrollbar-width: none;
 }
 
 .modal-content-carddetails h2 {
