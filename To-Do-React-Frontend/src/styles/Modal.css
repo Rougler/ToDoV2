@@ -29,7 +29,6 @@
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  z-index: 111;
   align-items: center;
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -38,11 +37,10 @@
   animation: slideIn 0.3s ease-in-out;
   width: 50%;
   position: relative;
-  top: 0px;
+  top: 27px;
   background-color: white;
-  padding: 20px 36px;
+  padding: 40px;
   border-radius: 10px;
-
 }
 
 .form-group {

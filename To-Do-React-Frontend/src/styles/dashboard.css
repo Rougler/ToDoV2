@@ -20,7 +20,7 @@
   padding: 78px 11px 0px 11px;
 }
 
-.dashboard h1 {
+.dashboard h3 {
   text-align: left;
     padding: 9px;
     color: rgb(255, 255, 255);
@@ -30,7 +30,6 @@
     background-color: #1976d2;
     margin-top: -3px;
 }
-
 .charts {
   display: flex;
   /* gap: 17px; */
@@ -205,4 +204,12 @@ tr.priority-high:hover {
 
 .completed {
   color: green;
+}
+
+.charts h2{
+  text-align: left;
+    font-size: 16px;
+    margin-top: -5px;
+    margin-bottom: 9px;
+    color: gray;
 }

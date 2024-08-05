@@ -177,22 +177,6 @@ const Sidebar = ({ children, userInfo, handleLogout }) => {
                   {isOpen && <span className="icon-tag">User/Group</span>}
                 </li>
               </Link>
-              {/* <Link
-                to="/user-profilepage"
-                onClick={handleLinkClick}
-                style={{
-                  cursor: "pointer",
-                  textDecoration: "none",
-                  paddingLeft: "20px",
-                }}
-              >
-                <li className="sidebar-sub-item">
-                  <div className="icon">
-                    <FontAwesomeIcon icon={faUsers} />
-                  </div>
-                  {isOpen && <span className="icon-tag">User Profile</span>}
-                </li>
-              </Link> */}
             </>
           )}
         </ul>

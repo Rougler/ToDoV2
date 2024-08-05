@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../styles/CardDetail.css";
 import OutsideClickHandler from "../OutsideClickHandler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CommentBox from "./comment";
 import axios from "axios";
 import {
   faEye,
@@ -24,8 +25,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FaSave } from "react-icons/fa";
 import MoveCard from "./MoveCard";
-import CommentSection from "./Comments";
-import CommentCard from "./Comments";
 
 const colors = [
   "#f2d600",
@@ -65,15 +64,7 @@ const CardDetail = ({
   const [showPriority, setShowPriority] = useState(false);
   const [priority, setPriority] = useState(card.priority || 0);
   const [showDeadline, setShowDeadline] = useState(false);
-  const [showEnddate, setShowEnddate] = useState(false);
-  const [enddate, setEnddate] = useState(card.enddate || "");
-  const [taskStatus, setTaskStatus] = useState("");
   const [deadline, setDeadline] = useState(card.deadline || "");
-  const [isVisible, setIsVisible] = useState(false);
-
-  const selectedTaskName = title;
-
-  console.log("niyazvampire: ", selectedTaskName);
 
   useEffect(() => {
     fetchTaskDetails();
@@ -95,7 +86,6 @@ const CardDetail = ({
         assignedTo,
         cover,
         deadline,
-        enddate,
       } = response.data;
 
       let parsedChecklistItems = [];
@@ -125,8 +115,6 @@ const CardDetail = ({
       setCoverColor(cover || colors[0]);
       setPriority(priority || 0);
       setDeadline(deadline || "");
-      setEnddate(enddate || "");
-      setTaskStatus(taskStatus || "");
 
       console.log("Fetched Task Details:", {
         title: taskName,
@@ -163,29 +151,15 @@ const CardDetail = ({
     setDeadline(newDeadline);
 
     try {
-      await axios.put(`http://127.0.0.1:8000/todo/update-date/${card.id}/`, {
-        deadline: newDeadline,
-      });
+      await axios.put(
+        `http://127.0.0.1:8000/todo/update-deadline/${card.id}/`,
+        {
+          deadline: newDeadline,
+        }
+      );
     } catch (error) {
       console.error("Error updating deadline:", error);
     }
-  };
-
-  const handleEnddateChange = async (event) => {
-    const newEnddate = event.target.value;
-    setEnddate(newEnddate);
-
-    try {
-      await axios.put(`http://127.0.0.1:8000/todo/update-enddate/${card.id}/`, {
-        enddate: newEnddate,
-      });
-    } catch (error) {
-      console.error("Error updating Enddate:", error);
-    }
-  };
-
-  const toggleCard = () => {
-    setIsVisible(!isVisible);
   };
 
   const handleDownload = (file) => {
@@ -659,25 +633,6 @@ const CardDetail = ({
 
             <h3>Actions</h3>
             <div className="sidebar-button">
-              {taskStatus === "Completed" && (
-                <>
-                  <a onClick={() => setShowEnddate(!showEnddate)}>
-                    <FontAwesomeIcon icon={faCalendarAlt} /> Completion Date
-                  </a>
-                  {showEnddate && (
-                    <div className="deadline-field">
-                      <label>
-                        Enddate:
-                        <input
-                          type="date"
-                          value={enddate}
-                          onChange={handleEnddateChange}
-                        />
-                      </label>
-                    </div>
-                  )}
-                </>
-              )}
               <a onClick={() => setSShowMoveCard(true)}>
                 <FontAwesomeIcon icon={faTags} /> Move
               </a>

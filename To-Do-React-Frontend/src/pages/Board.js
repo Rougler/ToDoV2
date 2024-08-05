@@ -173,16 +173,14 @@ const Board = () => {
   return (
     <div>
       <div className="board">
-        <div className="your-board-title">
-          <h1>Task Manager</h1>
+        <div className="managerName">
+          <h3>Task Manager</h3>
         </div>
         {tabs.map(
           (tab) =>
             selectedProject === tab.value && (
               <div key={tab.value}>
-                <div className="managerName">
-                  Project Manager: {getProjectManager()}
-                </div>
+               <div className="proj-manager" style={{ textAlign: 'left', display: 'block' }}>Project Manager: {getProjectManager()}</div>
                 <div key={tab.value} className="lists-container">
                   {lists.map((list) => (
                     <div key={list.id} className="list">
@@ -220,7 +218,7 @@ const Board = () => {
                         className="add-list-button"
                         onClick={() => setShowAddListForm(true)}
                       >
-                        +
+                        + Add another list
                       </button>
                     )}
                   </div>

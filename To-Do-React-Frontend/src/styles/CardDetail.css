@@ -1,3 +1,4 @@
+/* src/components/CardDetail.css */
 .priority-deadline {
   margin-top: 20px;
 }
@@ -6,9 +7,9 @@
   margin-top: 20px;
 }
 
+/* Ensure the comment section doesn't overflow */
 .comment-section .react-comments-section {
   max-width: 100%;
-
   overflow-x: hidden;
 }
 
@@ -37,10 +38,11 @@
 
 .description-button button {
   border: none;
-  padding: 6px;
-  font-weight: 500;
-  border-radius: 3px;
-  color: grey;
+    padding: 6px 8px;
+    font-weight: 500;
+    border-radius: 3px;
+    cursor: pointer;
+    color: grey;
 }
 
 .modal-one {
@@ -177,7 +179,6 @@
   border-radius: 3px;
   margin-bottom: 10px;
   cursor: pointer;
-  margin-left: 8px;
 }
 
 .sidebar button:hover {
@@ -214,7 +215,12 @@
   border-radius: 4px;
   padding: 0.5rem;
   color: black;
-  resize: none;
+  box-shadow: none !important; 
+  font-size: 13px;
+}
+
+.description textarea:focus{
+  outline: none;
 }
 
 .sidebar {
@@ -222,9 +228,10 @@
 }
 
 .sidebar-button button {
-  margin-top: 0.5rem;
+  margin-top: 9px;
   padding: 0.5rem;
   border: none;
+  display: block;
   background-color: #5cb85c;
   color: white;
   border-radius: 4px;
@@ -292,8 +299,12 @@
 
 .title-section input {
   padding: 8px;
-  border: none;
-  box-shadow: 1px 1px lightgray;
+  height: auto;
+  border: 1px solid #ccc;
+}
+
+.title-section input:focus{
+  outline: none;
 }
 
 .title-section button:hover {
@@ -305,7 +316,7 @@
   cursor: pointer;
   margin-left: 17px;
   color: #ccc;
-  margin-top: -2px;
+  margin-top: -5px;
   color: #9c9c9c;
 }
 
@@ -393,6 +404,8 @@
   font-size: 12px;
 }
 
+/* CardDetail.css */
+
 .modal-one {
   position: fixed;
   top: 0;
@@ -408,11 +421,11 @@
 .modal-content-carddetails {
   background-color: white;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 2px;
   width: 600px;
+  max-height: 90%;
   overflow-y: scroll;
   height: 70vh;
-  scrollbar-width: none;
 }
 
 .close {
@@ -579,4 +592,34 @@
   border: none;
   background-color: #f1f1f1;
   border-radius: 4px;
+}
+
+.add-comment{
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(215, 215, 215);
+}
+
+.new-comment-input{
+  border: none;
+
+}
+
+.add-comment-comment{
+  padding: 0.5rem;
+    border: none;
+    display: block;
+    background-color: #5cb85c;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+
+.add-comment-button{
+  margin: 0 !important;
+}
+
+.new-comment-input:focus{
+outline: none ;
 }

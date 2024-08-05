@@ -1,32 +1,18 @@
 /* src/components/Board.css */
 
-.your-board-title {
-  display: flex;
-  margin-top: 30px;
-  color: white;
-  background-color: #0079bf;
-  /* color: black;
-  background-color: silver; */
-  padding: 7px;
-  position: relative;
-  align-items: center;
-  margin-bottom: 10px;
-  border-radius: 4px;
-}
-
-.your-board-title h1 {
-  font-size: 28px;
-  padding-left: 20px;
-  font-weight: 500;
-}
-
 .board {
   gap: 10px;
   background: #f1f1f1;
   padding: 10px;
-  padding-top: 50px;
-  /* Enable horizontal scrolling */
+  padding-top: 118px;
+  height: 81vh;
+  overflow: hidden;
   white-space: nowrap;
+}
+
+.cards{
+  overflow: auto;
+  scrollbar-width: none;
 }
 
 .delete-column {
@@ -39,8 +25,7 @@
   justify-content: space-between;
   align-items: center;
   padding-left: 5%;
-  background: transparent;
-  /* background: black; */
+ color: #0079bf;
 }
 
 .list {
@@ -61,8 +46,7 @@
 }
 
 .list h3 {
-  /* color: white; */
-  color: black;
+  color:#0079bf;
   word-wrap: break-word;
   /* font-weight: normal; */
   font-size: 15px;
@@ -76,7 +60,7 @@
 .card {
   background-color: white;
   padding: 8px 8px 26px 14px;
-  margin: 5px 0;
+  margin: 10px 0;
   border-radius: 3px;
   cursor: pointer;
   display: flex;
@@ -177,7 +161,6 @@
 
 .add-list button {
   padding: 5px;
-  background-color: #0079bf;
 }
 
 .add-new-list {
@@ -314,18 +297,19 @@
 .lists-container {
   display: flex;
   overflow-x: scroll;
-  height: 100vh;
+  height: 76vh;
   overflow-y: hidden;
 }
 
 .managerName {
-  color: black;
+  color: #ffffff;
   padding: 10px 17px;
   background: #1976d2;
   margin-top: -42px;
   text-align: left;
   font-weight: 700;
   font-size: 16px;
+  margin-bottom: 25px;
 }
 
 .add-list-section {
@@ -345,8 +329,6 @@
 
 .add-list button {
   padding: 5px;
-  height: 40px;
-  margin-top: 0;
 }
 
 .add-new-list {
@@ -418,6 +400,12 @@
   cursor: pointer;
   margin-top: 10px;
   height: 36px;
+}
+
+.proj-manager{
+  color: gray;
+  font-weight: 500;
+  margin-left: 10px;
 }
 
 @-moz-keyframes splash-12 {

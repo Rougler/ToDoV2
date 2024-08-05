@@ -6,7 +6,7 @@
 }
 
 .pie-chart {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -23,8 +23,13 @@
   margin-bottom: 20px;
 }
 
-.Project-dropdown-Details {
-  margin-left: 25px;
-  margin-bottom: 20px;
-  width: 400px;
+.detailed-dashboard-h3{
+  text-align: left;
+  padding: 9px;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-size: 19px;
+  padding-left: 26px;
+  background-color: #1976d2;
+  margin-top: -3px;
 }

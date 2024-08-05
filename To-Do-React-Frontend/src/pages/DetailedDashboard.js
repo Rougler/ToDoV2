@@ -76,7 +76,7 @@ export default function PieActiveArc() {
 
   return (
     <div className="dashboard">
-      <h1 className="user-dashboard">Users Dashboard</h1>
+      <h3 className="user-dashboard-h3">Users Dashboard</h3>
       <div className="charts">
         <div className="chart pie-chart">
           <FormControl fullWidth>
@@ -136,7 +136,7 @@ export default function PieActiveArc() {
         </div>
       </div>
       <div className="chart apex-chart">
-        <ApexChart  />
+        <ApexChart />
       </div>
     </div>
   );

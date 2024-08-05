@@ -2,11 +2,10 @@
   display: inline-block;
   float: left;
 }
-
+/* 
 .delete-column button {
-  color: black;
-  /* color: white; */
-}
+  color: white;
+} */
 
 .delete-confirmation-overlay {
   position: fixed;

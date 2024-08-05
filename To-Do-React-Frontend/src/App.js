@@ -1,4 +1,168 @@
-//-----------------------------------------------
+// import React, { useState, useEffect } from "react";
+// import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+// import Sidebar from "./components/sidebar";
+// import Dashboard from "./components/Dashboard";
+// import Home from "./components/Home";
+// import UserGroup from "./components/UserGroup";
+// import Login from "./components/login";
+// import Projects from "./components/Projects";
+
+// function ProtectedRoute({ element: Element, isAuthenticated, ...rest }) {
+//   return isAuthenticated ? <Element {...rest} /> : <Navigate to="/login" />;
+// }
+
+// function App() {
+//   const [isAuthenticated, setIsAuthenticated] = useState(false);
+//   const location = useLocation();
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("token");
+//     if (token) {
+//       setIsAuthenticated(true);
+//     }
+//   }, []);
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("token");
+//     if (!token) {
+//       setIsAuthenticated(false);
+//     }
+//   }, [location]);
+
+//   const shouldDisplaySidebar = !["/login"].includes(location.pathname);
+
+//   return (
+//     <div>
+//       {shouldDisplaySidebar && (
+//         <Sidebar setIsAuthenticated={setIsAuthenticated} />
+//       )}
+//       <Routes>
+//         <Route
+//           path="/login"
+//           element={<Login setIsAuthenticated={setIsAuthenticated} />}
+//         />
+//         <Route
+//           path="/"
+//           element={
+//             <ProtectedRoute element={Home} isAuthenticated={isAuthenticated} />
+//           }
+//         />
+//         <Route
+//           path="/dashboard"
+//           element={
+//             <ProtectedRoute
+//               element={Dashboard}
+//               isAuthenticated={isAuthenticated}
+//             />
+//           }
+//         />
+//         <Route
+//           path="/user-group"
+//           element={
+//             <ProtectedRoute
+//               element={UserGroup}
+//               isAuthenticated={isAuthenticated}
+//             />
+//           }
+//         />
+//         <Route
+//           path="/projects"
+//           element={
+//             <ProtectedRoute
+//               element={Projects}
+//               isAuthenticated={isAuthenticated}
+//             />
+//           }
+//         />
+//       </Routes>
+//     </div>
+//   );
+// }
+
+// export default App;
+// import React, { useState, useEffect } from "react";
+// import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+// import Sidebar from "./components/sidebar";
+// import Dashboard from "./components/Dashboard";
+// import Home from "./components/Home";
+// import UserGroup from "./components/UserGroup";
+// import Login from "./components/login";
+// import Projects from "./components/Projects";
+
+// function ProtectedRoute({ element: Element, isAuthenticated, ...rest }) {
+//   return isAuthenticated ? <Element {...rest} /> : <Navigate to="/login" />;
+// }
+
+// function App() {
+//   const [isAuthenticated, setIsAuthenticated] = useState(false);
+//   const location = useLocation();
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("token");
+//     if (token) {
+//       setIsAuthenticated(true);
+//     }
+//   }, []);
+
+//   useEffect(() => {
+//     const token = localStorage.getItem("token");
+//     if (!token) {
+//       setIsAuthenticated(false);
+//     }
+//   }, [location]);
+
+//   const shouldDisplaySidebar = !["/login"].includes(location.pathname);
+//   const userInfo = location.state?.userInfo;
+
+//   return (
+//     <div>
+//       {shouldDisplaySidebar && (
+//         <Sidebar setIsAuthenticated={setIsAuthenticated} userInfo={userInfo} />
+//       )}
+//       <Routes>
+//         <Route
+//           path="/login"
+//           element={<Login setIsAuthenticated={setIsAuthenticated} />}
+//         />
+//         <Route
+//           path="/"
+//           element={
+//             <ProtectedRoute element={Home} isAuthenticated={isAuthenticated} />
+//           }
+//         />
+//         <Route
+//           path="/dashboard"
+//           element={
+//             <ProtectedRoute
+//               element={Dashboard}
+//               isAuthenticated={isAuthenticated}
+//             />
+//           }
+//         />
+//         <Route
+//           path="/user-group"
+//           element={
+//             <ProtectedRoute
+//               element={UserGroup}
+//               isAuthenticated={isAuthenticated}
+//             />
+//           }
+//         />
+//         <Route
+//           path="/projects"
+//           element={
+//             <ProtectedRoute
+//               element={Projects}
+//               isAuthenticated={isAuthenticated}
+//             />
+//           }
+//         />
+//       </Routes>
+//     </div>
+//   );
+// }
+
+// export default App;
 
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
@@ -9,7 +173,6 @@ import UserGroup from "./pages/UserGroup";
 import Login from "./pages/login";
 import Projects from "./pages/Projects";
 import DetailedDashboard from "./pages/DetailedDashboard";
-// import { UserProfile } from "./pages/UserProfile";
 
 function ProtectedRoute({ element: Element, isAuthenticated, ...rest }) {
   return isAuthenticated ? <Element {...rest} /> : <Navigate to="/login" />;
@@ -108,20 +271,9 @@ function App() {
             />
           }
         />
-        {/* <Route
-          path="/user-profilepage"
-          element={
-            <ProtectedRoute
-              element={UserProfile}
-              isAuthenticated={isAuthenticated}
-            />
-          }
-        /> */}
       </Routes>
     </div>
   );
 }
 
 export default App;
-
-//--------------

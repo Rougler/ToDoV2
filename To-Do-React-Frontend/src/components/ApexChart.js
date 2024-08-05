@@ -1,5 +1,3 @@
-//---------------------------------------
-
 import React, { useContext, useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import axios from "axios";
@@ -53,9 +51,8 @@ const ApexChart = () => {
             const assignedUser = task.assignedTo;
             const taskName = task.taskName;
             const startTime = new Date(task.startdate).getTime();
-            const endTime = task.enddate
-              ? new Date(task.enddate).getTime()
-              : new Date().getTime();
+            // const endTime = new Date(task.deadline).getTime();
+            const endTime = new Date().getTime();
 
             if (!acc[assignedUser]) {
               acc[assignedUser] = [];
