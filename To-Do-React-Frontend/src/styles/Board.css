@@ -63,7 +63,7 @@
   margin: 10px 0;
   border-radius: 3px;
   cursor: pointer;
-  display: flex;
+  
   gap: 4px;
   /* white-space: normal; */
   overflow-wrap: break-word;
@@ -407,6 +407,52 @@
   font-weight: 500;
   margin-left: 10px;
 }
+
+.card-d{
+  border-top: 1px solid blue;
+  display: flex;
+}
+
+
+
+
+.card {
+  background-color: white;
+  padding: 8px;
+  margin: 10px 0;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #172b4d;
+  text-align: left;
+  box-shadow: 0 1px 0 rgba(9,30,66,.25);
+}
+
+.card:hover {
+  background-color: #f4f5f7;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: 4px;
+}
+
+.card-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #5e6c84;
+}
+
+.card-deadline,
+.card-assigned-to {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 
 @-moz-keyframes splash-12 {
   40% {

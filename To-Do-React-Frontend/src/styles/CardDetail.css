@@ -786,3 +786,10 @@ outline: none ;
   display: inline-block;
   width: 100%;
 }
+
+.progress-bar p{
+ 
+  font-size: 16px;
+  font-weight: 700;
+  color: #0079bf;
+}
