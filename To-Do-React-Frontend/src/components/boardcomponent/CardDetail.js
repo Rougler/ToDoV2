@@ -655,17 +655,9 @@ const CardDetail = ({
               </a>
               <InputSlider />
             </div>
-            {/* <h3>Actions</h3>
+            <h3>Actions</h3>
             <div className="sidebar-button">
-              <ClassComponent />
-            </div> */}
-            <h3>Comments</h3>
-            <div className="toggle-container">
-              <button className="sidebar-button" onClick={toggleCard}>
-                {isVisible ? "Hide Comment Card" : "Show Comment Card"}
-              </button>
-              {console.log("Task Name being passed:", selectedTaskName)}
-              {isVisible && <CommentCard taskName={selectedTaskName} />}
+            <ClassComponent />
             </div>
           </div>
         </div>

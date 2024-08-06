@@ -21,16 +21,21 @@ const Board = () => {
         const listsResponse = await axios.get(
           "http://127.0.0.1:8000/todo/cardname/"
         );
+        console.log("I am listresponse",listsResponse);
         setLists(listsResponse.data);
+        console.log("I am lists2",lists);
 
         const tasksResponse = await axios.get(
           "http://127.0.0.1:8000/todo/tasks/"
         );
+        console.log("I am task response",tasksResponse)
         const mappedCards = tasksResponse.data.map((task) => ({
           id: task.id,
           title: task.taskName,
           listTitle: task.taskStatus,
           cover: task.cover,
+          deadline:task.deadline,
+          assignedTo:task.assignedTo,
           projectName: task.project,
         }));
         setCards(mappedCards);
@@ -99,6 +104,7 @@ const Board = () => {
       );
       if (response.status === 201) {
         setLists([...lists, response.data]);
+        console.log("I am lists",lists);
         setShowAddListForm(false);
       } else {
         console.error("Failed to add list:", response.statusText);
@@ -189,7 +195,8 @@ const Board = () => {
                         <DeleteColumn listId={list.id} onDelete={deleteCard} />
                       </div>
                       <div className="cards">
-                        {getCardsForCurrentTab(list.card_name).map((card) => (
+                        {
+                        getCardsForCurrentTab(list.card_name).map((card) => (
                           <div
                             key={card.id}
                             className="card"
@@ -197,9 +204,14 @@ const Board = () => {
                             style={{ backgroundColor: card.cover }}
                           >
                             {card.title}
+                            <br/>
+                            <p className="cardAssignedTo">{card.assignedTo}</p>
+                            <br/>
+                            <p className="cardDeadLine">{card.deadline}</p>
                           </div>
                         ))}
                       </div>
+                      {console.log("I am hero",getCardsForCurrentTab(list.card_name))}
                     </div>
                   ))}
                   <div className="add-list">
