@@ -4,9 +4,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
-// import VolumeUp from '@mui/icons-material/VolumeUp';
-import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
-
+import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
+ 
 export default function InputSlider() {
   const [value, setValue] = React.useState(0); // Set initial value to zero
   const [confirmedValue, setConfirmedValue] = React.useState(null); // State to track confirmed value
@@ -30,7 +29,7 @@ export default function InputSlider() {
       </Typography>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          <PublishedWithChangesIcon />
+          <ModelTrainingIcon />
         </Grid>
         <Grid item xs>
           <Slider

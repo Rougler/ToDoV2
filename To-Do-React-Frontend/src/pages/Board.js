@@ -4,6 +4,8 @@ import DeleteColumn from "../components/DeleteColumn";
 import CardDetail from "../components/boardcomponent/CardDetail";
 import axios from "axios";
 import ProjectContext from "../components/projectcomponent/ProjectContext";
+import { Calendar, User, Flag } from "lucide-react";
+// import { Calendar, User, Flag } from "lucide-react";
 
 const Board = () => {
   const [cards, setCards] = useState([]);
@@ -21,21 +23,21 @@ const Board = () => {
         const listsResponse = await axios.get(
           "http://127.0.0.1:8000/todo/cardname/"
         );
-        console.log("I am listresponse",listsResponse);
+        console.log("I am listresponse", listsResponse);
         setLists(listsResponse.data);
-        console.log("I am lists2",lists);
+        console.log("I am lists2", lists);
 
         const tasksResponse = await axios.get(
           "http://127.0.0.1:8000/todo/tasks/"
         );
-        console.log("I am task response",tasksResponse)
+        console.log("I am task response", tasksResponse);
         const mappedCards = tasksResponse.data.map((task) => ({
           id: task.id,
           title: task.taskName,
           listTitle: task.taskStatus,
           cover: task.cover,
-          deadline:task.deadline,
-          assignedTo:task.assignedTo,
+          deadline: task.deadline,
+          assignedTo: task.assignedTo,
           projectName: task.project,
         }));
         setCards(mappedCards);
@@ -43,6 +45,7 @@ const Board = () => {
         console.error("Error fetching data:", error);
       }
     };
+    
 
     const getAllProjects = async () => {
       try {
@@ -104,7 +107,7 @@ const Board = () => {
       );
       if (response.status === 201) {
         setLists([...lists, response.data]);
-        console.log("I am lists",lists);
+        console.log("I am lists", lists);
         setShowAddListForm(false);
       } else {
         console.error("Failed to add list:", response.statusText);
@@ -186,7 +189,7 @@ const Board = () => {
           (tab) =>
             selectedProject === tab.value && (
               <div key={tab.value}>
-               <div className="proj-manager" style={{ textAlign: 'left', display: 'block' }}>Project Manager: {getProjectManager()}</div>
+                <div className="proj-manager" style={{ textAlign: 'left', display: 'block' }}>Project Manager: {getProjectManager()}</div>
                 <div key={tab.value} className="lists-container">
                   {lists.map((list) => (
                     <div key={list.id} className="list">
@@ -195,23 +198,31 @@ const Board = () => {
                         <DeleteColumn listId={list.id} onDelete={deleteCard} />
                       </div>
                       <div className="cards">
-                        {
-                        getCardsForCurrentTab(list.card_name).map((card) => (
+                        {getCardsForCurrentTab(list.card_name).map((card) => (
                           <div
                             key={card.id}
                             className="card"
                             onClick={() => setSelectedCard(card)}
                             style={{ backgroundColor: card.cover }}
                           >
-                            {card.title}
-                            <br/>
-                            <p className="cardAssignedTo">{card.assignedTo}</p>
-                            <br/>
-                            <p className="cardDeadLine">{card.deadline}</p>
+                            <div className="card-title">{card.title}</div>
+                            <div className="card-details">
+                              {card.deadline && (
+                                <div className="card-deadline">
+                                  <Calendar size={14} />
+                                  <span>{card.deadline}</span>
+                                </div>
+                              )}
+                              {card.assignedTo && (
+                                <div className="card-assigned-to">
+                                  <User size={14} />
+                                  <span>{card.assignedTo}</span>
+                                </div>
+                              )}
+                            </div>
                           </div>
                         ))}
                       </div>
-                      {console.log("I am hero",getCardsForCurrentTab(list.card_name))}
                     </div>
                   ))}
                   <div className="add-list">
