@@ -26,6 +26,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FaSave } from "react-icons/fa";
 import MoveCard from "./MoveCard";
+import InputSlider from "./slider"
 
 const colors = [
   "#f2d600",
@@ -441,6 +442,7 @@ const CardDetail = ({
   };
 
   return (
+    
     <div className="modal-one">
       <OutsideClickHandler onClose={onClose}>
         <div className="modal-content-carddetails">
@@ -465,7 +467,13 @@ const CardDetail = ({
                 />
               </h2>
             )}
+            
             {isEditingTitle && <button onClick={handleSaveTitle}>Save</button>}
+
+            
+
+
+
           </div>
 
           <div className="modal-taskassignto">
@@ -558,9 +566,8 @@ const CardDetail = ({
                     {colors.map((color) => (
                       <div
                         key={color}
-                        className={`color-option ${
-                          color === card.coverColor ? "selected" : ""
-                        }`}
+                        className={`color-option ${color === card.coverColor ? "selected" : ""
+                          }`}
                         style={{ backgroundColor: color }}
                         onClick={() => handleCoverColorChange(color)}
                       ></div>
@@ -652,6 +659,7 @@ const CardDetail = ({
               <a onClick={handleDeleteCard}>
                 <FontAwesomeIcon icon={faTrashAlt} /> Delete
               </a>
+              <InputSlider />
             </div>
             <h3>Actions</h3>
             <div className="sidebar-button">
