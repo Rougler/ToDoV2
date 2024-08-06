@@ -5,8 +5,14 @@
   background: #f1f1f1;
   padding: 10px;
   padding-top: 118px;
-  /* Enable horizontal scrolling */
+  height: 81vh;
+  overflow: hidden;
   white-space: nowrap;
+}
+
+.cards{
+  overflow: auto;
+  scrollbar-width: none;
 }
 
 .delete-column {
@@ -54,7 +60,7 @@
 .card {
   background-color: white;
   padding: 8px 8px 26px 14px;
-  margin: 5px 0;
+  margin: 10px 0;
   border-radius: 3px;
   cursor: pointer;
   display: flex;

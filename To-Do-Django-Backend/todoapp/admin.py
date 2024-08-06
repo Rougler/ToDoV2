@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Task, Card, UserProfile, Projects
+from .models import Task, Card, UserProfile, Projects, Message
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 
@@ -38,3 +38,9 @@ admin.site.register(Projects, ProjectsAdmin)
 
 admin.site.site_header = "To Do Application"
 admin.site.index_title = "To Do Application"
+
+
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ['id','user','message']
+
+admin.site.register(Message,MessageAdmin)

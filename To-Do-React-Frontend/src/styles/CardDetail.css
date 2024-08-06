@@ -38,10 +38,11 @@
 
 .description-button button {
   border: none;
-  padding: 6px;
-  font-weight: 500;
-  border-radius: 3px;
-  color: grey;
+    padding: 6px 8px;
+    font-weight: 500;
+    border-radius: 3px;
+    cursor: pointer;
+    color: grey;
 }
 
 .modal-one {
@@ -215,7 +216,12 @@
   border-radius: 4px;
   padding: 0.5rem;
   color: black;
-  resize: none;
+  box-shadow: none !important; 
+  font-size: 13px;
+}
+
+.description textarea:focus{
+  outline: none;
 }
 
 .sidebar {
@@ -294,8 +300,12 @@
 
 .title-section input {
   padding: 8px;
-  border: none;
-  box-shadow: 1px 1px lightgray;
+  height: auto;
+  border: 1px solid #ccc;
+}
+
+.title-section input:focus{
+  outline: none;
 }
 
 .title-section button:hover {
@@ -417,7 +427,6 @@
   max-height: 90%;
   overflow-y: scroll;
   height: 70vh;
-  scrollbar-color: #fff6 #00000026;
 }
 
 .close {
@@ -584,4 +593,196 @@
   border: none;
   background-color: #f1f1f1;
   border-radius: 4px;
+}
+
+.add-comment{
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(215, 215, 215);
+}
+
+.new-comment-input{
+  border: none;
+
+}
+
+.add-comment-comment{
+  padding: 0.5rem;
+    border: none;
+    display: block;
+    background-color: #5cb85c;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+
+.add-comment-button{
+  margin: 0 !important;
+}
+
+.new-comment-input:focus{
+outline: none ;
+}
+
+.card-detail .task-dependencies {
+  margin-top: 1em;
+}
+
+.card-detail .task-dependencies .dependency-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.card-detail .task-dependencies .dependency-item button {
+  margin-left: 0.5em;
+  padding: 0.25em 0.5em;
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.card-detail .task-dependencies .dependency-item button:hover {
+  background-color: #ff1a1a;
+}
+
+.card-detail .task-dependencies .add-dependency {
+  margin-top: 1em;
+}
+
+.card-detail .task-dependencies .add-dependency button {
+  padding: 0.5em 1em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.card-detail .task-dependencies .add-dependency button:hover {
+  background-color: #0056b3;
+}
+
+.card-detail .task-dependencies .dropdown {
+  margin-top: 0.5em;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.card-detail .task-dependencies .dropdown div {
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.card-detail .task-dependencies .dropdown div:hover {
+  background-color: #f7f7f7;
+}
+
+.attachment-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 1em;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 5px;
+}
+
+.attachment-popup input[type="file"] {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.attachment-popup button {
+  margin-right: 0.5em;
+}
+
+.priority-popup, .deadline-popup, .cover-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 1em;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 5px;
+}
+
+.priority-popup select {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.deadline-popup input[type="date"] {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.color-options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* New CSS for the Waiting On section */
+.waiting-on-section {
+  background-color: #fffbf0;
+  border: 1px solid #f5c518;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.waiting-on-header {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #f5c518;
+}
+
+.waiting-on-header .icon {
+  margin-right: 10px;
+}
+
+.waiting-on-content {
+  margin-top: 10px;
+  color: #333;
+}
+
+.waiting-on-add-task {
+  color: #f5c518;
+  cursor: pointer;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.waiting-on-add-task .icon {
+  margin-right: 5px;
+}
+
+.waiting-on-add-task:hover {
+  text-decoration: underline;
+}
+.waiting-tasks-section{
+  float: left;
+  display: inline-block;
+  width: 100%;
 }

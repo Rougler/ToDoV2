@@ -68,7 +68,7 @@ textarea{
     resize: none;
 }
 
-input{
+.comments-section input{
   font-family: "LFT Etica", sans-serif;
   font-size: 16px;
   font-style: normal;
