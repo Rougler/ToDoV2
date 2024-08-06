@@ -4,7 +4,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
-import VolumeUp from '@mui/icons-material/VolumeUp';
+// import VolumeUp from '@mui/icons-material/VolumeUp';
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 
 export default function InputSlider() {
   const [value, setValue] = React.useState(0); // Set initial value to zero
@@ -29,7 +30,7 @@ export default function InputSlider() {
       </Typography>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          <VolumeUp />
+          <PublishedWithChangesIcon />
         </Grid>
         <Grid item xs>
           <Slider
