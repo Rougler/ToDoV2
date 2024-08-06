@@ -148,5 +148,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'niyaz143noor@gmail.com'
-EMAIL_HOST_PASSWORD = 'txkl cslc vihu qmzr'
+EMAIL_HOST_PASSWORD = 'ytly wyfv ysad vwoi'
 
