@@ -127,3 +127,7 @@ textarea{
   border-radius: 5px;
   cursor: pointer;
 }
+
+.comments-section{
+  margin-top: -22px;
+}

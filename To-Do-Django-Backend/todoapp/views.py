@@ -571,8 +571,8 @@ class UserProjectTasksView(APIView):
 
 
 class TaskMessagesView(APIView):
-    def get(self, request, task_name, format=None):
-        task = get_object_or_404(Task, taskName=task_name)
+    def get(self, request, task_id, format=None):
+        task = get_object_or_404(Task, id=task_id)
         messages = Message.objects.filter(task=task)
         serializer = MessageSerializer(messages, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

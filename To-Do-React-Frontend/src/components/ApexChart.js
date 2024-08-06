@@ -101,7 +101,7 @@ const ApexChart = () => {
 
   return (
     <div>
-      <div style={{ marginBottom: "5px", width: "300px" }}>
+      <div style={{ marginBottom: "13px", marginLeft:"83%" }}>
         <ProjectDropdown />
       </div>
       <div id="chart">

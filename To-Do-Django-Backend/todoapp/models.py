@@ -121,5 +121,5 @@ class Message(models.Model):
     task = models.ForeignKey(Task,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     message = models.TextField(max_length=5000)
-    date_time = models.DateTimeField(auto_now_add=True)
+    date_time = models.DateTimeField()
  
