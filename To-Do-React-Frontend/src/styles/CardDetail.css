@@ -284,6 +284,8 @@
 
 .title-section {
   clear: both;
+    display: inline-block;
+    float: left;
 }
 
 .title-section button {
@@ -785,4 +787,12 @@ outline: none ;
   float: left;
   display: inline-block;
   width: 100%;
+}
+
+.bold-text{
+  font-weight: 500;
+  color: #6e6e6e;
+}
+.modal-taskassignto{
+  float: right;
 }

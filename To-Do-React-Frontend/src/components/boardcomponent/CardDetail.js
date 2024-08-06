@@ -57,6 +57,7 @@ const CardDetail = ({
   const [newChecklistItem, setNewChecklistItem] = useState("");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [title, setTitle] = useState(card.title);
+  const [assignedTo, setAssignedTo] = useState([]);
   const [showCoverOptions, setShowCoverOptions] = useState(false);
   const [attachments, setAttachments] = useState(card.attachments || []);
   const [coverColor, setCoverColor] = useState(card.coverColor || colors[0]);
@@ -112,6 +113,7 @@ const CardDetail = ({
       }
 
       setTitle(taskName || "");
+      setAssignedTo(assignedTo || [] );
       setDescription(description || "");
       setChecklistItems(parsedChecklistItems || []);
       setAttachments(file ? [file] : []);
@@ -465,6 +467,10 @@ const CardDetail = ({
             )}
             {isEditingTitle && <button onClick={handleSaveTitle}>Save</button>}
           </div>
+
+          <div className="modal-taskassignto">
+    <p><span class="bold-text">Assigned to:</span> {assignedTo}</p>
+</div>
 
           <div className="description">
             <h3>
