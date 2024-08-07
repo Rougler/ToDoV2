@@ -126,6 +126,23 @@ const Sidebar = ({ children, userInfo, handleLogout }) => {
                 </div>
                 {isOpen && <span className="icon-tag">Task Pool</span>}
               </Link>
+              <Link
+                to="/SignOff"
+                onClick={handleLinkClick}
+                className={`sidebar-sub-item ${
+                  isActive("/SignOff") ? "active" : ""
+                }`}
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  paddingLeft: "20px",
+                }}
+              >
+                <div className="icon">
+                  <FontAwesomeIcon icon={faChartBar} />
+                </div>
+                {isOpen && <span className="icon-tag">SignOff</span>}
+              </Link>
             </>
           )}
           <li className="sidebar-item" onClick={toggleUserGroup}>

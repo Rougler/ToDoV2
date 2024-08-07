@@ -132,7 +132,7 @@ const initialComments = [
   },
 ];
 
-export default function CommentCard({ taskName }) {
+export default function CommentCard({ taskName, handleFlagStatusChange  }) {
   const [comments, setComments] = useState(initialComments);
   const [newComment, setNewComment] = useState("");
   const [replyText, setReplyText] = useState({});
@@ -193,6 +193,10 @@ export default function CommentCard({ taskName }) {
       comment.id === commentId ? { ...comment, flagged: !comment.flagged } : comment
     );
     setComments(updatedComments);
+
+    // Call the handler passed from Board component
+    const isAnyCommentFlagged = updatedComments.some(comment => comment.flagged);
+    handleFlagStatusChange(isAnyCommentFlagged);
   };
 
   return (

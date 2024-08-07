@@ -659,6 +659,7 @@ const CardDetail = ({
               <a onClick={handleDeleteCard}>
                 <FontAwesomeIcon icon={faTrashAlt} /> Delete
               </a>
+             
               <InputSlider />
             </div>
             <h3>Actions</h3>

@@ -12,6 +12,7 @@ const Board = () => {
   const [newListTitle, setNewListTitle] = useState("");
   const [projects, setProjects] = useState([]);
   const [showAddListForm, setShowAddListForm] = useState(false);
+  const [flaggedCards, setFlaggedCards] = useState({});
 
   const { selectedProject, tabs } = useContext(ProjectContext);
 
@@ -176,6 +177,13 @@ const Board = () => {
     }
   };
 
+  const handleFlagStatusChange = (cardId, isFlagged) => {
+    setFlaggedCards(prevState => ({
+      ...prevState,
+      [cardId]: isFlagged
+    }));
+  };
+
   return (
     <div>
       <div className="board">
@@ -186,7 +194,7 @@ const Board = () => {
           (tab) =>
             selectedProject === tab.value && (
               <div key={tab.value}>
-               <div className="proj-manager" style={{ textAlign: 'left', display: 'block' }}>Project Manager: {getProjectManager()}</div>
+                <div className="proj-manager" style={{ textAlign: 'left', display: 'block' }}>Project Manager: {getProjectManager()}</div>
                 <div key={tab.value} className="lists-container">
                   {lists.map((list) => (
                     <div key={list.id} className="list">
@@ -195,23 +203,24 @@ const Board = () => {
                         <DeleteColumn listId={list.id} onDelete={deleteCard} />
                       </div>
                       <div className="cards">
-                        {
-                        getCardsForCurrentTab(list.card_name).map((card) => (
+                        {getCardsForCurrentTab(list.card_name).map((card) => (
+                          console.log("Card", card),
                           <div
-                            key={card.id}
-                            className="card"
-                            onClick={() => setSelectedCard(card)}
-                            style={{ backgroundColor: card.cover }}
+                          key={card.id}
+                          className="card"
+                          onClick={() => setSelectedCard(card)}
+                          style={{ backgroundColor: card.cover }}
                           >
                             {card.title}
-                            <br/>
+                            {flaggedCards[card.id] && <i className="fa fa-flag" style={{ color: 'red' }}></i>}
+                            <br />
                             <p className="cardAssignedTo">{card.assignedTo}</p>
-                            <br/>
+                            <br />
                             <p className="cardDeadLine">{card.deadline}</p>
                           </div>
                         ))}
                       </div>
-                      {console.log("I am hero",getCardsForCurrentTab(list.card_name))}
+                      {console.log("I am hero", getCardsForCurrentTab(list.card_name))}
                     </div>
                   ))}
                   <div className="add-list">
@@ -249,6 +258,13 @@ const Board = () => {
             onSaveTitle={handleSaveTitle}
             onSaveCoverColor={handleSaveCoverColor}
             onCopyCard={handleCopyCard}
+          />
+        )}
+
+        {selectedCard && (
+          <commentCard
+            taskName={selectedCard.title}
+            handleFlagStatusChange={(isFlagged) => handleFlagStatusChange(selectedCard.id, isFlagged)}
           />
         )}
       </div>
