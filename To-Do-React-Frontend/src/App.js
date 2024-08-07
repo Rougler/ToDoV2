@@ -174,6 +174,7 @@ import Login from "./pages/login";
 import SignOff from "./pages/SignOff";
 import Projects from "./pages/Projects";
 import DetailedDashboard from "./pages/DetailedDashboard";
+import ParentComponent from "./components/boardcomponent/ParentComponent"; // Import the ParentComponent
 
 function ProtectedRoute({ element: Element, isAuthenticated, ...rest }) {
   return isAuthenticated ? <Element {...rest} /> : <Navigate to="/login" />;
@@ -277,6 +278,15 @@ function App() {
           element={
             <ProtectedRoute
               element={DetailedDashboard}
+              isAuthenticated={isAuthenticated}
+            />
+          }
+        />
+        <Route
+          path="/parent-component" // Define a path for ParentComponent
+          element={
+            <ProtectedRoute
+              element={ParentComponent} // Use ParentComponent here
               isAuthenticated={isAuthenticated}
             />
           }

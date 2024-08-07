@@ -789,10 +789,9 @@ outline: none ;
   width: 100%;
 }
 
-.bold-text{
-  font-weight: 500;
-  color: #6e6e6e;
-}
-.modal-taskassignto{
-  float: right;
+.progress-bar p{
+ 
+  font-size: 16px;
+  font-weight: 700;
+  color: #0079bf;
 }

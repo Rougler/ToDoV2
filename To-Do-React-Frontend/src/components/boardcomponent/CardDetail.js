@@ -47,6 +47,7 @@ const CardDetail = ({
   onSaveTitle,
   onDelete,
   onSaveCoverColor,
+  
 }) => {
   const [description, setDescription] = useState(card.description || "");
   const [showMoveCard, setSShowMoveCard] = useState(false);
@@ -659,10 +660,10 @@ const CardDetail = ({
               <a onClick={handleDeleteCard}>
                 <FontAwesomeIcon icon={faTrashAlt} /> Delete
               </a>
-             
-              <InputSlider />
+              
             </div>
-            <h3>Actions</h3>
+            <h3 className="progress-bar"><InputSlider /></h3>
+            <h3>Comments</h3>
             <div className="sidebar-button">
             <ClassComponent />
             </div>

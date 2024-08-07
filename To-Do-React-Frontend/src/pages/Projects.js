@@ -502,76 +502,84 @@ const ProjectList = (userInfo) => {
         </div>
       )}
       <Modal
-        isOpen={showForm || showEditModal}
-        onRequestClose={() => {
-          setShowForm(false);
-          setShowEditModal(false);
-          setEditProject(null);
-        }}
-        contentLabel={showEditModal ? "Edit Project" : "Add Project"}
-        className="modal"
-        overlayClassName="overlay"
+    isOpen={showForm || showEditModal}
+    onRequestClose={() => {
+      setShowForm(false);
+      setShowEditModal(false);
+      setEditProject(null);
+    }}
+    contentLabel={showEditModal ? "Edit Project" : "Add Project"}
+    className="modal"
+    overlayClassName="overlay"
+>
+    <form onSubmit={handleSubmit}>
+      <h2>{showEditModal ? "Edit Project" : "Add Project"}</h2>
+      <input
+        name="name"
+        value={newProject.name}
+        onChange={handleInputChange}
+        placeholder="Project Name"
+        required
+      />
+      <h4>Deadline</h4>
+      <input
+        type="date"
+        name="deadline"
+        value={newProject.deadline}
+        onChange={handleInputChange}
+        required
+      />
+      <Select
+        name="manager"
+        value={newProject.manager}
+        options={managerOptions}
+        onChange={handleManagerChange}
+        placeholder="Select Manager"
+        required
+      />
+      <Select
+        isMulti
+        className="manager-project"
+        name="team"
+        value={newProject.team}
+        options={teamOptions}
+        onChange={handleTeamChange}
+        placeholder="Select Team Members"
+        required
+      />
+      <input
+        name="totalPoints"
+        type="number"
+        value={newProject.totalPoints}
+        onChange={handleInputChange}
+        placeholder="Total Points"
+        required
+      />
+      <select
+        name="status"
+        value={newProject.status}
+        onChange={handleInputChange}
       >
-        <form onSubmit={handleSubmit}>
-          <h2>{showEditModal ? "Edit Project" : "Add Project"}</h2>
-          <input
-            name="name"
-            value={newProject.name}
-            onChange={handleInputChange}
-            placeholder="Project Name"
-            required
-          />
-          <h4>Deadline</h4>
-          <input
-            type="date"
-            name="deadline"
-            value={newProject.deadline}
-            onChange={handleInputChange}
-            required
-          />
-          <Select
-            name="manager"
-            value={newProject.manager}
-            options={managerOptions}
-            onChange={handleManagerChange}
-            placeholder="Select Manager"
-            required
-          />
-          <Select
-            isMulti
-            className="manager-project"
-            name="team"
-            value={newProject.team}
-            options={teamOptions}
-            onChange={handleTeamChange}
-            placeholder="Select Team Members"
-            required
-          />
-          <select
-            name="status"
-            value={newProject.status}
-            onChange={handleInputChange}
-          >
-            <option value="Not-Start">Not-Start</option>
-            <option value="On-going">On-going</option>
-            <option value="Done">Done</option>
-            <option value="Staging">Staging</option>
-          </select>
-          <div class="update-add-button-project">
-            <button
-              type="button"
-              onClick={() => {
-                setShowForm(false);
-                setShowEditModal(false);
-                setEditProject(null);
-              }}
-            >
-              Cancel
-            </button>
-            <button type="submit">{showEditModal ? "Update" : "Add"}</button>
-          </div>
-        </form>
-      </Modal>
+        <option value="Not-Start">In-Pipeline</option>
+        <option value="On-going">On-going</option>
+        <option value="Done">Done</option>
+        <option value="Staging">Staging</option>
+      </select>
+      <div class="update-add-button-project">
+        <button
+          type="button"
+          onClick={() => {
+            setShowForm(false);
+            setShowEditModal(false);
+            setEditProject(null);
+          }}
+        >
+          Cancel
+        </button>
+        <button type="submit">{showEditModal ? "Update" : "Add"}</button>
+      </div>
+    </form>
+</Modal>
 
       <Modal
         isOpen={showDeleteModal}
