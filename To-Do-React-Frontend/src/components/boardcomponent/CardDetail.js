@@ -478,7 +478,7 @@ const CardDetail = ({
           </div>
 
           <div className="modal-taskassignto">
-    <p><span class="bold-text">Assigned to:</span> {assignedTo}</p>
+    <p class="bold-text">Assigned to: {assignedTo}</p>
 </div>
 
           <div className="description">
