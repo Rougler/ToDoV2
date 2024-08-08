@@ -1,0 +1,35 @@
+.chart-content {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pie-chart {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.select-container {
+  margin-bottom: 20px;
+  width: 10%;
+  padding: 0%;
+}
+
+.apex-chart {
+  margin-left: 25px;
+  width: 92%;
+  margin-bottom: 20px;
+}
+
+.detailed-dashboard-h3{
+  text-align: left;
+  padding: 9px;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-size: 19px;
+  padding-left: 26px;
+  background-color: #1976d2;
+  margin-top: -3px;
+}

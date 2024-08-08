@@ -1,0 +1,795 @@
+/* src/components/CardDetail.css */
+.priority-deadline {
+  margin-top: 20px;
+}
+
+.comment-section {
+  margin-top: 20px;
+}
+
+/* Ensure the comment section doesn't overflow */
+.comment-section .react-comments-section {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.priority-radio-buttons {
+  display: ruby-text;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.priority-radio-buttons label {
+  margin-bottom: 8px;
+  margin-right: 10px;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.priority-radio-buttons input {
+  margin-right: 5px;
+}
+
+.priority-checkbox,
+.deadline-field {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.description-button button {
+  border: none;
+    padding: 6px 8px;
+    font-weight: 500;
+    border-radius: 3px;
+    cursor: pointer;
+    color: grey;
+}
+
+.modal-one {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.date-picker-popup {
+  position: fixed; /* Position the date picker relative to the viewport */
+  top: 50%; /* Position it at the vertical center */
+  left: 50%; /* Position it at the horizontal center */
+  transform: translate(-50%, -50%); /* Center it precisely */
+  z-index: 1000; /* Ensure it appears above other content */
+  background-color: white; /* Set background color */
+  border: 1px solid #ccc; /* Add border */
+  padding: 10px; /* Add padding */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  size: 50%;
+}
+
+.modal-content-carddetails {
+  background-color: #f9fcff;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  border-radius: 5px;
+  text-align: left;
+  position: relative;
+  color: #8c8c8c;
+  scrollbar-width: none;
+}
+
+.modal-content-carddetails h2 {
+  word-wrap: break-word;
+  white-space: normal;
+  clear: both;
+  font-size: 19px;
+  font-weight: 700;
+  color: #006eae;
+  align-items: center;
+  gap: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.notifications,
+.description,
+.activity,
+.sidebar {
+  margin: 10px 0;
+}
+
+.sidebar {
+  clear: both;
+}
+
+.description {
+  float: left;
+  display: inline-block;
+  width: 100%;
+}
+
+.description textarea {
+  width: 100%;
+  background-color: #ffffff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 3px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  box-shadow: 1px 1px gray;
+}
+
+.description textarea,
+.activity textarea {
+  width: 100%;
+  background-color: #ffffff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 3px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  box-shadow: 1px 1px gray;
+}
+
+.activity .comments {
+  margin: 10px 0;
+}
+
+.comment {
+  background-color: #2c2c2c;
+  padding: 10px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.comment-author {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.sidebar {
+  width: 100%;
+}
+.sidebar h3 {
+  margin-bottom: 12px;
+}
+
+.sidebar button {
+  background-color: #0079bf;
+  color: white;
+  border: none;
+  padding: 4px 6px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background-color: #026aa7;
+}
+
+.edit-icon {
+  font-size: 0.8em;
+  color: #ffd700; /* Attractive gold color */
+  transition: color 0.3s ease;
+}
+
+.edit-icon:hover {
+  color: #ffa500; /* Change color on hover */
+}
+
+.edit-link {
+  cursor: pointer;
+  text-decoration: none; /* Remove underline from link */
+}
+
+.edit-icon[disabled] {
+  cursor: not-allowed;
+}
+
+.description {
+  margin-top: 1rem;
+}
+
+.description textarea {
+  width: 100%;
+  height: 5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+  color: black;
+  box-shadow: none !important; 
+  font-size: 13px;
+}
+
+.description textarea:focus{
+  outline: none;
+}
+
+.sidebar {
+  margin-top: 1rem;
+}
+
+.sidebar-button button {
+  margin-top: 9px;
+  padding: 0.5rem;
+  border: none;
+  display: block;
+  background-color: #5cb85c;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sidebar-button button:hover {
+  background-color: #4cae4c;
+}
+
+.checklist {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.checklist-item input[type="checkbox"] {
+  width: fit-content;
+}
+
+.checklist-item input[type="text"] {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.checklist-item button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  border: none;
+  background-color: #d9534f;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checklist-item button:hover {
+  background-color: #c9302c;
+}
+
+.title-section {
+  clear: both;
+}
+
+.title-section button {
+  margin-left: 10px;
+  /* padding: 2px 6px 2px 6px; */
+  border: none;
+  color: white;
+  width: 36px;
+  height: 29px;
+  margin-top: 5px;
+  border-radius: 4px;
+  background-color: #0056b3;
+}
+
+.title-section input {
+  padding: 8px;
+  height: auto;
+  border: 1px solid #ccc;
+}
+
+.title-section input:focus{
+  outline: none;
+}
+
+.title-section button:hover {
+  background-color: #aaa;
+  color: black;
+}
+
+.edit-icon {
+  cursor: pointer;
+  margin-left: 17px;
+  color: #ccc;
+  margin-top: -5px;
+  color: #9c9c9c;
+}
+
+.edit-icon:hover {
+  color: #026aa7;
+}
+
+.attachments {
+  margin-top: 20px;
+}
+
+.attachment {
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.attachment .fa-paperclip {
+  margin-right: 10px;
+}
+
+.attachment-input {
+  margin-top: 10px;
+}
+
+.sidebar-button a {
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #707070;
+  background-color: #f4f5f7;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.sidebar-button a:hover {
+  background-color: #e1e4e9;
+}
+
+.sidebar-button a .fa {
+  margin-right: 8px;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.checklist-item input[type="text"] {
+  flex-grow: 1;
+  margin: 0 8px;
+}
+
+.checklist-item button {
+  align-items: center;
+  padding: 7px;
+  text-decoration: none;
+  color: #0079bf;
+  background-color: #eeeff0;
+  border-radius: 3px;
+  margin-bottom: 1px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.checklist-item button:hover {
+  background-color: #e1e4e9;
+}
+
+.description h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.description h3 svg {
+  font-size: 12px;
+}
+
+/* CardDetail.css */
+
+.modal-one {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content-carddetails {
+  background-color: white;
+  padding: 20px;
+  border-radius: 2px;
+  width: 600px;
+  max-height: 90%;
+  overflow-y: scroll;
+  height: 70vh;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.title-section h2 {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.edit-icon {
+  cursor: pointer;
+}
+
+.description {
+  margin-top: 20px;
+}
+
+.sidebar {
+  margin-top: 20px;
+}
+
+.sidebar h3 {
+  margin: 18px 0px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0079bf;
+}
+
+.cover-options {
+  margin: 27px 0px;
+}
+
+.cover-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.attachment {
+  margin-top: 10px;
+}
+
+.attachment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  background-color: #f4f5f7;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+.attachment-item span {
+  flex-grow: 1;
+}
+
+.attachment-item button {
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #0079bf;
+  background-color: #f4f5f7;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.attachment-item button:hover {
+  background-color: #e1e4e9;
+}
+
+.attachment-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.attachment-actions button {
+  align-items: center;
+  padding: 4px 6px;
+  text-decoration: none;
+  color: #0079bf;
+  background-color: #d6d6de;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 15px;
+  margin-right: -3px;
+}
+
+.description button.edit-button {
+  background-color: #dceef0; /* Yellow color for edit button */
+  color: #0d789f; /* Dark text color */
+  border: none; /* No border */
+  padding: 8px 12px; /* Padding around the text */
+  border-radius: 4px; /* Rounded corners */
+  position: absolute;
+  right: 230px;
+  top: 65px;
+}
+
+/* Style for Save button */
+.description .save-button {
+  background-color: #49a4dd; /* Green color for Save button */
+  color: rgba(236, 232, 241, 0.943);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Hover effect for Save button */
+.description .save-button:hover {
+  background-color: #4cae4c; /* Darker green color on hover */
+}
+
+/* Style for Cancel button */
+.description .cancel-button {
+  background-color: #4f9bd9; /* Red color for Cancel button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+/* Hover effect for Cancel button */
+.description .cancel-button:hover {
+  background-color: #c9302c; /* Darker red color on hover */
+}
+
+.tag-list button {
+  background-color: #0079bf;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 3px;
+  /* margin-bottom: 10px; */
+  cursor: pointer;
+  font-size: 11px;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.tag-list input {
+  padding: 7px;
+  border: none;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+}
+
+.add-comment{
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(215, 215, 215);
+}
+
+.new-comment-input{
+  border: none;
+
+}
+
+.add-comment-comment{
+  padding: 0.5rem;
+    border: none;
+    display: block;
+    background-color: #5cb85c;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+
+.add-comment-button{
+  margin: 0 !important;
+}
+
+.new-comment-input:focus{
+outline: none ;
+}
+
+.card-detail .task-dependencies {
+  margin-top: 1em;
+}
+
+.card-detail .task-dependencies .dependency-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.card-detail .task-dependencies .dependency-item button {
+  margin-left: 0.5em;
+  padding: 0.25em 0.5em;
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.card-detail .task-dependencies .dependency-item button:hover {
+  background-color: #ff1a1a;
+}
+
+.card-detail .task-dependencies .add-dependency {
+  margin-top: 1em;
+}
+
+.card-detail .task-dependencies .add-dependency button {
+  padding: 0.5em 1em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.card-detail .task-dependencies .add-dependency button:hover {
+  background-color: #0056b3;
+}
+
+.card-detail .task-dependencies .dropdown {
+  margin-top: 0.5em;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.card-detail .task-dependencies .dropdown div {
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.card-detail .task-dependencies .dropdown div:hover {
+  background-color: #f7f7f7;
+}
+
+.attachment-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 1em;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 5px;
+}
+
+.attachment-popup input[type="file"] {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.attachment-popup button {
+  margin-right: 0.5em;
+}
+
+.priority-popup, .deadline-popup, .cover-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 1em;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 5px;
+}
+
+.priority-popup select {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.deadline-popup input[type="date"] {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.color-options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.color-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* New CSS for the Waiting On section */
+.waiting-on-section {
+  background-color: #fffbf0;
+  border: 1px solid #f5c518;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.waiting-on-header {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #f5c518;
+}
+
+.waiting-on-header .icon {
+  margin-right: 10px;
+}
+
+.waiting-on-content {
+  margin-top: 10px;
+  color: #333;
+}
+
+.waiting-on-add-task {
+  color: #f5c518;
+  cursor: pointer;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.waiting-on-add-task .icon {
+  margin-right: 5px;
+}
+
+.waiting-on-add-task:hover {
+  text-decoration: underline;
+}
+.waiting-tasks-section{
+  float: left;
+  display: inline-block;
+  width: 100%;
+}
+
+.progress-bar p{
+ 
+  font-size: 16px;
+  font-weight: 700;
+  color: #0079bf;
+}
