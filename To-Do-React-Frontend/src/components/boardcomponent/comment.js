@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/CommentCard.css";
-import { format, parseISO,  } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { enIN } from "date-fns/locale";
 import axios from "axios";
 
@@ -11,7 +11,6 @@ const getInitials = (name) => {
   return initials;
 };
 
-
 // Static comments data for initial rendering
 const initialComments = [
   {
@@ -20,7 +19,7 @@ const initialComments = [
     date_time: "2024-08-05T12:34:56Z",
     message: "This is a static comment.",
     replies: [],
-    flagged: false,
+    is_flagged: false,
   },
   {
     id: 2,
@@ -28,7 +27,7 @@ const initialComments = [
     date_time: "2024-08-05T13:45:00Z",
     message: "Another static comment here!",
     replies: [],
-    flagged: false,
+    is_flagged: false,
   },
 ];
 
@@ -48,26 +47,27 @@ export default function CommentCard({ taskName }) {
       .catch((error) => {
         console.error("Error in fetching comments:", error);
       });
-  }, []);
+  }, [taskName]);
 
   const handlePostComment = () => {
     if (newComment.trim()) {
       const newCommentObj = {
-        "task": taskName,
-        "user": JSON.parse(localStorage.getItem("userInfo")).username,
-        "message": newComment.trim(),
-        "is_flagged": false,
+        task: taskName,
+        user: JSON.parse(localStorage.getItem("userInfo")).username,
+        message: newComment.trim(),
+        is_flagged: false,
         reply_to: null,
       };
 
       setComments([...comments, newCommentObj]);
-      axios.post(`http://127.0.0.1:8000/todo/messages/`, newCommentObj)
-      .then((response) => {
-        console.log(`Comment added successfully.`,response);
-      })
-      .catch((error) => {
-        console.log("Error in posting comment", error)
-      })
+      axios
+        .post(`http://127.0.0.1:8000/todo/messages/`, newCommentObj)
+        .then((response) => {
+          console.log(`Comment added successfully.`, response);
+        })
+        .catch((error) => {
+          console.log("Error in posting comment", error);
+        });
 
       setNewComment("");
     }
@@ -108,13 +108,34 @@ export default function CommentCard({ taskName }) {
   };
 
   const toggleFlag = (commentId) => {
-    const updatedComments = comments.map((comment) =>
-      comment.id === commentId
-        ? { ...comment, flagged: !comment.flagged }
-        : comment
-    );
+    console.log("Toggled bro");
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === commentId) {
+        const formData = new FormData();
+        formData.append("is_flagged", comment.is_flagged ? "False":"True");
+        console.log(formData)
+  
+        const url = `http://127.0.0.1:8000/todo/update_message_flagged/${commentId}/`;
+        console.log("Making PUT request to:", url);
+  
+        axios
+          .put(url, formData)
+          .then((response) => {
+            console.log("Flag Response:", response.data);
+          })
+          .catch((error) => {
+            console.log("Flag error:", error);
+          });
+  
+        return { ...comment, is_flagged: !comment.is_flagged };
+      } else {
+        return comment;
+      }
+    });
+  
     setComments(updatedComments);
   };
+  
 
   return (
     <section className="comment-card-section">
@@ -139,7 +160,12 @@ export default function CommentCard({ taskName }) {
       </div>
 
       {comments.map((comment) => {
-        const formattedDate = comment.date_time ? format(parseISO(comment.date_time), "d MMM yyyy, h:mma", { locale: enIN }) : "Unknown date";
+        console.log("I am comment", comment);
+        const formattedDate = comment.date_time
+          ? format(parseISO(comment.date_time), "d MMM yyyy, h:mma", {
+              locale: enIN,
+            })
+          : "Unknown date";
 
         return (
           <div className="comment-card-container" key={comment.id}>
@@ -179,11 +205,11 @@ export default function CommentCard({ taskName }) {
                   >
                     <i
                       className={`fa ${
-                        comment.flagged ? "fa-flag" : "fa-flag-o"
+                        comment?.is_flagged ? "fa-flag" : "fa-flag-o"
                       }`}
                     ></i>
                     <p className="action-text">
-                      {comment.flagged ? "Unflag" : "Flag"}
+                      {comment?.is_flagged ? "Unflag" : "Flag"}
                     </p>
                   </a>
                   <a

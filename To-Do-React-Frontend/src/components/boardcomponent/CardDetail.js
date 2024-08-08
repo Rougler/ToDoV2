@@ -48,6 +48,7 @@ const CardDetail = ({
   onSaveCoverColor,
   
 }) => {
+  console.log("Here is my card",card);
   const [description, setDescription] = useState(card.description || "");
   const [showMoveCard, setSShowMoveCard] = useState(false);
   const [showChecklist, setShowChecklist] = useState(false);
@@ -655,7 +656,8 @@ const CardDetail = ({
               </a>
               
             </div>
-            <h3 className="progress-bar"><InputSlider /></h3>
+            <h3 className="progress-bar"><InputSlider cardId={card.id} /></h3>
+            {console.log("I am card bro",card)}
             <h3>Comments</h3>
             <div className="sidebar-button">
             <CommentCard taskName={title} />
