@@ -3,7 +3,7 @@ import "../../styles/CardDetail.css";
 import OutsideClickHandler from "../OutsideClickHandler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ClassComponent from "./comment";
-import CommentCard from "./comment";
+// import CommentCard from "./comment";
 import axios from "axios";
 import {
   faEye,
@@ -70,6 +70,7 @@ const CardDetail = ({
   const [deadline, setDeadline] = useState(card.deadline || "");
   const [isVisible, setIsVisible] = useState(false);
   const selectedTaskName = title;
+  
 
   useEffect(() => {
     fetchTaskDetails();

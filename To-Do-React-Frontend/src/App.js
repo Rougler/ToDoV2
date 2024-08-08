@@ -172,6 +172,7 @@ import Home from "./pages/Home";
 import UserGroup from "./pages/UserGroup";
 import Login from "./pages/login";
 import Projects from "./pages/Projects";
+import Graphs from "./pages/graphs";
 import DetailedDashboard from "./pages/DetailedDashboard";
 
 function ProtectedRoute({ element: Element, isAuthenticated, ...rest }) {
@@ -271,6 +272,15 @@ function App() {
             />
           }
         />
+<Route
+  path="/graphs"
+  element={
+    <ProtectedRoute
+      element={Graphs}
+      isAuthenticated={isAuthenticated}
+    />
+  }
+/>
       </Routes>
     </div>
   );

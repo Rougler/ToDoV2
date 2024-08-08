@@ -1,11 +1,10 @@
-//-------------------------------------
-
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { BarChart } from "@mui/x-charts/BarChart";
-import "../styles/DetailedDashboard.css";
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 import ApexChart from "../components/ApexChart";
+import LineChartComponent from "./proficiency"; // Adjust the import path if necessary
+import "../styles/DetailedDashboard.css";
 
 const chartSetting = {
   xAxis: [
@@ -19,6 +18,15 @@ const chartSetting = {
   width: 500,
   height: 400,
 };
+
+const sampleData = [
+  { value: 20 },
+  { value: 50 },
+  { value: 80 },
+  { value: 40 },
+  { value: 60 },
+  { value: 30 },
+];
 
 const valueFormatter = (value) => `${value}%`;
 
@@ -116,6 +124,7 @@ export default function PieActiveArc() {
             />
           </div>
         </div>
+        
         <div className="chart bar-chart">
           <div className="chart-content">
             <BarChart
@@ -134,10 +143,12 @@ export default function PieActiveArc() {
             />
           </div>
         </div>
+
+
       </div>
-      <div className="chart apex-chart">
-        <ApexChart />
-      </div>
+      <div className="chart line-chart">
+          <LineChartComponent data={sampleData} />
+        </div>
     </div>
   );
 }

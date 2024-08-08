@@ -126,6 +126,23 @@ const Sidebar = ({ children, userInfo, handleLogout }) => {
                 </div>
                 {isOpen && <span className="icon-tag">Task Pool</span>}
               </Link>
+              <Link
+                to="/graphs"
+                onClick={handleLinkClick}
+                className={`sidebar-sub-item ${
+                  isActive("/graphs") ? "Graphs" : ""
+                }`}
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  paddingLeft: "20px",
+                }}
+              >
+                <div className="icon">
+                  <FontAwesomeIcon icon={faChartBar} />
+                </div>
+                {isOpen && <span className="icon-tag">Graphs</span>}
+              </Link>
             </>
           )}
           <li className="sidebar-item" onClick={toggleUserGroup}>
