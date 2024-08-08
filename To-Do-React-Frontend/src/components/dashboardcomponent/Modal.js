@@ -286,8 +286,8 @@ const Modal = ({ showModal, handleClose, addTask }) => {
                 selected={deadline}
                 onChange={(date) => setDeadline(date)}
                 dateFormat="yyyy-MM-dd"
+                className="custom-datepicker"
                 placeholderText="Select deadline"
-                required
               />
             </div>
           </div>

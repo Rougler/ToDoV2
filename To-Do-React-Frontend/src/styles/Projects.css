@@ -216,11 +216,13 @@ h1 {
 }
 
 .modal button {
-  background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 7px 28px;
-    cursor: pointer;
+  background-color: #c0c0c0;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  cursor: pointer;
+  margin-right: 5px;
+  font-size: 13px;
 }
 
 .modal button:hover {
@@ -228,7 +230,8 @@ h1 {
 }
 
 .modal h2 {
-  margin-bottom: 20px;
+  margin-bottom: 9px;
+  font-size: 19px;
 }
 
 .modal .modal-actions {
@@ -331,4 +334,24 @@ h1 {
 
 .add-btn-modal:hover {
   background: #0056b3;
+}
+
+
+button.add-bt{
+  background-color: #0056b3 !important;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  cursor: pointer;
+  margin-right: 5px;
+  font-size: 13px;
+}
+
+
+.deadline-cls{
+  font-size: 14px;
+  margin-left: 3px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #454545;
 }

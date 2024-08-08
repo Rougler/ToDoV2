@@ -20,7 +20,7 @@
   padding: 78px 11px 0px 11px;
 }
 
-.dashboard h3 {
+.task-class {
   text-align: left;
     padding: 9px;
     color: rgb(255, 255, 255);
@@ -212,4 +212,11 @@ tr.priority-high:hover {
     margin-top: -5px;
     margin-bottom: 9px;
     color: gray;
+}
+
+.add-task-container{
+  display: flex;
+    margin-bottom: 18px;
+    background-color: white;
+    padding: 10px;
 }

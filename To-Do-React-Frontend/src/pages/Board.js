@@ -4,8 +4,7 @@ import DeleteColumn from "../components/DeleteColumn";
 import CardDetail from "../components/boardcomponent/CardDetail";
 import axios from "axios";
 import ProjectContext from "../components/projectcomponent/ProjectContext";
-import { Calendar, User, Flag } from "lucide-react";
-// import { Calendar, User, Flag } from "lucide-react";
+import { Calendar, User } from "lucide-react";
 
 const Board = () => {
   const [cards, setCards] = useState([]);
@@ -14,6 +13,7 @@ const Board = () => {
   const [newListTitle, setNewListTitle] = useState("");
   const [projects, setProjects] = useState([]);
   const [showAddListForm, setShowAddListForm] = useState(false);
+  const [flaggedCards, setFlaggedCards] = useState({});
 
   const { selectedProject, tabs } = useContext(ProjectContext);
 
@@ -23,14 +23,11 @@ const Board = () => {
         const listsResponse = await axios.get(
           "http://127.0.0.1:8000/todo/cardname/"
         );
-        console.log("I am listresponse", listsResponse);
         setLists(listsResponse.data);
-        console.log("I am lists2", lists);
 
         const tasksResponse = await axios.get(
           "http://127.0.0.1:8000/todo/tasks/"
         );
-        console.log("I am task response", tasksResponse);
         const mappedCards = tasksResponse.data.map((task) => ({
           id: task.id,
           title: task.taskName,
@@ -45,7 +42,6 @@ const Board = () => {
         console.error("Error fetching data:", error);
       }
     };
-    
 
     const getAllProjects = async () => {
       try {
@@ -53,7 +49,6 @@ const Board = () => {
           "http://127.0.0.1:8000/todo/api/projects/"
         );
         const projects = response.data;
-        console.log("Fetched projects:", projects);
         setProjects(projects);
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -64,37 +59,16 @@ const Board = () => {
     getAllProjects();
   }, []);
 
-  const deleteCard = async (cardId) => {
+  const deleteCard = async (listId) => {
     try {
       await axios.delete(
-        `http://127.0.0.1:8000/todo/api/deletecard/${cardId}/`
+        `http://127.0.0.1:8000/todo/api/deletecard/${listId}/`
       );
-      setCards(cards.filter((card) => card.id !== cardId));
-      setSelectedCard(null);
+      setLists(lists.filter((list) => list.id !== listId));
+      setCards(cards.filter((card) => card.listTitle !== listId));
     } catch (error) {
       console.error("Error deleting card:", error);
     }
-  };
-
-  const moveCard = (cardId, newListTitle) => {
-    const updatedCards = cards.map((card) =>
-      card.id === cardId ? { ...card, listTitle: newListTitle } : card
-    );
-    setCards(updatedCards);
-  };
-
-  const saveTitle = (cardId, newTitle) => {
-    const updatedCards = cards.map((card) =>
-      card.id === cardId ? { ...card, title: newTitle } : card
-    );
-    setCards(updatedCards);
-  };
-
-  const saveCoverColor = (cardId, newColor) => {
-    const updatedCards = cards.map((card) =>
-      card.id === cardId ? { ...card, cover: newColor } : card
-    );
-    setCards(updatedCards);
   };
 
   const addList = async (listTitle) => {
@@ -107,7 +81,6 @@ const Board = () => {
       );
       if (response.status === 201) {
         setLists([...lists, response.data]);
-        console.log("I am lists", lists);
         setShowAddListForm(false);
       } else {
         console.error("Failed to add list:", response.statusText);
@@ -119,37 +92,6 @@ const Board = () => {
         console.error("Error adding list:", error.message);
       }
     }
-  };
-
-  const handleMoveCard = (cardId, newListTitle) => {
-    moveCard(cardId, newListTitle);
-  };
-
-  const handleDeleteCard = (cardId) => {
-    deleteCard(cardId);
-  };
-
-  const handleSaveTitle = (cardId, newTitle) => {
-    saveTitle(cardId, newTitle);
-  };
-
-  const handleSaveCoverColor = (cardId, newColor) => {
-    saveCoverColor(cardId, newColor);
-  };
-
-  const handleCopyCard = (card) => {
-    const newCard = {
-      ...card,
-      id: cards.length + 1,
-      title: `${card.title} (Copy)`,
-    };
-    const index = cards.findIndex((c) => c.id === card.id);
-    const updatedCards = [
-      ...cards.slice(0, index + 1),
-      newCard,
-      ...cards.slice(index + 1),
-    ];
-    setCards(updatedCards);
   };
 
   const handleAddList = (e) => {
@@ -179,6 +121,13 @@ const Board = () => {
     }
   };
 
+  const handleFlagStatusChange = (cardId, isFlagged) => {
+    setFlaggedCards(prevState => ({
+      ...prevState,
+      [cardId]: isFlagged
+    }));
+  };
+
   return (
     <div>
       <div className="board">
@@ -195,15 +144,15 @@ const Board = () => {
                     <div key={list.id} className="list">
                       <div className="list-header">
                         <h3>{list.card_name}</h3>
-                        <DeleteColumn listId={list.id} onDelete={deleteCard} />
+                        <DeleteColumn listId={list.id} listName={list.card_name} onDelete={deleteCard} />
                       </div>
                       <div className="cards">
                         {getCardsForCurrentTab(list.card_name).map((card) => (
                           <div
-                            key={card.id}
-                            className="card"
-                            onClick={() => setSelectedCard(card)}
-                            style={{ backgroundColor: card.cover }}
+                          key={card.id}
+                          className="card"
+                          onClick={() => setSelectedCard(card)}
+                          style={{ backgroundColor: card.cover }}
                           >
                             <div className="card-title">{card.title}</div>
                             <div className="card-details">
@@ -254,12 +203,12 @@ const Board = () => {
           <CardDetail
             card={selectedCard}
             lists={lists}
-            onMove={handleMoveCard}
+            onMove={() => {}}
             onClose={() => setSelectedCard(null)}
-            onDelete={handleDeleteCard}
-            onSaveTitle={handleSaveTitle}
-            onSaveCoverColor={handleSaveCoverColor}
-            onCopyCard={handleCopyCard}
+            onDelete={() => {}}
+            onSaveTitle={() => {}}
+            onSaveCoverColor={() => {}}
+            onCopyCard={() => {}}
           />
         )}
       </div>

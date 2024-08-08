@@ -171,9 +171,11 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import UserGroup from "./pages/UserGroup";
 import Login from "./pages/login";
+import SignOff from "./pages/SignOff";
 import Projects from "./pages/Projects";
 import Graphs from "./pages/graphs";
 import DetailedDashboard from "./pages/DetailedDashboard";
+import ParentComponent from "./components/boardcomponent/ParentComponent"; // Import the ParentComponent
 
 function ProtectedRoute({ element: Element, isAuthenticated, ...rest }) {
   return isAuthenticated ? <Element {...rest} /> : <Navigate to="/login" />;
@@ -249,6 +251,15 @@ function App() {
             <ProtectedRoute
               element={UserGroup}
               userInfo={userInfo}
+              isAuthenticated={isAuthenticated}
+            />
+          }
+        />
+        <Route
+          path="/SignOff"
+          element={
+            <ProtectedRoute
+              element={SignOff}
               isAuthenticated={isAuthenticated}
             />
           }

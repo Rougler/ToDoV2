@@ -521,7 +521,7 @@ const ProjectList = (userInfo) => {
         placeholder="Project Name"
         required
       />
-      <h4>Deadline</h4>
+      <h4 className="deadline-cls">Deadline</h4>
       <input
         type="date"
         name="deadline"
@@ -552,7 +552,7 @@ const ProjectList = (userInfo) => {
         type="number"
         value={newProject.totalPoints}
         onChange={handleInputChange}
-        placeholder="Total Points"
+        placeholder="Total Score"
         required
       />
       <select
@@ -576,7 +576,7 @@ const ProjectList = (userInfo) => {
         >
           Cancel
         </button>
-        <button type="submit">{showEditModal ? "Update" : "Add"}</button>
+        <button className="add-bt" type="submit">{showEditModal ? "Update" : "Add"}</button>
       </div>
     </form>
 </Modal>
