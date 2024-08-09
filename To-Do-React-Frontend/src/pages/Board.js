@@ -5,6 +5,7 @@ import CardDetail from "../components/boardcomponent/CardDetail";
 import axios from "axios";
 import ProjectContext from "../components/projectcomponent/ProjectContext";
 import { Calendar, User, Flag } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { Calendar, User, Flag } from "lucide-react";
 
 const Board = () => {
@@ -30,22 +31,32 @@ const Board = () => {
         const tasksResponse = await axios.get(
           "http://127.0.0.1:8000/todo/tasks/"
         );
+
         console.log("I am task response", tasksResponse);
-        const mappedCards = tasksResponse.data.map((task) => ({
-          id: task.id,
-          title: task.taskName,
-          listTitle: task.taskStatus,
-          cover: task.cover,
-          deadline: task.deadline,
-          assignedTo: task.assignedTo,
-          projectName: task.project,
-        }));
+
+        async function createMappedCards(tasksResponse) {
+          const mappedCards = await Promise.all(
+            tasksResponse.data.map(async (task) => ({
+              id: task.id,
+              is_flagged: await checkTaskFlag(task.taskName), // Wait for Promise to resolve
+              title: task.taskName,
+              listTitle: task.taskStatus,
+              cover: task.cover,
+              deadline: task.deadline,
+              assignedTo: task.assignedTo,
+              projectName: task.project,
+            }))
+          );
+          return mappedCards;
+        }
+
+        let mappedCards = await createMappedCards(tasksResponse);
+
         setCards(mappedCards);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-    
 
     const getAllProjects = async () => {
       try {
@@ -63,6 +74,22 @@ const Board = () => {
     fetchListsAndTasks();
     getAllProjects();
   }, []);
+
+  async function checkTaskFlag(taskName) {
+    try {
+      const taskComments = await axios.get(
+        `http://127.0.0.1:8000/todo/comment/tasks/${taskName}/`
+      );
+      const flaggedComments = taskComments.data.filter(
+        (comment) => comment.is_flagged
+      );
+      return flaggedComments.length > 0;
+    } catch (error) {
+      console.error(`Error fetching comments for task ${taskName}:`, error);
+      // Handle error as needed
+      return false; // Or throw a custom error
+    }
+  }
 
   const deleteCard = async (cardId) => {
     try {
@@ -189,7 +216,12 @@ const Board = () => {
           (tab) =>
             selectedProject === tab.value && (
               <div key={tab.value}>
-                <div className="proj-manager" style={{ textAlign: 'left', display: 'block' }}>Project Manager: {getProjectManager()}</div>
+                <div
+                  className="proj-manager"
+                  style={{ textAlign: "left", display: "block" }}
+                >
+                  Project Manager: {getProjectManager()}
+                </div>
                 <div key={tab.value} className="lists-container">
                   {lists.map((list) => (
                     <div key={list.id} className="list">
@@ -206,6 +238,19 @@ const Board = () => {
                             style={{ backgroundColor: card.cover }}
                           >
                             <div className="card-title">{card.title}</div>
+                            <div
+                              className="card-flag-status"
+                              style={{
+                                float: "right",
+                                top: "-25px",
+                                fontSize: "medium",
+                                position: "relative",
+                              }}
+                            >
+                              {card.is_flagged ? (
+                                <Flag color="red" fill="red" />
+                              ) : null}
+                            </div>
                             <div className="card-details">
                               {card.deadline && (
                                 <div className="card-deadline">
@@ -249,7 +294,7 @@ const Board = () => {
               </div>
             )
         )}
-
+{console.log("I am cards", cards)}
         {selectedCard && (
           <CardDetail
             card={selectedCard}
@@ -260,6 +305,7 @@ const Board = () => {
             onSaveTitle={handleSaveTitle}
             onSaveCoverColor={handleSaveCoverColor}
             onCopyCard={handleCopyCard}
+            setCards={setCards}
           />
         )}
       </div>

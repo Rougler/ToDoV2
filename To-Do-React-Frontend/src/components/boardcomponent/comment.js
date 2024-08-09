@@ -31,7 +31,7 @@ const initialComments = [
   },
 ];
 
-export default function CommentCard({ taskName }) {
+export default function CommentCard({ taskName, setCards }) {
   const [comments, setComments] = useState(initialComments);
   const [newComment, setNewComment] = useState("");
   const [replyText, setReplyText] = useState({});
@@ -107,17 +107,17 @@ export default function CommentCard({ taskName }) {
     setReplyTo(replyTo === commentId ? null : commentId);
   };
 
-  const toggleFlag = (commentId) => {
+  const toggleFlag = async (commentId) => {
     console.log("Toggled bro");
     const updatedComments = comments.map((comment) => {
       if (comment.id === commentId) {
         const formData = new FormData();
-        formData.append("is_flagged", comment.is_flagged ? "False":"True");
-        console.log(formData)
-  
+        formData.append("is_flagged", comment.is_flagged ? "False" : "True");
+        console.log(formData);
+
         const url = `http://127.0.0.1:8000/todo/update_message_flagged/${commentId}/`;
         console.log("Making PUT request to:", url);
-  
+
         axios
           .put(url, formData)
           .then((response) => {
@@ -126,16 +126,58 @@ export default function CommentCard({ taskName }) {
           .catch((error) => {
             console.log("Flag error:", error);
           });
-  
+
         return { ...comment, is_flagged: !comment.is_flagged };
       } else {
         return comment;
       }
     });
-  
+
     setComments(updatedComments);
+    await updateAllCard();
   };
-  
+
+  async function checkTaskFlag(taskName) {
+    try {
+      const taskComments = await axios.get(
+        `http://127.0.0.1:8000/todo/comment/tasks/${taskName}/`
+      );
+      const flaggedComments = taskComments.data.filter(
+        (comment) => comment.is_flagged
+      );
+      return flaggedComments.length > 0;
+    } catch (error) {
+      console.error(`Error fetching comments for task ${taskName}:`, error);
+      // Handle error as needed
+      return false; // Or throw a custom error
+    }
+  }
+
+  async function updateAllCard() {
+    const tasksResponse = await axios.get("http://127.0.0.1:8000/todo/tasks/");
+
+    console.log("I am task response", tasksResponse);
+
+    async function createMappedCards(tasksResponse) {
+      const mappedCards = await Promise.all(
+        tasksResponse.data.map(async (task) => ({
+          id: task.id,
+          is_flagged: await checkTaskFlag(task.taskName), // Wait for Promise to resolve
+          title: task.taskName,
+          listTitle: task.taskStatus,
+          cover: task.cover,
+          deadline: task.deadline,
+          assignedTo: task.assignedTo,
+          projectName: task.project,
+        }))
+      );
+      return mappedCards;
+    }
+
+    let mappedCards = await createMappedCards(tasksResponse);
+
+    setCards(mappedCards);
+  }
 
   return (
     <section className="comment-card-section">
@@ -165,7 +207,7 @@ export default function CommentCard({ taskName }) {
           ? format(parseISO(comment.date_time), "d MMM yyyy, h:mma", {
               locale: enIN,
             })
-          : "Unknown date";
+          : "Today, Now";
 
         return (
           <div className="comment-card-container" key={comment.id}>

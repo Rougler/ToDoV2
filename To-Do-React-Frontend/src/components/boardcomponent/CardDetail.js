@@ -25,7 +25,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FaSave } from "react-icons/fa";
 import MoveCard from "./MoveCard";
-import InputSlider from "./slider"
+import InputSlider from "./slider";
 
 const colors = [
   "#f2d600",
@@ -46,9 +46,10 @@ const CardDetail = ({
   onSaveTitle,
   onDelete,
   onSaveCoverColor,
-  
+  cards,
+  setCards,
 }) => {
-  console.log("Here is my card",card);
+  console.log("Here is my card", card);
   const [description, setDescription] = useState(card.description || "");
   const [showMoveCard, setSShowMoveCard] = useState(false);
   const [showChecklist, setShowChecklist] = useState(false);
@@ -440,8 +441,32 @@ const CardDetail = ({
     setUploadedFiles([...uploadedFiles, ...files]);
   };
 
+  // const handleFlagComment = async (commentId) => {
+  //   try {
+  //     const response = await axios.put(
+  //       `http://127.0.0.1:8000/todo/comments/flag/${commentId}/`
+  //     );
+
+  //     if (response.status === 200) {
+  //       // Assuming that the API returns the updated list of comments after flagging
+  //       const updatedComments = response.data.comments;
+  //       // Update the card's comments with the new list
+  //       const updatedCard = {
+  //         ...card,
+  //         comments: updatedComments,
+  //       };
+
+  //       // Call the onSaveTitle or another function passed via props to update the card list
+  //       onSaveTitle(card.id, updatedCard);
+
+  //       console.log("Comment flagged successfully:", response.data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error flagging comment:", error);
+  //   }
+  // };
+
   return (
-    
     <div className="modal-one">
       <OutsideClickHandler onClose={onClose}>
         <div className="modal-content-carddetails">
@@ -466,13 +491,8 @@ const CardDetail = ({
                 />
               </h2>
             )}
-            
+
             {isEditingTitle && <button onClick={handleSaveTitle}>Save</button>}
-
-            
-
-
-
           </div>
 
           <div className="description">
@@ -561,8 +581,9 @@ const CardDetail = ({
                     {colors.map((color) => (
                       <div
                         key={color}
-                        className={`color-option ${color === card.coverColor ? "selected" : ""
-                          }`}
+                        className={`color-option ${
+                          color === card.coverColor ? "selected" : ""
+                        }`}
                         style={{ backgroundColor: color }}
                         onClick={() => handleCoverColorChange(color)}
                       ></div>
@@ -654,13 +675,14 @@ const CardDetail = ({
               <a onClick={handleDeleteCard}>
                 <FontAwesomeIcon icon={faTrashAlt} /> Delete
               </a>
-              
             </div>
-            <h3 className="progress-bar"><InputSlider cardId={card.id} /></h3>
-            {console.log("I am card bro",card)}
+            <h3 className="progress-bar">
+              <InputSlider cardId={card.id} />
+            </h3>
+            {console.log("I am card bro", card)}
             <h3>Comments</h3>
             <div className="sidebar-button">
-            <CommentCard taskName={title} />
+              <CommentCard taskName={title} setCards={setCards} />
             </div>
           </div>
         </div>
