@@ -176,3 +176,74 @@
   margin-right: 10px !important;
   margin-top: 7px !important;
 }
+
+
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item button {
+  margin-left: 10px;
+}
+
+.MuiDialogContent-root {
+  padding: 20px;
+}
+
+.MuiDialogTitle-root {
+  background-color: #f5f5f5;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.MuiDialogActions-root {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item button {
+  margin-left: 10px;
+}
+
+.MuiDialogContent-root {
+  padding: 20px;
+}
+
+.MuiDialogTitle-root {
+  background-color: #f5f5f5;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.MuiDialogActions-root {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+
+

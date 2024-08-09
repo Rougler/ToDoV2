@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,43 +14,26 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import "../../styles/navbar.css";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ProjectDropdown from "../projectcomponent/ProjectDropdown";
 import Bourntec from "../../Images/logo_bourntec prabhash.png";
+import ProjectContext from "../projectcomponent/ProjectContext";
+import "../../styles/navbar.css";
 
 const settings = ["Profile", "Logout"];
-
-const notifications = [
-  {
-    id: 1,
-    message: "A new budget request for $25",
-    timestamp: "less than a minute ago",
-    status: "Unread"
-  },
-  {
-    id: 2,
-    message: "A new budget request for $25",
-    timestamp: "11 minutes ago",
-    status: ""
-  },
-  {
-    id: 3,
-    message: "A new budget request for $25",
-    timestamp: "30 minutes ago",
-    status: ""
-  },
-];
 
 function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
   const location = useLocation();
   const hideComponentRoutes = ["/projects", "/detailed-dashboard", "/user-group"];
   const shouldHideComponent = hideComponentRoutes.includes(location.pathname);
 
+  const { selectedProjectName } = useContext(ProjectContext);
+
+  const [notifications, setNotifications] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [openProfile, setOpenProfile] = useState(false);
   const [openNotifications, setOpenNotifications] = useState(false);
@@ -60,6 +43,7 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
     role: "",
     profilePicture: "",
   });
+
   const [storedUserInfo, setStoredUserInfo] = useState(() => {
     const savedUserInfo = localStorage.getItem("userInfo");
     return savedUserInfo ? JSON.parse(savedUserInfo) : null;
@@ -78,9 +62,7 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
         try {
           const response = await axios.get("http://127.0.0.1:8000/todo/users/");
           const users = response.data;
-          console.log("API Response:", response.data);
           const user = users.find((u) => u.email === storedUserInfo.email);
-          console.log("User Found:", user);
           if (user) {
             setUserData({
               username: user.username,
@@ -97,6 +79,39 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
 
     fetchUserData();
   }, [storedUserInfo]);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const taskResponse = await axios.get("http://127.0.0.1:8000/todo/tasks/");
+        setTasks(taskResponse.data);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+
+    fetchTasks();
+  }, []);
+
+  useEffect(() => {
+    if (tasks.length > 0) {
+      const newNotifications = tasks.map((task) => {
+        const assignedTo = task.assignedTo || [];
+
+        return {
+          id: task.id,
+          message: `${task.taskName} has been assigned to ${assignedTo.join(", ")}.`,
+          timestamp: new Date().toLocaleString(),
+          status: "Unread",
+        };
+      });
+
+      setNotifications((prevNotifications) => [
+        ...newNotifications,
+        ...prevNotifications,
+      ]);
+    }
+  }, [tasks]);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -122,6 +137,12 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
     setOpenNotifications(false);
   };
 
+  const handleDeleteNotification = (id) => {
+    setNotifications((prevNotifications) =>
+      prevNotifications.filter((notification) => notification.id !== id)
+    );
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl" sx={{ background: "white", color: "#007BFF" }}>
@@ -140,7 +161,7 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
             <img
               src={Bourntec}
               alt="Bourntec Logo"
-              style={{ width: '120px', marginLeft:'7px', paddingRight:'7px'}}
+              style={{ width: "120px", marginLeft: "7px", paddingRight: "7px" }}
             />
           </Tooltip>
           <Typography
@@ -156,8 +177,7 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
               textDecoration: "none",
             }}
           >
-            <p style={{ color: "orangered", marginRight: "5px" }}>|</p>{" "}
-            ToDo
+            <p style={{ color: "orangered", marginRight: "5px" }}>|</p> ToDo
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <Menu
@@ -171,7 +191,8 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
               sx={{ display: { xs: "block", md: "none" } }}
             >
               {settings.map((setting) => (
-                <MenuItem sx={{position:'static !important'}}
+                <MenuItem
+                  sx={{ position: "static !important" }}
                   key={setting}
                   onClick={() => {
                     handleCloseUserMenu();
@@ -207,221 +228,202 @@ function ResponsiveAppBar({ onSidebarToggle, handleLogout, userInfo }) {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}></Box>
           {!shouldHideComponent && (
             <>
-              <IconButton color="inherit" onClick={handleOpenNotifications} sx={{ ml: 2, position: 'relative' }}>
-                <NotificationsIcon />
-                <Box
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <ProjectDropdown />
+                <Typography
+                  variant="h6"
+                  noWrap
+                  component="a"
+                  href="#home"
                   sx={{
-                    position: 'absolute',
-                    top: 0,
-                    right: 0,
-                    backgroundColor: 'red',
-                    borderRadius: '50%',
-                    width: '20px',
-                    height: '20px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'white',
-                    fontSize: '0.75rem',
+                    mr: 2,
+                    display: { xs: "none", md: "flex" },
+                    fontFamily: "sans-serif",
+                    fontWeight: 700,
+                    color: "black",
+                    textDecoration: "none",
                   }}
                 >
-                  1
-                </Box>
+                  {selectedProjectName}
+                </Typography>
+              </Box>
+              <IconButton
+                color="inherit"
+                onClick={handleOpenNotifications}
+                sx={{ ml: 2, position: "relative" }}
+              >
+                <NotificationsIcon />
+                {notifications.some(
+                  (notification) => notification.status === "Unread"
+                ) && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      right: 0,
+                      width: "8px",
+                      height: "8px",
+                      backgroundColor: "red",
+                      borderRadius: "50%",
+                    }}
+                  ></span>
+                )}
               </IconButton>
-              <a href="/projects">
-                <ProjectDropdown />
-              </a>
+
+              <Dialog open={openNotifications} onClose={handleCloseNotifications}>
+                <DialogTitle>Notifications</DialogTitle>
+                <DialogContent>
+                  {notifications.length > 0 ? (
+                    <ul>
+                      {notifications
+                        .sort(
+                          (a, b) =>
+                            new Date(b.timestamp) - new Date(a.timestamp)
+                        )
+                        .map((notification) => (
+                          <li key={notification.id}>
+                            <Typography variant="body1">
+                              {notification.message}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                              {notification.timestamp}
+                            </Typography>
+                            <Button
+                              variant="outlined"
+                              color="secondary"
+                              size="small"
+                              onClick={() =>
+                                handleDeleteNotification(notification.id)
+                              }
+                              sx={{ marginTop: 1 }}
+                            >
+                              Delete
+                            </Button>
+                          </li>
+                        ))}
+                    </ul>
+                  ) : (
+                    <Typography variant="body1">
+                      No new notifications.
+                    </Typography>
+                  )}
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseNotifications}>Close</Button>
+                </DialogActions>
+              </Dialog>
+
+              <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
+                <Tooltip title="Open settings">
+                  <IconButton
+                    onClick={handleOpenUserMenu}
+                    sx={{ p: 0, display: "flex", alignItems: "center" }}
+                  >
+                    <Avatar
+                      alt={userData.username}
+                      src={userData.profilePicture}
+                      sx={{ width: 40, height: 40 }}
+                    />
+                    <ArrowDropDownIcon />
+                  </IconButton>
+                </Tooltip>
+                <Box
+                  sx={{
+                    ml: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <Typography variant="body1" color="textPrimary">
+                    {userData.username}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    {userData.email}
+                  </Typography>
+                </Box>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem
+                      key={setting}
+                      onClick={() => {
+                        handleCloseUserMenu();
+                        if (setting === "Profile") {
+                          handleOpenProfile();
+                        } else if (setting === "Logout") {
+                          handleLogout();
+                        }
+                      }}
+                    >
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+              <Dialog open={openProfile} onClose={handleCloseProfile}>
+                <DialogTitle>User Profile</DialogTitle>
+                <DialogContent>
+                  <Typography variant="body1">
+                    <strong>Name:</strong> {userData.username}
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>Email:</strong> {userData.email}
+                  </Typography>
+                  <Typography variant="body1">
+                    <strong>Role:</strong> {userData.role}
+                  </Typography>
+                  <Box sx={{ textAlign: "center", marginTop: 2 }}>
+                    <Avatar
+                      alt={userData.username}
+                      src={userData.profilePicture}
+                      sx={{ width: 80, height: 80, margin: "auto" }}
+                    />
+                  </Box>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseProfile}>Close</Button>
+                </DialogActions>
+              </Dialog>
             </>
           )}
-          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-            <IconButton sx={{ p: 0 }}>
-              <Avatar alt={userData.username} src={userData.profilePicture} />
-            </IconButton>
-            <Box sx={{ ml: 1, mr: 1 }}>
-              <Typography variant="subtitle1">
-                {userData.username}
-              </Typography>
-              <Typography variant="body2" sx={{ fontSize: '0.8rem', color: 'gray' }}>
-                {userData.email}
-              </Typography>
-            </Box>
-          
-
-            <Tooltip title="Account settings">
-              <IconButton
-                onClick={handleOpenUserMenu}
-                size="small"
-                sx={{ ml: 0.5 }}
-                aria-controls={Boolean(anchorElUser) ? 'account-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={Boolean(anchorElUser) ? 'true' : undefined}
-              >
-                <ArrowDropDownIcon />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              anchorEl={anchorElUser}
-              id="account-menu"
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-              onClick={handleCloseUserMenu}
-              PaperProps={{
-                elevation: 0,
-                sx: {
-                  overflow: 'visible',
-                  filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                  mt: 1.5,
-                  '& .MuiAvatar-root': {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
-                  },
-                  '&:before': {
-                    content: '""',
-                    display: 'block',
-                    position: 'absolute',
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: 'background.paper',
-                    transform: 'translateY(-50%) rotate(45deg)',
-                    zIndex: 0,
-                  },
-                },
-              }}
-              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={() => {
-                  if (setting === "Profile") {
-                    handleOpenProfile();
-                  } else if (setting === "Logout") {
-                    handleLogout();
-                  }
-                }}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-      <Dialog 
-        className="profile-manage"
-        open={openProfile}
-        onClose={handleCloseProfile}
-        PaperProps={{
-          sx: {
-            width: "500px",
-            maxWidth: "100%",
-            display: "flex",
-            position: "static",
-            left: "50%",
-          },
-        }}
-      >
-        <DialogTitle>Profile</DialogTitle>
-        <DialogContent>
-          {storedUserInfo && (
+          {shouldHideComponent && (
             <>
-              <Box
+              <ProjectDropdown />
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="#home"
                 sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "20px",
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "sans-serif",
+                  fontWeight: 700,
+                  color: "black",
+                  textDecoration: "none",
                 }}
               >
-                <Avatar
-                  alt={storedUserInfo.username}
-                  src={userData.profilePicture}
-                  sx={{ width: 120, height: 120 }}
-                />
-              </Box>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="Username"
-                type="text"
-                fullWidth
-                variant="standard"
-                value={storedUserInfo.username}
-                InputProps={{ readOnly: true }}
-              />
-              <br />
-              <TextField
-                margin="dense"
-                id="email"
-                label="Email Address"
-                type="email"
-                fullWidth
-                variant="standard"
-                value={storedUserInfo.email}
-                InputProps={{ readOnly: true }}
-              />
-              <br />
-              <TextField
-                margin="dense"
-                id="role"
-                label="Role"
-                type="text"
-                fullWidth
-                variant="standard"
-                value={storedUserInfo.role}
-                InputProps={{ readOnly: true }}
-              />
-              <br />
-              <TextField
-                margin="dense"
-                id="designation"
-                label="designation"
-                type="text"
-                fullWidth
-                variant="standard"
-                value={storedUserInfo.designation}
-                InputProps={{ readOnly: true }}
-              />
+                {selectedProjectName} {/* Display selected project name */}
+              </Typography>
             </>
           )}
-        </DialogContent>
-      </Dialog>
-      <Dialog 
-        open={openNotifications} 
-        onClose={handleCloseNotifications} 
-        PaperProps={{
-          sx: {
-            width: "500px",
-            maxWidth: "100%",
-            display: "flex",
-            position: "static",
-            left: "50%",
-          },
-        }}
-      >
-        <DialogTitle>Notifications</DialogTitle>
-        <DialogContent>
-          {notifications.map((notification) => (
-            <Box key={notification.id} sx={{ mb: 2, p: 2, border: '1px solid #ccc', borderRadius: '5px' }}>
-              <Typography variant="body1">{notification.message}</Typography>
-              <div className="btn-class">
-              <Button className="approve-btn" variant="contained" color="primary" sx={{ mr: 1 }}>Approve</Button>
-              <Button className="approve-btn"  variant="contained" color="secondary" sx={{ mr: 1 }}>Reject</Button>
-              <Button className="view-btn"  variant="outlined">View</Button>
-              </div>
-              <div className="details">
-              <Typography variant="caption" display="block">{notification.timestamp}</Typography>
-              <Typography variant="caption" color="primary">{notification.status}</Typography>
-              </div>
-            </Box>
-          ))}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseNotifications}>Close</Button>
-        </DialogActions>
-      </Dialog>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 }

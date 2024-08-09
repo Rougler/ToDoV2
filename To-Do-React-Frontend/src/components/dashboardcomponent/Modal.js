@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
@@ -52,21 +53,20 @@ const Modal = ({ showModal, handleClose, addTask }) => {
         "http://127.0.0.1:8000/todo/api/get-users/"
       );
 
-      console.log("tech", response.data);
-
       const techStackSet = new Set();
       response.data.forEach((techStack) => {
         const techStackNames = techStack.tech_stack
           .split(",")
           .map((tech) => tech.trim());
         techStackNames.forEach((name) => techStackSet.add(name));
-        const uniqueTechStacks = Array.from(techStackSet).map((name) => ({
-          value: name,
-          label: name,
-        }));
-  
-        setTechStackOptions(uniqueTechStacks);
       });
+
+      const uniqueTechStacks = Array.from(techStackSet).map((name) => ({
+        value: name,
+        label: name,
+      }));
+
+      setTechStackOptions(uniqueTechStacks);
     } catch (error) {
       console.error("Error fetching tech stacks:", error);
     }
@@ -75,7 +75,6 @@ const Modal = ({ showModal, handleClose, addTask }) => {
   const getStatusOptions = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:8000/todo/cardname/");
-      console.log("check", response.data);
       const statusOptions = response.data.map((status) => ({
         value: status.card_name,
         label: status.card_name,
@@ -120,7 +119,6 @@ const Modal = ({ showModal, handleClose, addTask }) => {
     if (
       !taskName ||
       !taskStatus ||
-      (!autoAssign && assignedTo.length === 0) ||
       !selectedProject ||
       techStack.length === 0 ||
       !deadline
@@ -146,8 +144,6 @@ const Modal = ({ showModal, handleClose, addTask }) => {
       priority,
     };
 
-    console.log("Submitting task:", task);
-
     try {
       let res = await fetch("http://127.0.0.1:8000/todo/api/create-task/", {
         method: "POST",
@@ -160,7 +156,6 @@ const Modal = ({ showModal, handleClose, addTask }) => {
         throw new Error("Network response was not ok");
       }
       const result = await res.json();
-      console.log("Task added:", result);
       addTask(result);
       setNewTaskId(result.id); // Store the new task ID
     } catch (error) {
@@ -296,18 +291,20 @@ const Modal = ({ showModal, handleClose, addTask }) => {
               Cancel
             </button>
             <button type="submit">Add Task</button>
-            <button type="button" onClick={handleAddAndOpen}>Add and Open Details</button>
+            <button type="button" onClick={handleAddAndOpen}>
+              Add and Open Details
+            </button>
           </div>
         </form>
       </div>
-      
+
       {showCardDetail && newTaskId && (
-        <CardDetail
-          card={{ id: newTaskId, title: taskName }}
-          onClose={() => setShowCardDetail(false)}
-          // Add other necessary props for CardDetail
-        />
-      )}
+  <CardDetail
+    card={{ id: newTaskId, title: taskName }}
+    onClose={() => setShowCardDetail(false)}
+    // Add other necessary props for CardDetail
+  />
+)}
     </div>
   );
 };
